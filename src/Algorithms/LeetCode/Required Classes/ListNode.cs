@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LeetCodeProblems
+namespace LeetCode
 {
     /// <summary>
     /// Class used for LeetCode problem 2 <see cref="Medium.AddTwoNumbers(ListNode, ListNode)"/>

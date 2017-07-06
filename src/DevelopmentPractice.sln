@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorithms", "Algorithms", "{02B04E51-EB80-4933-B2BA-72241B111023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode Tests", "LeetCode Tests\LeetCode Tests.csproj", "{B8087D65-0101-4449-A507-AFD84F3C853F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "LeetCode Problems\LeetCode.csproj", "{3DEC134E-9A36-4280-A9F3-04E1607FCD7E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BB92042D-05ED-4ABF-85E1-D6E33E2EE5A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode Tests", "Algorithms\LeetCode Tests\LeetCode Tests.csproj", "{B8087D65-0101-4449-A507-AFD84F3C853F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "Algorithms\LeetCode\LeetCode.csproj", "{3DEC134E-9A36-4280-A9F3-04E1607FCD7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,8 +50,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{BB92042D-05ED-4ABF-85E1-D6E33E2EE5A7} = {02B04E51-EB80-4933-B2BA-72241B111023}
 		{B8087D65-0101-4449-A507-AFD84F3C853F} = {BB92042D-05ED-4ABF-85E1-D6E33E2EE5A7}
 		{3DEC134E-9A36-4280-A9F3-04E1607FCD7E} = {02B04E51-EB80-4933-B2BA-72241B111023}
-		{BB92042D-05ED-4ABF-85E1-D6E33E2EE5A7} = {02B04E51-EB80-4933-B2BA-72241B111023}
 	EndGlobalSection
 EndGlobal

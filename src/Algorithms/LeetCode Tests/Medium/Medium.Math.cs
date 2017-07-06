@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xunit;
-using LeetCodeProblems;
-using static LeetCodeProblems.Medium;
+using LeetCode;
+using static LeetCode.Medium;
 
 namespace LeetCodeTests.Medium
 {
