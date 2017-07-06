@@ -31,10 +31,8 @@ namespace LeetCodeTests.Medium
             private static readonly List<object[]> _listNodeData
                 = new List<object[]>
                 {
-                        new object[]
-                        {
-                            new ListNode(1), new ListNode(7), new ListNode(8)
-                        }
+                        new object[] { new ListNode(1), new ListNode(7), new ListNode(8) },
+                        new object[] { new ListNode(5), new ListNode(5), new ListNode(0, 1) }
                 };
             public static IEnumerable<object[]> ListNodeData
             {

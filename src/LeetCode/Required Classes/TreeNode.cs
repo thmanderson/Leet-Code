@@ -87,13 +87,25 @@ namespace LeetCode
         }
 
         // TODO: Should be implemented, but gave an error.
-        /*public static bool operator ==(TreeNode t1, TreeNode t2)
+        public static bool operator ==(TreeNode t1, TreeNode t2)
         {
+            // If both are null, or both are same instance, return true.
+            if (System.Object.ReferenceEquals(t1, t2))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)t1 == null) || ((object)t2 == null))
+            {
+                return false;
+            }
+
             return t1.Equals(t2);
         }
         public static bool operator !=(TreeNode t1, TreeNode t2)
         {
-            return !t1.Equals(t2);
-        }*/
+            return !(t1 == t2);
+        }
     }
 }

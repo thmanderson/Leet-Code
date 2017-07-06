@@ -45,7 +45,31 @@ namespace LeetCode.Medium
         /// <returns>Sum of 2 inputs.</returns>
         public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            return new ListNode(0);
+            ListNode result;
+
+            if (l1 == null)
+            {
+                if (l2 == null) return null;
+                else return l2;
+            }
+            else if (l2 == null) return l1;
+
+            // L1 and L2 are the smallest numbers in a sequence.
+            // e.g if L1 == 2, and links to another ListNode 1, which doesn't link to anything else, this represents the number 12.
+
+            // Add up this node:
+            int value = l1.val + l2.val;
+
+            // If an extra 1 needs to be carried to the next sum:
+            int carry = 0;
+            if (value > 9) { carry = 1; value -= 10; }
+
+            result = new ListNode(value);
+            result.next = AddTwoNumbers(l1.next, l2.next);
+            if (result.next == null && carry != 0) result.next = new ListNode(carry);
+            else if (result.next != null) result.next.val += carry;
+
+            return result;
         }
 
     }
