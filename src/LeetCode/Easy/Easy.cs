@@ -6,6 +6,7 @@ namespace LeetCode
 {
     /// <summary>
     /// Methods used to solve the 'Easy' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Easy 
+    /// TO DO: Split into files by category, e.g. strings, maths, etc.
     /// </summary>
     public class Easy
     {

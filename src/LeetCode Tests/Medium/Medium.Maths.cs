@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Xunit;
 using LeetCode;
-using static LeetCode.Medium;
+using static LeetCode.Medium.Math;
 
 namespace LeetCodeTests.Medium
 {
-    public class Math
+    public class Maths
     {
         public class ComplexNumberMultiplyTests
         {

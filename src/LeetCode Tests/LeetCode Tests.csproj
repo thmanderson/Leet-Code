@@ -65,8 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Easy\Easy.Strings.cs" />
-    <Compile Include="Easy\Easy.Math.cs" />
-    <Compile Include="Medium\Medium.Math.cs" />
+    <Compile Include="Easy\Easy.Maths.cs" />
+    <Compile Include="Medium\Medium.Maths.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

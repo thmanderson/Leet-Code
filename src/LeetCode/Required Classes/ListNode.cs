@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LeetCode
 {
     /// <summary>
-    /// Class used for LeetCode problem 2 <see cref="Medium.AddTwoNumbers(ListNode, ListNode)"/>
+    /// Class used for LeetCode problem 2 <see cref="Medium.Math.AddTwoNumbers(ListNode, ListNode)"/>
     /// </summary>
     public class ListNode
     {

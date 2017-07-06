@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Easy.cs" />
-    <Compile Include="Medium.cs" />
+    <Compile Include="Easy\Easy.cs" />
+    <Compile Include="Medium\Medium.Maths.cs" />
     <Compile Include="Required Classes\ListNode.cs" />
     <Compile Include="Required Classes\TreeNode.cs" />
   </ItemGroup>
