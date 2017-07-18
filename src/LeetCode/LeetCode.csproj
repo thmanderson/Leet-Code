@@ -7,8 +7,8 @@
     <ProjectGuid>{3DEC134E-9A36-4280-A9F3-04E1607FCD7E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LeetCodeProblems</RootNamespace>
-    <AssemblyName>LeetCodeProblems</AssemblyName>
+    <RootNamespace>LeetCode</RootNamespace>
+    <AssemblyName>LeetCode</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -22,7 +22,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\LeetCodeProblems.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\LeetCode.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\LeetCodeProblems.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\LeetCode.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Easy\Easy.cs" />
     <Compile Include="Medium\Medium.Maths.cs" />
+    <Compile Include="Medium\Medium.Strings.cs" />
     <Compile Include="Required Classes\ListNode.cs" />
     <Compile Include="Required Classes\TreeNode.cs" />
   </ItemGroup>

@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 namespace LeetCode
 {    
     
-    /// <summary>
-    /// Class used for LeetCode problem 617 - <see cref="Easy.MergeTrees(TreeNode, TreeNode)"/>
-    /// </summary>
+    /// <summary> Class used for LeetCode problem 617 - <see cref="Easy.MergeTrees(TreeNode, TreeNode)"/> </summary>
     public class TreeNode : IEquatable<TreeNode>
     {
+        // Member variables.
         /// <summary> Value of of this Node. </summary>
         public int val;
         /// <summary> Node connected by 'left' branch of this node. </summary>
         public TreeNode left;
         /// <summary> Node connected by 'right' branch of this node. </summary>
         public TreeNode right;
+
+        // Constructors
         /// <summary> Create a node with a specified value, with both connected nodes NULL. </summary>
         /// <param name="x">Value for node.</param>
         public TreeNode(int x) { val = x; }
@@ -33,6 +34,7 @@ namespace LeetCode
             right = t2;
         }
 
+        // Equality methods.
         /// <summary> Equality method for TreeNode. </summary>
         /// <param name="t">TreeNode to be compared to.</param>
         /// <returns>True is values are equal for this Node, and all connected nodes.</returns>
@@ -86,7 +88,12 @@ namespace LeetCode
             return val.GetHashCode() ^ left.GetHashCode() ^ right.GetHashCode();
         }
 
-        // TODO: Should be implemented, but gave an error.
+        /// <summary>
+        /// Over-ride == operator for TreeNodes. Compares value, and values of connected nodes.
+        /// </summary>
+        /// <param name="t1">Left hand node.</param>
+        /// <param name="t2">Right hand node.</param>
+        /// <returns>True is values are equal for this node, and all connected nodes.</returns>
         public static bool operator ==(TreeNode t1, TreeNode t2)
         {
             // If both are null, or both are same instance, return true.
@@ -103,6 +110,13 @@ namespace LeetCode
 
             return t1.Equals(t2);
         }
+
+        /// <summary>
+        /// Over-ride != operator for TreeNodes. Compares value, and values of connected nodes.
+        /// </summary>
+        /// <param name="t1">Left hand node.</param>
+        /// <param name="t2">Right hand node.</param>
+        /// <returns>Inverse of == operator.</returns>
         public static bool operator !=(TreeNode t1, TreeNode t2)
         {
             return !(t1 == t2);

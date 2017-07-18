@@ -9,8 +9,8 @@
     <ProjectGuid>{B8087D65-0101-4449-A507-AFD84F3C853F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChallengeLibraryTests</RootNamespace>
-    <AssemblyName>ChallengeLibraryTests</AssemblyName>
+    <RootNamespace>LeetCodeTests</RootNamespace>
+    <AssemblyName>LeetCodeTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -67,6 +67,7 @@
     <Compile Include="Easy\Easy.Strings.cs" />
     <Compile Include="Easy\Easy.Maths.cs" />
     <Compile Include="Medium\Medium.Maths.cs" />
+    <Compile Include="Medium\Medium.Strings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

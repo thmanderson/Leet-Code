@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace LeetCode.Medium
 {
     /// <summary>
-    /// Methods used to solve the 'Medium' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Medium 
+    /// Methods used to solve the maths based 'Medium' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Medium 
     /// </summary>
-    public class Math
+    public class Maths
     {
         /// <summary>
         /// LeetCode problem 537 - Complex Number Manipulation: https://leetcode.com/problems/complex-number-multiplication/#/description
@@ -67,10 +67,8 @@ namespace LeetCode.Medium
             result = new ListNode(value);
             result.next = AddTwoNumbers(l1.next, l2.next);
             if (result.next == null && carry != 0) result.next = new ListNode(carry);
-            else if (result.next != null) result.next.val += carry;
-
+            else if (result.next != null) result.next = AddTwoNumbers(result.next, new ListNode(carry));
             return result;
         }
-
     }
 }

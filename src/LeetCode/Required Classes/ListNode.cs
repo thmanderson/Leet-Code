@@ -6,21 +6,30 @@ using System.Threading.Tasks;
 
 namespace LeetCode
 {
-    /// <summary>
-    /// Class used for LeetCode problem 2 <see cref="Medium.Math.AddTwoNumbers(ListNode, ListNode)"/>
-    /// </summary>
+    /// <summary> Class used for LeetCode problem 2 <see cref="Medium.Maths.AddTwoNumbers(ListNode, ListNode)"/> </summary>
     public class ListNode
     {
+        // Member variables
         /// <summary> Value of current node. </summary>
         public int val;
         /// <summary> Next node in the list. </summary>
         public ListNode next;
+
+        // Constructors
         /// <summary> Constructor for new node, with value but no linked nodes. </summary>
         public ListNode(int x) { val = x; }
 
         /// <summary> Constructor for new node, with value but no linked nodes. </summary>
         public ListNode(int x, int y) { val = x; next = new ListNode(y); }
+        /// <summary>
+        /// Constructor for new node, with 2 successive linked nodes.
+        /// </summary>
+        /// <param name="x">Value for first node.</param>
+        /// <param name="y">Value for second node.</param>
+        /// <param name="z">Value for third node.</param>
+        public ListNode(int x, int y, int z) { val = x; next = new ListNode(y,z); }
 
+        // Equality methods
         /// <summary> Equality method for ListNode. </summary>
         /// <param name="l">ListNode to be compared to.</param>
         /// <returns>True if values are equal for this Node, and all connected nodes.</returns>
@@ -65,7 +74,12 @@ namespace LeetCode
             return val.GetHashCode() ^ next.GetHashCode();
         }
 
-        // TODO: Should be implemented, but gave an error.
+        /// <summary>
+        /// Over-ride == operator for ListNodes. Compares value, and values of connected nodes.
+        /// </summary>
+        /// <param name="l1">Left hand node.</param>
+        /// <param name="l2">Right hand node.</param>
+        /// <returns>True is values are equal along the list.</returns>
         public static bool operator ==(ListNode l1, ListNode l2)
         {
             // If both are null, or both are same instance, return true.
@@ -82,6 +96,13 @@ namespace LeetCode
 
             return l1.Equals(l2);
         }
+
+        /// <summary>
+        /// Over-ride != operator for ListNodes. Compares value, and values of connected nodes.
+        /// </summary>
+        /// <param name="l1">Left hand node.</param>
+        /// <param name="l2">Right hand node.</param>
+        /// <returns>Inverse of ==</returns>
         public static bool operator !=(ListNode l1, ListNode l2)
         {
             return !(l1 == l2);
