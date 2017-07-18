@@ -18,27 +18,31 @@ namespace LeetCode.Medium
         /// <returns>Length of longest possible substring of s with no repeating characters.</returns>
         public static int LengthOfLongestSubstring(string s)
         {
+            /* First attempt - works but too slow for LeetCode submission */
             // Track the chars used to make a substring
             HashSet<char> usedChars = new HashSet<char>();
             int result = 0, temp = 0;
 
-            foreach (char c in s)
+            for (int i = 0; i < s.Length; i++)
             {
-                if (usedChars.Contains(c))
+                foreach (char c in s.Skip(i))
                 {
-                    if (temp > result) result = temp;
-                    usedChars.Clear();
-                    usedChars.Add(c);
-                    temp = 1;
-                }
-                else
-                {
-                    temp++;
-                    usedChars.Add(c);
-                }
+                    if (usedChars.Contains(c))
+                    {
+                        if (temp > result) result = temp;
+                        usedChars.Clear();
+                        temp = 0;
+                        break;
+                    }
+                    else
+                    {
+                        temp++;
+                        usedChars.Add(c);
+                    }
 
-                if (temp > result) result = temp;
-            }            
+                    if (temp > result) result = temp;
+                }
+            }
 
             return result;
         }
