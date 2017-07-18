@@ -16,6 +16,8 @@ namespace LeetCodeTests.Medium
             [InlineData("abc", 3)]
             [InlineData("dvdf", 3)]
             [InlineData("abcabcbb", 3)]
+            [InlineData("asjrgapa", 6)]
+            [InlineData("jbpnbwwd", 4)]
             public void ValidInputs(string x, int expectedResult)
             {
                 int actualResult = LengthOfLongestSubstring(x);
