@@ -32,13 +32,14 @@ namespace LeetCodeTests.Medium
                 = new List<object[]>
                 {
                         new object[] { new ListNode(1), new ListNode(7), new ListNode(8) },
-                        new object[] { new ListNode(5), new ListNode(5), new ListNode(0, 1) }
+                        new object[] { new ListNode(5), new ListNode(5), new ListNode(0, 1) },
+                        new object[] { new ListNode(1), new ListNode(9,9), new ListNode( 0, 0, 1) },
+                        new object[] { new ListNode(0,0,1), new ListNode(0,0,2), new ListNode( 0, 0, 3) }
                 };
             public static IEnumerable<object[]> ListNodeData
             {
                 get { return _listNodeData; }
             }
         }
-
     }
 }
