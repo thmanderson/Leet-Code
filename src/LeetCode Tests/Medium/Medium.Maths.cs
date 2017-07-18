@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 using LeetCode;
-using static LeetCode.Medium.Math;
+using static LeetCode.Medium.Maths;
 
 namespace LeetCodeTests.Medium
 {

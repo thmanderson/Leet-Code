@@ -1,8 +1,6 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeetCode.Medium
 {
@@ -18,29 +16,27 @@ namespace LeetCode.Medium
         /// <returns>Length of longest possible substring of s with no repeating characters.</returns>
         public static int LengthOfLongestSubstring(string s)
         {
-            /* First attempt - works but too slow for LeetCode submission */
-            // Track the chars used to make a substring
+            // Track the chars used to make a substring in the HashSet.
             HashSet<char> usedChars = new HashSet<char>();
-            int result = 0, temp = 0;
+            int result = 0, n = s.Length, i = 0, j = 0;
 
-            for (int i = 0; i < s.Length; i++)
+            // Create a "sliding window", substring (i,j). Extend as much as possible to the right, if it fails, shrink from the left.
+            while (i < n && j < n)
             {
-                foreach (char c in s.Skip(i))
+                // First, check s[j]
+                if (!usedChars.Contains(s[j]))
                 {
-                    if (usedChars.Contains(c))
-                    {
-                        if (temp > result) result = temp;
-                        usedChars.Clear();
-                        temp = 0;
-                        break;
-                    }
-                    else
-                    {
-                        temp++;
-                        usedChars.Add(c);
-                    }
+                    // If this isn't a duplicate, extend the window to the right, and add to the HashSet.
+                    usedChars.Add(s[j]);
+                    j++;
+                    result = Math.Max(result, j - i); // Keeps track of the largest sub-string we've seen so far.
+                }
 
-                    if (temp > result) result = temp;
+                else
+                {
+                    // If s[j] is a duplicate, reduce the window from the left, and try again.
+                    usedChars.Remove(s[i]);
+                    i++;
                 }
             }
 

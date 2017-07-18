@@ -9,7 +9,7 @@ namespace LeetCode.Medium
     /// <summary>
     /// Methods used to solve the maths based 'Medium' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Medium 
     /// </summary>
-    public class Math
+    public class Maths
     {
         /// <summary>
         /// LeetCode problem 537 - Complex Number Manipulation: https://leetcode.com/problems/complex-number-multiplication/#/description
