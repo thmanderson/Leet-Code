@@ -42,5 +42,35 @@ namespace LeetCode.Medium
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 5 - Longest Palindromic Substring: https://leetcode.com/problems/longest-palindromic-substring/#/description
+        /// </summary>
+        /// <param name="s">Input string.</param>
+        /// <returns>The longest palindromic substring of input s.</returns>
+        public static string LongestPalindrome(string s)
+        {
+            /******************************************************
+            // Attempt 1: Seems to work but too slow for Leetcode:
+            ******************************************************/
+
+            // Check if whole input string is a palindrome
+            if (s == Easy.ReverseString(s)) return s;
+            string result = "";
+
+            // Iterate through the string, where i is the starting point of the substring.
+            for (int i = 0; i < s.Length; i++)
+            {
+                // Start with the largest possible substring that starts from s[i]:
+                for (int j = s.Length - 1; j >= i; j--)
+                {
+                    // If the substring is a palindrome, and longer than current best - return it.
+                    string temp = s.Substring(i, j + 1 - i);
+                    if (Easy.ReverseString(temp) == temp && temp.Length > result.Length) result = temp;
+                }
+                if (result.Length > s.Length - i) return result;
+            }
+            return result;
+        }
     }
 }

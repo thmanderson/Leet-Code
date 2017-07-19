@@ -24,5 +24,20 @@ namespace LeetCodeTests.Medium
                 Assert.Equal(expectedResult, actualResult);
             }
         }
+
+        public class LongestPalindromicSubstring
+        {
+            [Theory]
+            [InlineData("aba", "aba")]
+            [InlineData("abb", "bb")]
+            [InlineData("babad", "bab")]
+            [InlineData("aaaaaaabbbbbbb", "aaaaaaa")]
+            [InlineData("aaaaaaabbbbbbbb", "bbbbbbbb")]
+            public void ValidInputs(string s, string expectedResult)
+            {
+                string actualResult = LongestPalindrome(s);
+                Assert.Equal(expectedResult, actualResult);
+            }
+        }
     }
 }
