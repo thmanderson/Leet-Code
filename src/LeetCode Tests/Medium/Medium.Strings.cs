@@ -39,5 +39,19 @@ namespace LeetCodeTests.Medium
                 Assert.Equal(expectedResult, actualResult);
             }
         }
+
+        public class ZigZagConversion
+        {
+            [Theory]
+            [InlineData("PAYPALISHIRING", 1, "PAYPALISHIRING")]
+            [InlineData("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR")]
+            [InlineData("PAYPALISHIRING", 4, "PINALSIGYAHRPI")]
+            public void ValidInputs(string s, int rows, string expectedResult)
+            {
+                string actualResult = ZigZagConvert(s, rows);
+                Assert.Equal(expectedResult, actualResult);
+            }
+
+        }
     }
 }
