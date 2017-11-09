@@ -72,5 +72,19 @@ namespace LeetCode.Medium
             }
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 6 - ZigZag Conversion: https://leetcode.com/problems/zigzag-conversion/#/description
+        /// </summary>
+        /// <param name="s">String to be ZigZag-ified.</param>
+        /// <param name="rows">Number of rows to be split into.</param>
+        /// <returns>ZigZag-ified string read row by row.</returns>
+        public static string ZigZagConvert(string s, int rows)
+        {
+            if (rows == 1 || s.Length < rows) return s;
+            String[] zigZag = new String[rows];
+
+            return s;
+        }
     }
 }
