@@ -12,7 +12,7 @@ namespace AdventOfCode.Tests
         [InlineData(new int[] { 3, 4, 1, 5 }, new int[] { 0, 1, 2, 3, 4}, 12)]
         public void KnotHashTest(int[] lengths, int[] input, int expectedResult)
         {
-            int actualResult = DayTen.KnotHash(lengths, input);
+            int actualResult = DayTen.KnotHash2(lengths, input);
             Assert.Equal(expectedResult, actualResult);
         }
     }

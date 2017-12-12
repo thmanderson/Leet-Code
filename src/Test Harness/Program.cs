@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AdventOfCode.Console
 {
@@ -76,7 +77,17 @@ namespace AdventOfCode.Console
             var d10lengths = new int[] { 197, 97, 204, 108, 1, 29, 5, 71, 0, 50, 2, 255, 248, 78, 254, 63 };
             var d10input = new int[256];
             for (int i = 0; i < 256; i++) d10input[i] = i;
-            System.Console.WriteLine("Day 10, problem 1: " + DayTen.KnotHash(d10lengths, d10input));
+            System.Console.WriteLine("Day 10, problem 1: " + DayTen.KnotHash2(d10lengths, d10input));
+
+            // Day 11
+            var d11input = ReadDayElevenInput();
+            System.Console.WriteLine("Day 11, problem 1: " + DayEleven.HexStepsTaken(d11input, out int d11p2output));
+            System.Console.WriteLine("Day 11, problem 2: " + d11p2output);
+
+            // Day 12
+            var d12input = ReadDayTwelveInput();
+            System.Console.WriteLine("Day 12, problem 1: " + DayTwelve.LinkedPipes(d12input));
+            // System.Console.WriteLine("Day 12, problem 2: " + d12p2output);
 
             System.Console.ReadLine();
         }
@@ -86,7 +97,7 @@ namespace AdventOfCode.Console
             List<int[]> output = new List<int[]>();
             string line;
 
-            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\advent-of-code\Problems\Input Files\DayTwoInput.txt"))
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayTwoInput.txt"))
             {
                 while ((line = file.ReadLine()) != null)
                 {
@@ -113,7 +124,7 @@ namespace AdventOfCode.Console
             List<string> output = new List<string>();
             string line;
 
-            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\advent-of-code\Problems\Input Files\DayFourInput.txt"))
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayFourInput.txt"))
             {
                 while ((line = file.ReadLine()) != null)
                 {
@@ -128,7 +139,7 @@ namespace AdventOfCode.Console
             List<int> output = new List<int>();
             string line;
 
-            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\advent-of-code\Problems\Input Files\DayFiveInput.txt"))
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayFiveInput.txt"))
             {
                 while ((line = file.ReadLine()) != null)
                 {
@@ -143,7 +154,7 @@ namespace AdventOfCode.Console
             var output = new List<Tuple<string, List<string>>>();
             string line;
 
-            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\advent-of-code\Problems\Input Files\DaySevenInput.txt"))
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DaySevenInput.txt"))
             {
                 while ((line = file.ReadLine()) != null)
                 {
@@ -165,7 +176,7 @@ namespace AdventOfCode.Console
             List<string> output = new List<string>();
             string line;
 
-            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\advent-of-code\Problems\Input Files\DayEightInput.txt"))
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayEightInput.txt"))
             {
                 while ((line = file.ReadLine()) != null)
                 {
@@ -174,18 +185,58 @@ namespace AdventOfCode.Console
             }
             return output;
         }
+
         static string ReadDayNineInput()
         {
             string output = "";
             string line;
 
-            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\advent-of-code\Problems\Input Files\DayNineInput.txt"))
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayNineInput.txt"))
             {
                 while ((line = file.ReadLine()) != null)
                 {
                     output += line;
                 }
             }
+            return output;
+        }
+
+        static IEnumerable<string> ReadDayElevenInput()
+        {
+            IEnumerable<string> output = new List<string>();
+            string line;
+
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayElevenInput.txt"))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    output = line.Split(',').ToList();
+                }
+            }
+
+            return output;
+        }
+
+        static Dictionary<int, List<int>> ReadDayTwelveInput()
+        {
+            Dictionary<int, List<int>> output = new Dictionary<int, List<int>>();
+            string line;
+
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayTwelveInput.txt"))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    char[] delimiters = { ' ', ',' };
+                    string[] parts = line.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+                    List<int> values = new List<int>();
+                    for (int i = 2; i < parts.Length; i++)
+                    {
+                        values.Add(Convert.ToInt32(parts[i]));
+                    }
+                    output.Add(Convert.ToInt32(parts[0]), values);
+                }
+            }
+
             return output;
         }
     }

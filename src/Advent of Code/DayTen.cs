@@ -47,5 +47,58 @@ namespace AdventOfCode
             return input[0] * input[1];
 
         }
+
+        public static int KnotHash2(int[] lengths, int[] input)
+        {
+            // Starting values for index and skip.
+            int index = 0, skip = -1;
+
+            foreach (int length in lengths)
+            {
+                skip++;
+
+                // Get start point and end point
+                int start = index;
+                int end = start + length - 1;
+                if (end >= input.Length) end -= input.Length;
+
+                // Update index
+                index += (length + skip);
+                if (index >= input.Length) index -= input.Length;
+                if (length == 1 || end == start) continue;
+
+                int[] subArray = GetReverseSubArray(input, start, end);
+                ReplaceSubArray(start, subArray, ref input);
+            }
+
+            return input[0] * input[1];
+        }
+
+        public static int[] GetReverseSubArray(int[] input, int start, int end)
+        {
+            // Set up length of sub-array
+            int subLength = start < end ? 1 + end - start : (end - start) + input.Length + 1;
+            int[] output = new int[subLength];
+
+            int i = 0;
+            for (int j = end; i < subLength;)
+            {
+                if (j < 0) j = input.Length - 1;                
+                output[i] = input[j];
+                j--; i++;
+            }
+
+            return output;
+        }
+
+        public static void ReplaceSubArray(int start, int[] subArray, ref int[] mainArray)
+        {
+            for (int i = start, j = 0; j < subArray.Length; j++)
+            {
+                mainArray[i] = subArray[j];
+                i++;
+                if (i >= mainArray.Length) i = 0;
+            }
+        }
     }
 }
