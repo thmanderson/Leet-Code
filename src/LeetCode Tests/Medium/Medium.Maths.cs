@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using LeetCode;
 using static LeetCode.Medium.Maths;
+using LeetCode.Model;
 
 namespace LeetCodeTests.Medium
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LeetCode
+namespace LeetCode.Model
 {    
     
     /// <summary> Class used for LeetCode problem 617 - <see cref="Easy.MergeTrees(TreeNode, TreeNode)"/> </summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using LeetCode;
 using static LeetCode.Easy;
+using LeetCode.Model;
 
 namespace LeetCodeTests.Easy
 {
