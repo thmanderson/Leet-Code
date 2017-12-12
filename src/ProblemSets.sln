@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode", "Advent of C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Tests", "Advent of Code Tests\AdventOfCode.Tests.csproj", "{640B5F93-3F2A-4DD7-90C7-0D9F0DE3B8D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test Harness", "Test Harness\Test Harness.csproj", "{7FC7C3B6-A4DE-4062-9CBE-D0DA6A8ED521}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Console", "Test Harness\AdventOfCode.Console.csproj", "{7FC7C3B6-A4DE-4062-9CBE-D0DA6A8ED521}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
