@@ -91,7 +91,7 @@ namespace AdventOfCode.Console
 
             // Day 13
             var d13input = ReadDayThirteenInput();
-            System.Console.WriteLine("Day 13, problem 1: " + DayThirteen.FirewallSeverity(d13input, 0));
+            System.Console.WriteLine("Day 13, problem 1: " + DayThirteen.FirewallSeverity(d13input, 0, out bool caught));
             System.Console.WriteLine("Day 13, problem 2: " + DayThirteen.ShortestDelay(d13input));
 
             System.Console.ReadLine();

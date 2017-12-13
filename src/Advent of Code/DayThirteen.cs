@@ -9,19 +9,21 @@ namespace AdventOfCode
         public static int ShortestDelay(List<Tuple<int, int>> firewall)
         {
             int time = -1, severity = 0;
+            bool caught = true;
 
             do
             {
-                severity = FirewallSeverity(firewall, time);
                 time++;
-            } while (severity != 0);
+                severity = FirewallSeverity(firewall, time, out caught);
+            } while (caught);
 
             return time;
         }
 
-        public static int FirewallSeverity(List<Tuple<int,int>> firewall, int time)
+        public static int FirewallSeverity(List<Tuple<int,int>> firewall, int time, out bool caught)
         {
             int severity = 0, step = 0;
+            caught = false;
 
             // Step through the layers
             foreach (var layer in firewall)
@@ -41,6 +43,7 @@ namespace AdventOfCode
                 // If caught, what is the severity?
                 if (scanCount % 2 == 0 && currentScanDistance == 0)
                 {
+                    caught = true;
                     severity += (layer.Item1 * layer.Item2);
                 }
             }
