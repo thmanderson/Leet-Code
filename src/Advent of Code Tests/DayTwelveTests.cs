@@ -5,14 +5,19 @@ using Xunit;
 
 namespace AdventOfCode.Tests
 {
+    [Trait("TestCategory", "UnitTests")]
     public class DayTwelveTests
     {
+        [Fact]
         public void TestLinks()
         {
             int expectedResult = 6;
-            int actualResult = DayTwelve.LinkedPipes(testInput);
+            int expectedTotalGroups = 2;
+
+            int actualResult = DayTwelve.LinkedPipes(testInput, out int actualTotalGroups);
 
             Assert.Equal(expectedResult, actualResult);
+            Assert.Equal(expectedTotalGroups, actualTotalGroups);
         }
 
         private Dictionary<int, List<int>> testInput = new Dictionary<int, List<int>>()

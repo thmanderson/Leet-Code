@@ -86,8 +86,13 @@ namespace AdventOfCode.Console
 
             // Day 12
             var d12input = ReadDayTwelveInput();
-            System.Console.WriteLine("Day 12, problem 1: " + DayTwelve.LinkedPipes(d12input));
-            // System.Console.WriteLine("Day 12, problem 2: " + d12p2output);
+            System.Console.WriteLine("Day 12, problem 1: " + DayTwelve.LinkedPipes(d12input, out int d12p2output));
+            System.Console.WriteLine("Day 12, problem 2: " + d12p2output);
+
+            // Day 13
+            var d13input = ReadDayThirteenInput();
+            System.Console.WriteLine("Day 13, problem 1: " + DayThirteen.FirewallSeverity(d13input, 0));
+            System.Console.WriteLine("Day 13, problem 2: " + DayThirteen.ShortestDelay(d13input));
 
             System.Console.ReadLine();
         }
@@ -237,6 +242,23 @@ namespace AdventOfCode.Console
                 }
             }
 
+            return output;
+        }
+
+        static List<Tuple<int, int>> ReadDayThirteenInput()
+        {
+            List<Tuple<int, int>> output = new List<Tuple<int, int>>();
+            string line;
+
+            using (StreamReader file = new StreamReader(@"C:\Users\B06551A\Documents\GitHub\first-steps\src\Advent of Code\Input Files\DayThirteenInput.txt"))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    char[] delimiters = { ' ', ':' };
+                    string[] parts = line.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+                    output.Add(new Tuple<int, int>(Convert.ToInt32(parts[0]), Convert.ToInt32(parts[1])));
+                }
+            }
             return output;
         }
     }

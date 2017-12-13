@@ -6,38 +6,50 @@ namespace AdventOfCode
 {
     public static class DayTwelve
     {
-        public static int LinkedPipes(Dictionary<int, List<int>> input)
+        public static int LinkedPipes(Dictionary<int, List<int>> input, out int totalGroups)
         {
-            int counter = 0, target = 0;
+            int target = 0;
+            totalGroups = 1;
             var connectToTarget = new HashSet<int>();
-            connectToTarget.Add(target);
 
-            foreach (var value in input)
+            AddToSet(ref connectToTarget, input, target);
+
+            var output = connectToTarget.Count;
+
+            foreach (var x in input)
             {
-
-            }
-
-            return counter;
-        }
-
-        public static bool IsLinkedTo(int programToLink, int program, Dictionary<int, List<int>> input)
-        {
-            // Get list of programs the program in question links to
-            var listOfLinks = input[program];
-
-            // If it can link directly great
-            if (listOfLinks.Contains(programToLink)) return true;
-
-            else
-            {
-                foreach (int i in listOfLinks)
+                if (connectToTarget.Contains(x.Key)) continue;
+                else
                 {
-                    if (i == program) break;
-                    if (IsLinkedTo(programToLink, i, input)) return true;
+                    AddToSet(ref connectToTarget, input, x.Key);
+                    totalGroups++;
                 }
             }
 
-            return false;
+            return output;
+        }
+
+        private static void AddToSet(ref HashSet<int> set, Dictionary<int, List<int>> input, int toBeAdded)
+        {
+            set.Add(toBeAdded);
+
+            foreach (int i in input[toBeAdded])
+            {
+                if (set.Contains(i)) continue;
+                else AddToSet(ref set, input, i);
+            }
+        }
+
+        public static int TotalGroups(Dictionary<int, List<int>> input)
+        {
+            List<int> sets = new List<int>();
+
+            foreach (var x in input)
+            {
+
+            }
+
+            return 0;
         }
     }
 }
