@@ -74,10 +74,10 @@ namespace AdventOfCode.Console
             System.Console.WriteLine("Day 9, problem 2: " + d9p2output);
 
             // Day 10
-            var d10lengths = new int[] { 197, 97, 204, 108, 1, 29, 5, 71, 0, 50, 2, 255, 248, 78, 254, 63 };
-            var d10input = new int[256];
-            for (int i = 0; i < 256; i++) d10input[i] = i;
-            System.Console.WriteLine("Day 10, problem 1: " + DayTen.KnotHash2(d10lengths, d10input));
+            var d10input2 = "197,97,204,108,1,29,5,71,0,50,2,255,248,78,254,63";
+
+            System.Console.WriteLine("Day 10, problem 1: " + DayTen.KnotHashPartOne(d10input2, 256));
+            System.Console.WriteLine("Day 10, problem 2: " + DayTen.KnotHashPartTwo(d10input2));
 
             // Day 11
             var d11input = ReadDayElevenInput();
@@ -93,6 +93,11 @@ namespace AdventOfCode.Console
             var d13input = ReadDayThirteenInput();
             System.Console.WriteLine("Day 13, problem 1: " + DayThirteen.FirewallSeverity(d13input, 0, out bool caught));
             System.Console.WriteLine("Day 13, problem 2: " + DayThirteen.ShortestDelay(d13input));
+
+            // Day 14
+            var d14input = "ffayrhll";
+            System.Console.WriteLine("Day 14, problem 1: " + DayFourteen.Defrag(d14input, 128));
+            System.Console.WriteLine("Day 14, problem 2: " + DayFourteen.DefragGroups(d14input, 128));
 
             System.Console.ReadLine();
         }

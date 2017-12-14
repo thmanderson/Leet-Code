@@ -1,103 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace AdventOfCode
 {
     public static class DayTen
     {
-        public static int KnotHash(int[] lengths, int[] input)
+        public static int KnotHashPartOne(string input, int size)
         {
-            // Starting values for index and skip.
-            int index = 0, skip = -1;
+            var sparseHash = input
+            .Split(',')
+            .Select(i => byte.Parse(i))
+            .ToSparseHashSequence(1, size)
+                .Last();
+            return sparseHash[0] * sparseHash[1];
+        }
 
-            foreach (int length in lengths)
+        public static string KnotHashPartTwo(string input)
+        {
+            var sparseHash = input
+                .ToCharArray()
+                .Select(i => (byte)i)
+                .Concat(new byte[] { 0x11, 0x1f, 0x49, 0x2f, 0x17 })
+                .ToSparseHashSequence(64, 256)
+                .Last();
+
+            var denseHash = sparseHash
+                .Select((v, i) => (value: v, index: i))
+                .GroupBy(i => i.index / 16)
+                .Select(g => g.Aggregate(0x0, (acc, i) => (byte)(acc ^ i.value)));
+
+            return denseHash
+                .Aggregate(new StringBuilder(), (acc, i) => acc.Append($"{i:x2}"))
+                .ToString();
+        }
+    }
+
+    static class Extensions
+    {
+        public static IEnumerable<byte[]> ToSparseHashSequence(this IEnumerable<byte> lengths, int repeat, int size)
+        {
+            // var size = 256;
+            var position = 0;
+            var skip = 0;
+            var state = Enumerable.Range(0, size).Select(i => (byte)i).ToArray();
+            yield return state;
+            for (var _ = 0; _ < repeat; _++)
             {
-                int start, end, middle;
-                skip++;
-
-                // Grab index before updating it.
-                start = index;
-                index += (length + skip);
-                if (index >= input.Length) index -= input.Length;
-
-                if (length == 1) continue;
-
-                end = start + length - 1;
-                if (end >= input.Length) end -= (input.Length - 1);
-
-                middle = start + (length / 2);
-                if (middle >= input.Length) middle -= input.Length;
-                
-                // if (start > middle) middle--;
-                // if (middle < 0) middle += input.Length;
-
-                for (int i = start; i != middle; i++, end--)
+                foreach (var length in lengths)
                 {
-                    if (i >= input.Length) i = 0;
-                    if (end < 0) end = input.Length - 1;
-                    if (i == middle) break;
-
-                    var tmp = input[i];
-                    input[i] = input[end];
-                    input[end] = tmp;
+                    if (length > 1)
+                    {
+                        state = state.Select((v, i) => ((i < position && i + size >= position + length) || i >= position + length) ? v : state[(2 * position + length + size - i - 1) % size]).ToArray();
+                    }
+                    yield return state;
+                    position = (position + length + skip++) % size;
                 }
-            }
-
-            return input[0] * input[1];
-
-        }
-
-        public static int KnotHash2(int[] lengths, int[] input)
-        {
-            // Starting values for index and skip.
-            int index = 0, skip = -1;
-
-            foreach (int length in lengths)
-            {
-                skip++;
-
-                // Get start point and end point
-                int start = index;
-                int end = start + length - 1;
-                if (end >= input.Length) end -= input.Length;
-
-                // Update index
-                index += (length + skip);
-                if (index >= input.Length) index -= input.Length;
-                if (length == 1 || end == start) continue;
-
-                int[] subArray = GetReverseSubArray(input, start, end);
-                ReplaceSubArray(start, subArray, ref input);
-            }
-
-            return input[0] * input[1];
-        }
-
-        public static int[] GetReverseSubArray(int[] input, int start, int end)
-        {
-            // Set up length of sub-array
-            int subLength = start < end ? 1 + end - start : (end - start) + input.Length + 1;
-            int[] output = new int[subLength];
-
-            int i = 0;
-            for (int j = end; i < subLength;)
-            {
-                if (j < 0) j = input.Length - 1;                
-                output[i] = input[j];
-                j--; i++;
-            }
-
-            return output;
-        }
-
-        public static void ReplaceSubArray(int start, int[] subArray, ref int[] mainArray)
-        {
-            for (int i = start, j = 0; j < subArray.Length; j++)
-            {
-                mainArray[i] = subArray[j];
-                i++;
-                if (i >= mainArray.Length) i = 0;
             }
         }
     }
