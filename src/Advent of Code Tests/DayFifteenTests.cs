@@ -5,6 +5,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests
 {
+    [Trait("TestCategory", "UnitTests")]
     public class DayFifteenTests
     {
         [Theory]
