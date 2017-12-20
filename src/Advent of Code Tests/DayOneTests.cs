@@ -18,7 +18,7 @@ namespace AdventOfCode.Tests
         public void InverseCaptchaExamples(string input, int expectedResult)
         {
             // Arrange & Act
-            int actualResult = AdventOfCode.DayOne.InverseCaptcha(input);
+            int actualResult = AdventOfCode.Day1.InverseCaptcha(input);
 
             // Assert
             Assert.Equal(expectedResult, actualResult);
@@ -32,7 +32,7 @@ namespace AdventOfCode.Tests
         public void HalfwayCaptchaExamples(string input, int expectedResult)
         {
             // Arrange & Act
-            int actualResult = AdventOfCode.DayOne.HalfwayCaptcha(input);
+            int actualResult = AdventOfCode.Day1.HalfwayCaptcha(input);
 
             // Assert
             Assert.Equal(expectedResult, actualResult);

@@ -2,7 +2,7 @@
 
 namespace AdventOfCode
 {
-    public static class DayOne
+    public static class Day1
     {
         public static int InverseCaptcha(string inputCode)
         {
