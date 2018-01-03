@@ -36,12 +36,6 @@ namespace LeetCodeTests.Easy
                 Assert.Equal(expectedResult, actualResult);
             }
 
-            [Theory]
-            [MemberData(nameof(FizzBuzzData))]
-            public void FizzBuzz_Group(int i, List<string> expectedResult)
-            {
-
-            }
             private static readonly List<object[]> _fizzBuzzData
                 = new List<object[]>
                 {
