@@ -12,7 +12,7 @@ namespace AdventOfCode.Tests
         [InlineData(3, 638)]
         public void Problem1Tests(int input, int expectedResult)
         {
-            var actualResult = Day17.Problem1(input);
+            var actualResult = Day17.Problem1(2017, 2017, input);
 
             Assert.Equal(expectedResult, actualResult);
         }
