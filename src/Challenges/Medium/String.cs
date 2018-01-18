@@ -7,7 +7,7 @@ namespace LeetCode.Medium
     /// <summary>
     /// Methods used to solve the string based 'Medium' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Medium 
     /// </summary>
-    public class Strings
+    public class String
     {
         /// <summary>
         /// LeetCode problem 3 - Longest Substring Without Repeating Characters: https://leetcode.com/problems/longest-substring-without-repeating-characters/#/description
@@ -55,7 +55,7 @@ namespace LeetCode.Medium
             ******************************************************/
 
             // Check if whole input string is a palindrome
-            if (s == Easy.ReverseString(s)) return s;
+            if (s == Easy.String.ReverseString(s)) return s;
             string result = "";
 
             // Iterate through the string, where i is the starting point of the substring.
@@ -66,7 +66,7 @@ namespace LeetCode.Medium
                 {
                     // If the substring is a palindrome, and longer than current best - return it.
                     string temp = s.Substring(i, j + 1 - i);
-                    if (Easy.ReverseString(temp) == temp && temp.Length > result.Length) result = temp;
+                    if (Easy.String.ReverseString(temp) == temp && temp.Length > result.Length) result = temp;
                 }
                 if (result.Length > s.Length - i) return result;
             }

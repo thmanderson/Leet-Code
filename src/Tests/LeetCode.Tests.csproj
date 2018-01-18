@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Challenges\Challenges.csproj" />
+    <ProjectReference Include="..\Challenges\LeetCode.csproj" />
   </ItemGroup>
 
 </Project>

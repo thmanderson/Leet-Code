@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xunit;
-using LeetCode;
-using static LeetCode.Easy;
+using static LeetCode.Easy.String;
 
-namespace LeetCodeTests.Easy
+namespace LeetCode.Easy.Tests
 {
-    public class Strings
+    public class StringTests
     {
         public class ReverseString
         {
@@ -19,7 +18,7 @@ namespace LeetCodeTests.Easy
             [InlineData("111", "111")]
             public void ValidInputs(string input, string expectedResult)
             {
-                string actualResult = ReverseString(input);
+                var actualResult = LeetCode.Easy.String.ReverseString(input);
                 Assert.Equal(expectedResult, actualResult);
             }
         }
@@ -86,20 +85,7 @@ namespace LeetCodeTests.Easy
                 Assert.Equal(expectedResult, actualResult);
             }
         }
-        public class UncommonSubSequence
-        {
-            [Theory]
-            [InlineData("aaa","bbb",3)]
-            [InlineData("aaa", "aaa", -1)]
-            [InlineData("aa", "baab", 4)]
-            [InlineData("baab", "aa", 4)]
-            [InlineData("aa", "baaccccccaab", 12)]
-            public void ValidInputs(string x, string y, int expectedResult)
-            {
-                int actualResult = LongestUncommonSequence(x, y);
-                Assert.Equal(expectedResult, actualResult);
-            }
-        }
+
         public class ReverseWordsInString
         {
             [Theory]

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xunit;
-using LeetCode;
-using static LeetCode.Easy;
-using LeetCode.Model;
 
-namespace LeetCodeTests.Easy
+namespace LeetCode.Easy.Tests
 {
-    public class Math
+    public class MathsTests
     {
         public class IslandPerimeter
         {
@@ -15,7 +12,7 @@ namespace LeetCodeTests.Easy
             [MemberData(nameof(PerimeterData))]
             public void ValidInputs(int[,] grid, int expectedResult)
             {
-                int actualResult = CalculateIslandPerimeter(grid);
+                int actualResult = Maths.CalculateIslandPerimeter(grid);
                 Assert.Equal(expectedResult, actualResult);
             }
 
@@ -32,13 +29,14 @@ namespace LeetCodeTests.Easy
                 get { return _perimeterData; }
             }
         }
+
         public class ComplementNumber
         {
             [Theory]
             [MemberData(nameof(ComplementData))]
             public void ValidInputs(int number, int expectedResult)
             {
-                int actualResult = FindComplementNumber(number);
+                int actualResult = Maths.FindComplementNumber(number);
                 Assert.Equal(expectedResult, actualResult);
             }
 
@@ -60,6 +58,7 @@ namespace LeetCodeTests.Easy
             }
 
         }
+
         public class HammingDistance
         {
             [Theory]
@@ -68,17 +67,18 @@ namespace LeetCodeTests.Easy
             [InlineData(17, 324, 5)]
             public void ValidInputs(int x, int y, int expectedResult)
             {
-                int actualResult = FindHammingDistance(x, y);
+                int actualResult = Maths.FindHammingDistance(x, y);
                 Assert.Equal(expectedResult, actualResult);
             }
         }
+
         public class LargestSumMinValues
         {
             [Theory]
             [MemberData(nameof(PartitionData))]
             public void ValidInputs(int[] intArray, int expectedResult)
             {
-                int actualResult = FindLargestSumOfMinValues(intArray);
+                int actualResult = Maths.FindLargestSumOfMinValues(intArray);
                 Assert.Equal(expectedResult, actualResult);
             }
 
@@ -95,13 +95,14 @@ namespace LeetCodeTests.Easy
                 get { return _partitionData; }
             }
         }
+
         public class DistributeCandies
         {
             [Theory]
             [MemberData(nameof(CandyData))]
             public void ValidInputs(int[] candies, int expectedResult)
             {
-                int actualResult = DistributeCandies(candies);
+                int actualResult = Maths.DistributeCandies(candies);
                 Assert.Equal(expectedResult, actualResult);
             }
             private static readonly List<object[]> _candyData
@@ -116,13 +117,14 @@ namespace LeetCodeTests.Easy
                 get { return _candyData; }
             }
         }
+
         public class MatrixReshape
         {
             [Theory]
             [MemberData(nameof(MatrixData))]
             public void ValidInputs(int[,] inputMatrix, int outputRows, int outputColumns, int[,] expectedResult)
             {
-                int[,] actualResult = MatrixReshape(inputMatrix, outputRows, outputColumns);
+                int[,] actualResult = Maths.MatrixReshape(inputMatrix, outputRows, outputColumns);
                 Assert.Equal(expectedResult, actualResult);
             }
 
@@ -147,13 +149,14 @@ namespace LeetCodeTests.Easy
                 get { return _matrixData; }
             }
         }
+
         public class NextGreater
         {
             [Theory]
             [MemberData(nameof(GreaterNumberData))]
             public void ValidInputs(int[] findNums, int[] nums, int[] expectedResult)
             {
-                int[] actualResult = NextGreaterElement(findNums, nums);
+                int[] actualResult = Maths.NextGreaterElement(findNums, nums);
                 Assert.Equal(expectedResult, actualResult);
             }
 
@@ -168,6 +171,7 @@ namespace LeetCodeTests.Easy
             }
 
         }
+
         public class ConsecutiveOnes
         {
             [Theory]
@@ -175,53 +179,24 @@ namespace LeetCodeTests.Easy
             [InlineData(new int[] { 1, 1, 0, 1, 1, 1 }, 3)]
             public void ValidInputs(int[] nums, int expectedResult)
             {
-                int actualResult = MaxConsecutiveOnes(nums);
+                int actualResult = Maths.MaxConsecutiveOnes(nums);
                 Assert.Equal(expectedResult, actualResult);
             }
         }
-        public class MaxTreeDepth
-        {
-            [Theory]
-            [MemberData(nameof(TreeData))]
-            public void ValidInputs(TreeNode x, int expectedResult)
-            {
-                int actualResult = MaxDepth(x);
-                Assert.True(expectedResult.Equals(actualResult));
-            }
-            private static readonly List<object[]> _treeData
-                = new List<object[]>
-                {
-                        new object[] { new TreeNode(1), 1 },
-                        new object[] { new TreeNode(1, new TreeNode(2), new TreeNode(3)), 2 },
-                        new object[] { null, 0 }
-                };
-            public static IEnumerable<object[]> TreeData
-            {
-                get { return _treeData; }
-            }
-        }
-        public class MergeBinaryTrees
-        {
-            [Theory]
-            [MemberData(nameof(TreeData))]
-            public void ValidInputs(TreeNode x, TreeNode y, TreeNode expectedResult)
-            {
-                TreeNode actualResult = MergeTrees(x, y);
-                Assert.True(expectedResult.Equals(actualResult));
-            }
-            private static readonly List<object[]> _treeData
-                = new List<object[]>
-                {
-                        new object[]
-                        {
-                            new TreeNode(1), new TreeNode(7), new TreeNode(8)
-                        }
-                };
-            public static IEnumerable<object[]> TreeData
-            {
-                get { return _treeData; }
-            }
-        }
 
+        public class UncommonSubSequence
+        {
+            [Theory]
+            [InlineData("aaa", "bbb", 3)]
+            [InlineData("aaa", "aaa", -1)]
+            [InlineData("aa", "baab", 4)]
+            [InlineData("baab", "aa", 4)]
+            [InlineData("aa", "baaccccccaab", 12)]
+            public void ValidInputs(string x, string y, int expectedResult)
+            {
+                int actualResult = Maths.LongestUncommonSequence(x, y);
+                Assert.Equal(expectedResult, actualResult);
+            }
+        }
     }
 }

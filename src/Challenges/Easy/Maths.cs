@@ -1,78 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using LeetCode.Model;
 
-namespace LeetCode
+namespace LeetCode.Easy
 {
-    /// <summary>
-    /// Methods used to solve the 'Easy' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Easy 
-    /// TO DO: Split into files by category, e.g. strings, maths, etc.
-    /// </summary>
-    public class Easy
+    public class Maths
     {
-        /// <summary>
-        /// LeetCode problem 104 - Maximum Depth of Binary Tree: https://leetcode.com/problems/maximum-depth-of-binary-tree/#/description
-        /// </summary>
-        /// <param name="root">Root TreeNode</param>
-        /// <returns>Maximum depth of the Tree</returns>
-        public static int MaxDepth(TreeNode root)
-        {
-            if (root == null) return 0; // If null tree, 0 depth.
-            if (root.left==null && root.right==null) return 1; // If both connected nodes are null, depth of 1.
-
-            // If non-null connected nodes, depth = deepest connected node + this node
-            else if (root.left == null) return MaxDepth(root.right) + 1; 
-            else if (root.right == null) return MaxDepth(root.left) + 1;
-            else return Math.Max(MaxDepth(root.left), MaxDepth(root.right)) + 1;
-        }
-
-        /// <summary>
-        /// LeetCode problem 344 - Reverse String: https://leetcode.com/submissions/detail/76241460/
-        /// Take a string, and reverse it, without changing cases.
-        /// </summary>
-        /// <param name="input">String to be reversed.</param>
-        /// <returns>Reversed string.</returns>
-        public static string ReverseString(string input)
-        {
-            // Holder string.
-            string output = "";
-            // Start from the final letter in the string and put into new string.
-            for (int i = input.Length - 1; i >= 0; i--)
-            {
-                output += input[i];
-            }
-            return output;
-        }
-
-        /// <summary>
-        /// LeetCode problem 412 - FizzBuzz: https://leetcode.com/problems/fizz-buzz/
-        /// Output a list of strings from 1 to N, where any number divisible by 3 is Fizz, by 5 is Buzz, by both is FizzBuzz.
-        /// All other numbers should be unchanged. Uses <see cref="SingleFizzBuzz(int)"/>
-        /// </summary>
-        /// <param name="input">N - number of strings in the returned list.</param>
-        /// <returns>List of N strings, representing each number from 1 to N.</returns>
-        public static List<string> FizzBuzz(int input)
-        {
-            List<string> result = new List<string>();
-            for (int i = 1; i <= input; i++) result.Add(SingleFizzBuzz(i));
-            return result;
-        }
-
-        /// <summary>
-        /// LeetCode problem 412 - FizzBuzz <see cref="FizzBuzz(int)"/>
-        /// </summary>
-        /// <param name="input">Integer to be FizzBuzzed.</param>
-        /// <returns>String of FizzBuzzed int.</returns>
-        public static string SingleFizzBuzz(int input)
-        {
-            string temp = "";
-            if (input % 3 == 0) temp += "Fizz";
-            if (input % 5 == 0) temp += "Buzz";
-            else if (input % 3 != 0) return input.ToString();
-            return temp;            
-        }
-
         /// <summary>
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
@@ -80,7 +12,7 @@ namespace LeetCode
         /// <param name="x">First input integer</param>
         /// <param name="y">Second input integer</param>
         /// <returns>Hamming distance between the 2 input integers</returns>
-         public static int FindHammingDistance(int x, int y)
+        public static int FindHammingDistance(int x, int y)
         {
             // XOR of the input numbers. Once we have this, we need to count the number of bits in the result.
             int product = x ^ y, bitCount = 0;
@@ -125,7 +57,7 @@ namespace LeetCode
                     {
                         landCount++;
                         // If we're not at the edge of the map, and the next square is land (check both directions).
-                        if (j != gridHeight - 1) if (grid[i, j + 1] == 1) neighbourCount++; 
+                        if (j != gridHeight - 1) if (grid[i, j + 1] == 1) neighbourCount++;
                         if (i != gridWidth - 1) if (grid[i + 1, j] == 1) neighbourCount++;
                     }
 
@@ -214,66 +146,6 @@ namespace LeetCode
         }
 
         /// <summary>
-        /// LeetCode problem 500 - Keyboard Row: https://leetcode.com/problems/keyboard-row/#/description
-        /// Given a list of words, determine which can be typed using a single row of characters on a standard keyboard.
-        /// </summary>
-        /// <param name="words">Words to be tested.</param>
-        /// <returns>Words which can be typed using a single keyboard row.</returns>
-        public static string[] FindWordsInKeyboardLines(string[] words)
-        {
-            List<string> result = new List<string>();
-
-            // Set up each row of the keyboard (lower case), and put into list.
-            HashSet<char> FirstLine = new HashSet<char> { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p' };
-            HashSet<char> SecondLine = new HashSet<char> { 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l' };
-            HashSet<char> ThirdLine = new HashSet<char> { 'z', 'x', 'c', 'v', 'b', 'n', 'm' };
-            List<HashSet<char>> KeyboardLines = new List<HashSet<char>> { FirstLine, SecondLine, ThirdLine };
-
-            // Go through each word given, and compare against each Keyboard Row.
-            foreach (string word in words)
-            {
-                foreach (HashSet<char> line in KeyboardLines)
-                {
-                    if (CanMakeWordFromChars(word.ToLower(), line)) // Make sure to submit words in lower case.
-                    {
-                        result.Add(word);
-                        break;
-                    }
-                }
-            }
-
-            return result.ToArray();
-        }
-
-        /// <summary>
-        /// Check is a word consists of characters only from a given collection (case sensitive).
-        /// </summary>
-        /// <param name="word">Word to be checked.</param>
-        /// <param name="charSet">Collection of letters to be checked against.</param>
-        /// <returns></returns>
-        public static bool CanMakeWordFromChars(string word, ICollection<char> charSet)
-        {
-            foreach (char c in word)
-            {
-                if (!charSet.Contains(c)) return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// LeetCode problem 520 - Detect Capital
-        /// Given an input word, determine if it uses capitalisation correctly. i.e all lower, all upper, or first letter upper only.
-        /// </summary>
-        /// <param name="word">Word to be tested.</param>
-        /// <returns>True if word uses capitals correctly.</returns>
-        public static bool DetectCapitalUse(string word)
-        {
-            if (word.ToLower() == word || word.ToUpper() == word) return true;
-            if (char.IsUpper(word[0]) && word.Substring(1) == word.Substring(1).ToLower()) return true;
-            return false;
-        }
-
-        /// <summary>
         /// LeetCode problem 521 - Longest Uncommon Subsequence I: https://leetcode.com/problems/longest-uncommon-subsequence-i/#/description
         /// Given 2 strings, return the length of the longest possible uncommon sub-sequence. i.e. the longest string that exists as a sub-string
         /// of one input, but not the other.
@@ -285,52 +157,6 @@ namespace LeetCode
         {
             if (x == y) return -1;
             return Math.Max(x.Length, y.Length);
-        }
-
-        /// <summary>
-        /// LeetCode problem 557 - Reverse Words in a String III: https://leetcode.com/problems/reverse-words-in-a-string-iii/#/description
-        /// Reverse each word from an input string, preserving whitespace, order of words, and casing.
-        /// </summary>
-        /// <param name="input">String of words</param>
-        /// <returns>String of reversed words</returns>
-        public static string ReverseWordsInString(string input)
-        {
-            // Create char array of same size as the input string.
-            char[] outputArray = new char[input.Length];
-
-            // Starting index for the first word.
-            int startOfWordIndex = 0;
-
-            // Loop along the entire string.
-            for (int endOfWordIndex = 0; endOfWordIndex < input.Length; endOfWordIndex++)
-            {
-                // If J is a spacewe want to put the previous word into the array, in reverse.
-                if (input[endOfWordIndex] == ' ')
-                {
-                    outputArray[endOfWordIndex] = ' ';
-                    // Iterate from the start of the word, to the end of the word (space / end of line).
-                    for (int i = startOfWordIndex; i < endOfWordIndex; i++)
-                    {
-                        // first letter at the start is assigned as the last letter of the word
-                        outputArray[i] = input[endOfWordIndex + startOfWordIndex - i - 1];
-                    }
-                    startOfWordIndex = endOfWordIndex + 1;
-                }
-
-                // If we're at the end of the string
-                if (endOfWordIndex == input.Length - 1)
-                {
-                    // Iterate from the start of the word, to the end of the word (space / end of line).
-                    for (int i = startOfWordIndex; i <= endOfWordIndex; i++)
-                    {
-                        // first letter at the start is assigned as the last letter of the word
-                        outputArray[i] = input[endOfWordIndex + startOfWordIndex - i];
-                    }
-                    startOfWordIndex = endOfWordIndex + 1;
-                }
-            }
-
-            return new string(outputArray);
         }
 
         /// <summary>
@@ -410,54 +236,5 @@ namespace LeetCode
             if (uniqueCandies.Count < candies.Length / 2) return uniqueCandies.Count;
             else { return candies.Length / 2; } // If more than half are unique, max unique to be gained is half the total.
         }
-
-        /// <summary>
-        /// LeetCode problem 606 - Construct string from binary tree: https://leetcode.com/problems/construct-string-from-binary-tree/#/description
-        /// </summary>
-        /// <param name="t">Binary tree.</param>
-        /// <returns>String representation of the tree.</returns>
-        public string Tree2str(TreeNode t)
-        {
-            if (t == null) return "";
-
-            // Add node value to string to start with.
-            string output = t.val.ToString(), left = "", right = "";
-
-            // Right hand node, include blank parens if left is null.
-            if (t.right != null)
-            {
-                right = "(" + Tree2str(t.right) + ")";
-                if (t.left == null) left = "()";
-            }
-
-            // Left hand node.
-            if (t.left != null) left = "(" + Tree2str(t.left) + ")";
-
-            // Combine!
-            return output + left + right;
-        }
-
-        /// <summary>
-        /// LeetCode problem 617 - Merge Two Binary Trees: https://leetcode.com/problems/merge-two-binary-trees/#/description
-        /// Merge 2 binary trees - i.e. if values overlap, add them together, if one is null, take the other value, if both null, null.
-        /// </summary>
-        /// <param name="t1">First binary tree</param>
-        /// <param name="t2">Second binary tree</param>
-        /// <returns>Merged result of 2 input trees</returns>
-        public static TreeNode MergeTrees(TreeNode t1, TreeNode t2)
-        {
-            // If both are null, end of the tree for this node.
-            if (t1 == null && t2 == null) return null;
-
-            // If not, create new node, combining the 2 input values (either could be null).
-            TreeNode Final = new TreeNode((t1 != null ? t1.val : 0) + (t2 != null ? t2.val : 0));
-
-            // Create the 2 subsequent nodes from the new tree Final with recursion. Will end when both null.
-            Final.left = MergeTrees(t1 != null ? t1.left : null, t2 != null ? t2.left : null);
-            Final.right = MergeTrees(t1 != null ? t1.right : null, t2 != null ? t2.right : null);
-
-            return Final;
-        }
     }
-
 }
