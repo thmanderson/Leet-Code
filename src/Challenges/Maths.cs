@@ -9,9 +9,46 @@ namespace LeetCode
 {
     public static class Maths
     {
+
         /// <summary>
-        /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
+        /// Given 2 <see cref="ListNode"/>s representing 2 integers in reverse, return the two numbers added together as another ListNode.
+        /// e.g. 2 -> 4 -> 3 == 342.
+        /// LeetCode problem 2 - Add Two Numbers: https://leetcode.com/problems/add-two-numbers/#/description
+        /// </summary>
+        /// <param name="l1">First number starting with smallest value e.g. 2 -> 4 -> 3 == 342.</param>
+        /// <param name="l2">Second number starting with smallest value e.g. 2 -> 4 -> 3 == 342.</param>
+        /// <returns>Sum of <paramref name="l1"/> and <paramref name="l2"/> starting with smallest value e.g. 2 -> 4 -> 3 == 342.</returns>
+        public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        {
+            ListNode result;
+
+            if (l1 == null)
+            {
+                if (l2 == null) return null;
+                else return l2;
+            }
+            else if (l2 == null) return l1;
+
+            // L1 and L2 are the smallest numbers in a sequence.
+            // e.g if L1 == 2, and links to another ListNode 1, which doesn't link to anything else, this represents the number 12.
+
+            // Add up this node:
+            int value = l1.val + l2.val;
+
+            // If an extra 1 needs to be carried to the next sum:
+            int carry = 0;
+            if (value > 9) { carry = 1; value -= 10; }
+
+            result = new ListNode(value);
+            result.next = AddTwoNumbers(l1.next, l2.next);
+            if (result.next == null && carry != 0) result.next = new ListNode(carry);
+            else if (result.next != null) result.next = AddTwoNumbers(result.next, new ListNode(carry));
+            return result;
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
+        /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
         /// <param name="x">First input integer</param>
         /// <param name="y">Second input integer</param>
@@ -29,9 +66,9 @@ namespace LeetCode
         }
 
         /// <summary>
-        /// LeetCode problem 463 - Island Perimeter: https://leetcode.com/problems/island-perimeter/#/description
         /// Given a 2D rectangular binary "map", where 1 == land and 0 == water, calculate the perimter of the island depicted.
         /// Assume no diagonal connections between land, and no 'lakes' in the island.
+        /// LeetCode problem 463 - Island Perimeter: https://leetcode.com/problems/island-perimeter/#/description
         /// </summary>
         /// <param name="grid">Grid "map" of and island, each int value is either 1 or 0.</param>
         /// <returns></returns>
@@ -73,8 +110,8 @@ namespace LeetCode
         }
 
         /// <summary>
-        /// LeetCode problem 476 - Number Complement: https://leetcode.com/problems/number-complement/#/description
         /// Given a positive integer, output it's complement number. e.g. input 5 (101) == output 2 (010).
+        /// LeetCode problem 476 - Number Complement: https://leetcode.com/problems/number-complement/#/description
         /// </summary>
         /// <param name="inputNumber">Number to be flipped.</param>
         /// <returns>Complement number - integer equivalent of flipped bits.</returns>
@@ -150,9 +187,9 @@ namespace LeetCode
         }
 
         /// <summary>
-        /// LeetCode problem 521 - Longest Uncommon Subsequence I: https://leetcode.com/problems/longest-uncommon-subsequence-i/#/description
         /// Given 2 strings, return the length of the longest possible uncommon sub-sequence. i.e. the longest string that exists as a sub-string
         /// of one input, but not the other.
+        /// LeetCode problem 521 - Longest Uncommon Subsequence I: https://leetcode.com/problems/longest-uncommon-subsequence-i/#/description
         /// </summary>
         /// <param name="x">Input String 1</param>
         /// <param name="y">Input String 2</param>
@@ -164,9 +201,36 @@ namespace LeetCode
         }
 
         /// <summary>
-        /// LeetCode problem 561 - Array Partition I: https://leetcode.com/problems/array-partition-i/#/description
+        /// Calculate the product of 2 complex numbers.
+        /// LeetCode problem 537 - Complex Number Manipulation: https://leetcode.com/problems/complex-number-multiplication/#/description
+        /// </summary>
+        /// <param name="a">Complex number A in format of "x + yi" where x and y are both integers.</param>
+        /// <param name="b">Complex number B in format of "x + yi" where x and y are both integers.</param>
+        /// <returns>Complex number A*B in format of "x + yi" where x and y are both integers.</returns>
+        public static string ComplexNumberMultiply(string a, string b)
+        {
+            // Split string into real and imaginary components.
+            string[] leftStrings = a.Split('+');
+            string[] rightStrings = b.Split('+');
+
+            // Convert strings into integers:
+            int leftReal = Convert.ToInt32(leftStrings[0]);
+            int leftImaginary = Convert.ToInt32(leftStrings[1].TrimEnd('i'));
+            int rightReal = Convert.ToInt32(rightStrings[0]);
+            int rightImaginary = Convert.ToInt32(rightStrings[1].TrimEnd('i'));
+
+            // Final real number:
+            int finalReal = (leftReal * rightReal) - (leftImaginary * rightImaginary);
+            // Final imaginary number:
+            int finalImaginary = (leftReal * rightImaginary) + (leftImaginary * rightReal);
+
+            return (finalReal.ToString() + "+" + finalImaginary.ToString() + "i");
+        }
+
+        /// <summary>
         /// Separates a given array of 2n integers into n pairs, such that it produces the largest possible value for the sum of all minimum values of each pair.
         /// e.g. given (1,2,3,4), grouped as (1,2) and (3,4) means the sum of the minimum values == 1 + 3 = 4.
+        /// LeetCode problem 561 - Array Partition I: https://leetcode.com/problems/array-partition-i/#/description
         /// </summary>
         /// <param name="nums">Array of 2n integers.</param>
         /// <returns>Largest possible value for the sum of minimum values for n pairs.</returns>
@@ -189,8 +253,8 @@ namespace LeetCode
         }
 
         /// <summary>
-        /// LeetCode problem 566 - Reshape the Matrix: https://leetcode.com/problems/reshape-the-matrix/#/description
         /// Given a matrix of ints, return the same values in a re-shaped matrix.
+        /// LeetCode problem 566 - Reshape the Matrix: https://leetcode.com/problems/reshape-the-matrix/#/description
         /// </summary>
         /// <param name="inputMatrix">Input multi-dimensional array of ints.</param>
         /// <param name="outputRows">Number of rows for the output array.</param>
@@ -222,10 +286,10 @@ namespace LeetCode
         }
 
         /// <summary>
-        /// LeetCode problem 575 - Distribute Candies: https://leetcode.com/problems/distribute-candies/#/description
         /// Given an array of 'candies' represented by integers (each unique int represents a unique type of candy),
         /// and if the candies are to be distributed equally between brother and sister then return the maximum number
         /// of unique candies that either the brother or sister can get from the set of candies.
+        /// LeetCode problem 575 - Distribute Candies: https://leetcode.com/problems/distribute-candies/#/description
         /// </summary>
         /// <param name="candies">Array of 'candies', where different int values represent unique types of candy.</param>
         /// <returns>Maximum number of unique candies that be contained in an array half the size of the input.</returns>
@@ -241,6 +305,12 @@ namespace LeetCode
             else { return candies.Length / 2; } // If more than half are unique, max unique to be gained is half the total.
         }
 
+        /// <summary>
+        /// Find out of a given set of moves result in starting and finishing in the same place.
+        /// LeetCode problem 657 - Judge Route Circuit: https://leetcode.com/problems/judge-route-circle/
+        /// </summary>
+        /// <param name="moves">String of characters, each representing a move, e.g. U == Up, L == Left, etc. Any characters other than U, D, L, or R are ignored.</param>
+        /// <returns>True if all the moves add up to no net movement.</returns>
         public static bool JudgeCircle(string moves)
         {
             int up = 0, across = 0;
@@ -254,10 +324,18 @@ namespace LeetCode
             return (up == 0 && across == 0);
         }
 
-        public static IList<int> SelfDividingNumbers(int left, int right)
+        /// <summary>
+        /// Returns a list of Self Dividing numbers between the lower and upper limit provided. Self dividing
+        /// here means is divisible by each of the digits in the integer.
+        /// LeetCode problem 728 - Self Dividing Numbers: https://leetcode.com/problems/self-dividing-numbers
+        /// </summary>
+        /// <param name="lowerLimit">Lower limit.</param>
+        /// <param name="upperLimit">Upper limit.</param>
+        /// <returns>List of self-divisible integers.</returns>
+        public static IList<int> SelfDividingNumbers(int lowerLimit, int upperLimit)
         {
             var result = new List<int>();
-            for (int i = left; i <= right; i++)
+            for (int i = lowerLimit; i <= upperLimit; i++)
             {
                 var intString = Convert.ToString(i);
                 bool SelfDividing = true;
@@ -271,69 +349,14 @@ namespace LeetCode
             }
             return result;
         }
-
-
+        
         /// <summary>
-        /// LeetCode problem 537 - Complex Number Manipulation: https://leetcode.com/problems/complex-number-multiplication/#/description
+        /// Find the maximum increase in height that can be made to a 'city', without altering the skyline.
+        /// This means increasing all buildings without making them taller than the tallest in both their row and column.
+        /// LeetCode problem 807 - https://leetcode.com/problems/max-increase-to-keep-city-skyline/
         /// </summary>
-        /// <param name="a">Complex number 1 - as a string.</param>
-        /// <param name="b">Complex number 2 - as a string.</param>
-        /// <returns>Complex number - 1 * 2 - as a string.</returns>
-        public static string ComplexNumberMultiply(string a, string b)
-        {
-            // Split string into real and imaginary components.
-            string[] leftStrings = a.Split('+');
-            string[] rightStrings = b.Split('+');
-
-            // Convert strings into integers:
-            int leftReal = Convert.ToInt32(leftStrings[0]);
-            int leftImaginary = Convert.ToInt32(leftStrings[1].TrimEnd('i'));
-            int rightReal = Convert.ToInt32(rightStrings[0]);
-            int rightImaginary = Convert.ToInt32(rightStrings[1].TrimEnd('i'));
-
-            // Final real number:
-            int finalReal = (leftReal * rightReal) - (leftImaginary * rightImaginary);
-            // Final imaginary number:
-            int finalImaginary = (leftReal * rightImaginary) + (leftImaginary * rightReal);
-
-            return (finalReal.ToString() + "+" + finalImaginary.ToString() + "i");
-        }
-
-        /// <summary>
-        /// LeetCode problem 2 - Add Two Numbers: https://leetcode.com/problems/add-two-numbers/#/description
-        /// </summary>
-        /// <param name="l1">First number.</param>
-        /// <param name="l2">Second number.</param>
-        /// <returns>Sum of 2 inputs.</returns>
-        public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
-        {
-            ListNode result;
-
-            if (l1 == null)
-            {
-                if (l2 == null) return null;
-                else return l2;
-            }
-            else if (l2 == null) return l1;
-
-            // L1 and L2 are the smallest numbers in a sequence.
-            // e.g if L1 == 2, and links to another ListNode 1, which doesn't link to anything else, this represents the number 12.
-
-            // Add up this node:
-            int value = l1.val + l2.val;
-
-            // If an extra 1 needs to be carried to the next sum:
-            int carry = 0;
-            if (value > 9) { carry = 1; value -= 10; }
-
-            result = new ListNode(value);
-            result.next = AddTwoNumbers(l1.next, l2.next);
-            if (result.next == null && carry != 0) result.next = new ListNode(carry);
-            else if (result.next != null) result.next = AddTwoNumbers(result.next, new ListNode(carry));
-            return result;
-        }
-
-        // https://leetcode.com/problems/max-increase-to-keep-city-skyline/description/
+        /// <param name="grid">Rectangular grid representing buildings in a city, and their relative heights.</param>
+        /// <returns>Total maximum increase that can be made across all buildings in the grid.</returns>
         public static int MaxIncreaseKeepingSkyline(int[][] grid)
         {
             var topView = new int[grid.Length];
