@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using LeetCode.Model;
 
-namespace LeetCode.Easy.Tests
+namespace LeetCode.Tests
 {
     public class TreeNodeTests
     {

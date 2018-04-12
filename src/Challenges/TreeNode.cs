@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using LeetCode.Model;
 
-namespace LeetCode.Easy
+namespace LeetCode
 {
     /// <summary>
     /// Methods used to solve the 'Easy' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Easy 

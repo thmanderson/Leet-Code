@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace LeetCode.Easy
+namespace LeetCode
 {
     public class String
     {
@@ -157,5 +156,159 @@ namespace LeetCode.Easy
 
             return new string(outputArray);
         }
+
+        /// <summary>
+        /// LeetCode Problem 771 - Jewels and Stones: https://leetcode.com/problems/jewels-and-stones/description/
+        /// Given a list of stones, and a list of which stones are jewels, count how many jewels you have (case sensitive).
+        /// </summary>
+        /// <param name="J">List of Jewels, each character is distinct, and represents a type of Jewel (case sensitive).</param>
+        /// <param name="S">List of stones. Not necessarily distinct, not all jewels.</param>
+        /// <returns></returns>
+        public static int NumJewelsInStones(string J, string S)
+        {
+            var Jewels = new HashSet<char>();
+            int result = 0;
+            foreach (char jewel in J)
+            {
+                Jewels.Add(jewel);
+            }
+            foreach (char stone in S)
+            {
+                if (Jewels.Contains(stone)) result++;
+            }
+            return result;
+        }
+
+        // https://leetcode.com/problems/subdomain-visit-count/description/
+        public IList<string> SubdomainCount(string[] cpDomains)
+        {
+            var result = new List<string>();
+            var totals = new Dictionary<string, int>();
+
+            foreach (string cpDomain in cpDomains)
+            {
+                int count = Convert.ToInt32(cpDomain.Split(' ')[0]);
+                string domain = cpDomain.Split(' ')[1];
+                while (domain.Split('.')[0] != domain)
+                {
+                    if (totals.ContainsKey(domain)) totals[domain] += count;
+                    else totals.Add(domain, count);
+                    domain = domain.Substring(domain.IndexOf('.') + 1);
+                }
+                if (totals.ContainsKey(domain)) totals[domain] += count;
+                else totals.Add(domain, count);
+            }
+
+            foreach (var d in totals)
+            {
+                result.Add(d.Value + " " + d.Key);
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// LeetCode problem 3 - Longest Substring Without Repeating Characters: https://leetcode.com/problems/longest-substring-without-repeating-characters/#/description
+        /// </summary>
+        /// <param name="s">Input string.</param>
+        /// <returns>Length of longest possible substring of s with no repeating characters.</returns>
+        public static int LengthOfLongestSubstring(string s)
+        {
+            // Track the chars used to make a substring in the HashSet.
+            HashSet<char> usedChars = new HashSet<char>();
+            int result = 0, n = s.Length, i = 0, j = 0;
+
+            // Create a "sliding window", substring (i,j). Extend as much as possible to the right, if it fails, shrink from the left.
+            while (i < n && j < n)
+            {
+                // First, check s[j]
+                if (!usedChars.Contains(s[j]))
+                {
+                    // If this isn't a duplicate, extend the window to the right, and add to the HashSet.
+                    usedChars.Add(s[j]);
+                    j++;
+                    result = Math.Max(result, j - i); // Keeps track of the largest sub-string we've seen so far.
+                }
+
+                else
+                {
+                    // If s[j] is a duplicate, reduce the window from the left, and try again.
+                    usedChars.Remove(s[i]);
+                    i++;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// LeetCode problem 5 - Longest Palindromic Substring: https://leetcode.com/problems/longest-palindromic-substring/#/description
+        /// </summary>
+        /// <param name="s">Input string.</param>
+        /// <returns>The longest palindromic substring of input s.</returns>
+        public static string LongestPalindrome(string s)
+        {
+            /******************************************************
+            // Attempt 1: Seems to work but too slow for Leetcode:
+            ******************************************************/
+
+            // Check if whole input string is a palindrome
+            if (s == ReverseString(s)) return s;
+            string result = "";
+
+            // Iterate through the string, where i is the starting point of the substring.
+            for (int i = 0; i < s.Length; i++)
+            {
+                // Start with the largest possible substring that starts from s[i]:
+                for (int j = s.Length - 1; j >= i; j--)
+                {
+                    // If the substring is a palindrome, and longer than current best - return it.
+                    string temp = s.Substring(i, j + 1 - i);
+                    if (ReverseString(temp) == temp && temp.Length > result.Length) result = temp;
+                }
+                if (result.Length > s.Length - i) return result;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// LeetCode problem 6 - ZigZag Conversion: https://leetcode.com/problems/zigzag-conversion/#/description
+        /// </summary>
+        /// <param name="s">String to be ZigZag-ified.</param>
+        /// <param name="rows">Number of rows to be split into.</param>
+        /// <returns>ZigZag-ified string read row by row.</returns>
+        public static string ZigZagConvert(string s, int rows)
+        {
+            if (rows == 1 || s.Length < rows) return s;
+            string result = "";
+            int total = (rows - 1) * 2;
+
+            for (int x = 0; x < rows; x++)
+            {
+                // Set initial gap
+                int GapToNextChar = (rows - 1 - x) * 2;
+
+                // Last number in the column
+                if (GapToNextChar == 0) GapToNextChar = (rows - 1) * 2;
+
+                //// Grab all letters in the row
+                for (int i = x; i < s.Length; i += GapToNextChar)
+                {
+                    result += s[i];
+
+                    // Gap alternates between two numbers as you go
+                    bool zag = ((i / (rows - 1)) % 2 == 0);
+                    // if (i % (2 * rows) > rows || i % (2 * rows) == 0) GapToNextChar = total - (rows - 1 - x) * 2;
+                    if (zag) GapToNextChar = (rows - 1 - x) * 2;
+                    else GapToNextChar = total - (rows - 1 - x) * 2;
+
+                    if (GapToNextChar == 0) GapToNextChar = (rows - 1) * 2;
+                }
+            }
+
+            return result;
+        }
+
     }
 }
