@@ -47,7 +47,7 @@ namespace LeetCode
         public static string LongestPalindrome(string s)
         {
             /******************************************************
-            // Attempt 1: Seems to work but too slow for Leetcode:
+            // Attempt 1: Works but too slow for Leetcode
             ******************************************************/
 
             // Check if whole input string is a palindrome
@@ -96,7 +96,6 @@ namespace LeetCode
 
                     // Gap alternates between two numbers as you go
                     bool zag = ((i / (rows - 1)) % 2 == 0);
-                    // if (i % (2 * rows) > rows || i % (2 * rows) == 0) GapToNextChar = total - (rows - 1 - x) * 2;
                     if (zag) GapToNextChar = (rows - 1 - x) * 2;
                     else GapToNextChar = total - (rows - 1 - x) * 2;
 
@@ -117,6 +116,7 @@ namespace LeetCode
         {
             // Holder string.
             string output = "";
+
             // Start from the final letter in the string and put into new string.
             for (int i = input.Length - 1; i >= 0; i--)
             {
@@ -150,7 +150,7 @@ namespace LeetCode
             if (input % 3 == 0) temp += "Fizz";
             if (input % 5 == 0) temp += "Buzz";
             else if (input % 3 != 0) return input.ToString();
-            return temp;            
+            return temp;
         }
 
         /// <summary>
