@@ -71,6 +71,20 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Finds out if an integer is a palindrome.
+        /// LeetCode problem 9 - https://leetcode.com/problems/palindrome-number/description/
+        /// </summary>
+        /// <param name="input">Input integer.</param>
+        /// <returns>True if number is a palindrome.</returns>
+        public static bool IsPalindrome(int input)
+        {
+            if (input < 0) return false;
+            if (input == 0) return true;
+            if (input == Reverse(input)) return true;
+            else return false;
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
