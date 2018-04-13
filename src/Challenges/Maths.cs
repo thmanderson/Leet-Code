@@ -45,6 +45,32 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Reverses an integer, e.g. 123 => 321, -321 => -123, 120 => 21.
+        /// LeetCode problem 7 - Reverse Integer: https://leetcode.com/problems/reverse-integer/
+        /// </summary>
+        /// <param name="x">Integer to be reversed</param>
+        /// <returns>Reversed integer. 0 for overflow.</returns>
+        public static int Reverse(int x)
+        {
+            if (x == Int32.MinValue || x == Int32.MaxValue) return 0;
+
+            int result;
+            int xAbs = Math.Abs(x);
+
+            var xReversed = String.ReverseString(Convert.ToString(xAbs));
+            try
+            {
+                result = Convert.ToInt32(xReversed);
+            }
+            catch
+            {
+                result = 0;
+            }
+            result = x >= 0 ? result : -result;
+            return result;
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>

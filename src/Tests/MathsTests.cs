@@ -128,6 +128,18 @@ namespace LeetCode.Tests
             Assert.Equal(expectedResult, actualResult);
         }
 
+        [Theory]
+        [InlineData(123, 321)]
+        [InlineData(-123, -321)]
+        [InlineData(120, 21)]
+        [InlineData(1534236469, 0)]
+        [InlineData(-2147483648, 0)]
+        public void ReverseInteger (int input, int expectedResult)
+        {
+            var actualResult = Maths.Reverse(input);
+            Assert.Equal(expectedResult, actualResult);
+        }
+
         #region Test Data
 
         public static readonly List<object[]> CandyData

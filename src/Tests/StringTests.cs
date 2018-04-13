@@ -115,5 +115,22 @@ namespace LeetCode.Easy.Tests
             string actualResult = ZigZagConvert(s, rows);
             Assert.Equal(expectedResult, actualResult);
         }
+
+        [Theory]
+        [MemberData(nameof(MorseCodeData))]
+        public void MorseCode_ValidInputs(string[] input, int expectedResult)
+        {
+            var actualResult = UniqueMorseRepresentations(input);
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        #region Test Data
+        public static readonly List<object[]> MorseCodeData
+            = new List<object[]>
+            {
+                new object[] { new string[] { "gin", "zen", "gig", "msg" }, 2 },
+            };
+
+        #endregion
     }
 }
