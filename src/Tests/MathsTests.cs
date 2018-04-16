@@ -140,6 +140,17 @@ namespace LeetCode.Tests
             Assert.Equal(expectedResult, actualResult);
         }
 
+        [Theory]
+        [InlineData("X", 10)]
+        [InlineData("XI", 11)]
+        [InlineData("IX", 9)]
+        [InlineData("XIV", 14)]
+        public void RomanNumerals(string input, int expected)
+        {
+            var actual = RomanToInt(input);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
 
         public static readonly List<object[]> CandyData

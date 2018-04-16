@@ -85,6 +85,31 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Converts a roman numeral string into an integer.
+        /// LeetCode problem 13 - https://leetcode.com/problems/roman-to-integer/description/
+        /// </summary>
+        /// <param name="s">Roman numeral</param>
+        /// <returns>Integer value of input</returns>
+        public static int RomanToInt(string s)
+        {
+            var RomanNumeralValues = new Dictionary<char, int> { { 'I', 1 }, { 'V', 5 }, { 'X', 10 }, { 'L', 50 }, { 'C', 100 }, { 'D', 500 }, { 'M', 1000 } };
+            int result = 0;
+            
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                int current = RomanNumeralValues[s[i]];
+                int next = RomanNumeralValues[s[i + 1]];
+
+                if (current < next) result -= current;
+                else result += current;
+            }
+
+            result += RomanNumeralValues[s[s.Length - 1]];
+
+            return result;
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
