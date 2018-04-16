@@ -3,15 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using LeetCode.Model;
 
-namespace LeetCode.Easy
+namespace LeetCode
 {
-    /// <summary>
-    /// Methods used to solve the 'Easy' algorithm problems on LeetCode: https://leetcode.com/problemset/algorithms/?difficulty=Easy 
-    /// TO DO: Split into files by category, e.g. strings, maths, etc.
-    /// </summary>
-    public class TreeNode
+    public static class TreeNode
     {
         /// <summary>
+        /// Find the maximum depth of a tree of <see cref="TreeNode"/>s
         /// LeetCode problem 104 - Maximum Depth of Binary Tree: https://leetcode.com/problems/maximum-depth-of-binary-tree/#/description
         /// </summary>
         /// <param name="root">Root TreeNode</param>
@@ -28,11 +25,12 @@ namespace LeetCode.Easy
         }
 
         /// <summary>
+        /// Turn a binary tree into a string.
         /// LeetCode problem 606 - Construct string from binary tree: https://leetcode.com/problems/construct-string-from-binary-tree/#/description
         /// </summary>
         /// <param name="t">Binary tree.</param>
         /// <returns>String representation of the tree.</returns>
-        public string Tree2str(Model.TreeNode t)
+        public static string Tree2str(Model.TreeNode t)
         {
             if (t == null) return "";
 
@@ -54,8 +52,8 @@ namespace LeetCode.Easy
         }
 
         /// <summary>
-        /// LeetCode problem 617 - Merge Two Binary Trees: https://leetcode.com/problems/merge-two-binary-trees/#/description
         /// Merge 2 binary trees - i.e. if values overlap, add them together, if one is null, take the other value, if both null, null.
+        /// LeetCode problem 617 - Merge Two Binary Trees: https://leetcode.com/problems/merge-two-binary-trees/#/description
         /// </summary>
         /// <param name="t1">First binary tree</param>
         /// <param name="t2">Second binary tree</param>
