@@ -110,6 +110,47 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Merge 2 sorted lists into 1 sorted list. <seealso cref="ListNode"/>
+        /// LeetCode problem 20 - Merge Two Sorted Lists: https://leetcode.com/problems/merge-two-sorted-lists/description/
+        /// </summary>
+        /// <param name="l1">First sorted list.</param>
+        /// <param name="l2">Second sorted list.</param>
+        /// <returns>Merged sorted list.</returns>
+        public static ListNode MergeTwoLists(ListNode l1, ListNode l2)
+        {
+            ListNode result = new ListNode(0);
+
+            if (l1 == null)
+            {
+                if (l2 == null) return null;
+                else
+                {
+                    result.val = l2.val;
+                    result.next = MergeTwoLists(null, l2.next);
+                }
+            }
+            else if (l2 == null)
+            {
+                result.val = l1.val;
+                result.next = MergeTwoLists(l1.next, null);
+            }
+            else
+            {
+                if (l1.val > l2.val)
+                {
+                    result.val = l2.val;
+                    result.next = MergeTwoLists(l1, l2.next);
+                }
+                else
+                {
+                    result.val = l1.val;
+                    result.next = MergeTwoLists(l1.next, l2);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
