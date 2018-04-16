@@ -15,7 +15,7 @@ namespace LeetCode.Tests
             int actualResult = CalculateIslandPerimeter(grid);
             Assert.Equal(expectedResult, actualResult);
         }
-        
+
         [Theory]
         [MemberData(nameof(ComplementData))]
         public void ComplementNumber_ValidInputs(int number, int expectedResult)
@@ -23,7 +23,7 @@ namespace LeetCode.Tests
             int actualResult = FindComplementNumber(number);
             Assert.Equal(expectedResult, actualResult);
         }
-        
+
         [Theory]
         [InlineData(1, 1, 0)]
         [InlineData(1, 0, 1)]
@@ -74,7 +74,7 @@ namespace LeetCode.Tests
             int actualResult = Maths.MaxConsecutiveOnes(nums);
             Assert.Equal(expectedResult, actualResult);
         }
-        
+
         [Theory]
         [InlineData("aaa", "bbb", 3)]
         [InlineData("aaa", "aaa", -1)]
@@ -134,7 +134,7 @@ namespace LeetCode.Tests
         [InlineData(120, 21)]
         [InlineData(1534236469, 0)]
         [InlineData(-2147483648, 0)]
-        public void ReverseInteger (int input, int expectedResult)
+        public void ReverseInteger(int input, int expectedResult)
         {
             var actualResult = Maths.Reverse(input);
             Assert.Equal(expectedResult, actualResult);
@@ -148,6 +148,14 @@ namespace LeetCode.Tests
         public void RomanNumerals(string input, int expected)
         {
             var actual = RomanToInt(input);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [MemberData(nameof(SortedDedupeData))]
+        public void RemoveDuplicates(int[] input, int expected)
+        {
+            var actual = Maths.RemoveDuplicates(input);
             Assert.Equal(expected, actual);
         }
 
@@ -208,7 +216,7 @@ namespace LeetCode.Tests
                 new object[] { 1, 22, new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22 } }
             };
 
-        public static readonly List<object[]> CityData 
+        public static readonly List<object[]> CityData
             = new List<object[]>
             {
                 new object[]
@@ -240,6 +248,18 @@ namespace LeetCode.Tests
                 new object[] { new ListNode(5), new ListNode(5), new ListNode(0, 1) },
                 new object[] { new ListNode(1), new ListNode(9,9), new ListNode( 0, 0, 1) },
                 new object[] { new ListNode(0,0,1), new ListNode(0,0,2), new ListNode( 0, 0, 3) }
+            };
+
+        public static readonly List<object[]> SortedDedupeData
+            = new List<object[]>
+            {
+                new object[] { new int[] { },  0 },
+                new object[] { new int[] { 1 },  1 },
+                new object[] { new int[] { 1, 1 },  1 },
+                new object[] { new int[] { 1, 2 },  2 },
+                new object[] { new int[] { 1, 1, 2 },  2 },
+                new object[] { new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 },  5 },
+                new object[] { new int[] { 0, 1, 2, 2, 3, 4 },  5 }
             };
 
         #endregion

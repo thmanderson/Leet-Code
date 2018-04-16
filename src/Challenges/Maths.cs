@@ -151,6 +151,35 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Given an array of sorted integers, modify the existing array in place, and return the new length so there are no duplicates.
+        /// LeetCode problem 26 - Remove Duplicates from Sorted Array: https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+        /// </summary>
+        /// <param name="nums">Array of ints.</param>
+        /// <returns>Length of de-duped sorted array.</returns>
+        public static int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length == 0 || nums.Length == 1) return nums.Length;
+
+            int prev = nums[0];
+            int toReplace = 1;
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] == prev)
+                {
+                    if (toReplace == 0) toReplace = i;
+                }
+                else
+                {
+                    if (toReplace != 0) nums[toReplace] = nums[i];
+                    toReplace++;
+                }
+                prev = nums[i];
+            }
+            return toReplace;
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
