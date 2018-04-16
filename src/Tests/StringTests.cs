@@ -132,6 +132,20 @@ namespace LeetCode.Easy.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData("()", true)]
+        [InlineData("(]", false)]
+        [InlineData("[{()}]", true)]
+        [InlineData("()[]{}", true)]
+        [InlineData("([)]", false)]
+        [InlineData("[", false)]
+        [InlineData("]", false)]
+        public void ValidParentheses(string input, bool expected)
+        {
+            var actual = ValidParantheses(input);
+            Assert.True(expected == actual, "For input " + input + ", expected result " + expected + " but " + actual + " was returned.");
+        }
+
         #region Test Data        
         public static readonly List<object[]> CommonPrefixData
             = new List<object[]>

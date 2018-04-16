@@ -130,6 +130,31 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Checks if a string has valid parantheses use.
+        /// LeetCode problem 20 - Valid Parantheses: https://leetcode.com/problems/valid-parentheses/description/
+        /// </summary>
+        /// <param name="s">String to be checked.</param>
+        /// <returns>True is parantheses use is valid.</returns>
+        public static bool ValidParantheses(string s)
+        {
+            var parensToClose = new Stack<char>();
+            var Parentheses = new Dictionary<char, char> { { '(', ')' }, { '{', '}' }, { '[', ']' }, };
+
+            foreach (char c in s)
+            {
+                if (Parentheses.ContainsKey(c)) parensToClose.Push(c);
+                if (Parentheses.ContainsValue(c))
+                {
+                    if (parensToClose.Count == 0 || Parentheses[parensToClose.Peek()] != c) return false;
+                    else parensToClose.Pop();
+                }
+            }
+
+            if (parensToClose.Count != 0) return false;
+            return true;
+        }
+
+        /// <summary>
         /// Take a string, and reverse it, without changing cases.
         /// LeetCode problem 344 - Reverse String: https://leetcode.com/submissions/detail/76241460/
         /// </summary>
