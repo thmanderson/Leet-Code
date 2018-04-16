@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LeetCode
 {
@@ -103,6 +104,28 @@ namespace LeetCode
                 }
             }
 
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the longest common prefix for an array of strings.
+        /// LeetCode problem 14 - Longest Common Prefix: https://leetcode.com/problems/longest-common-prefix/description/
+        /// </summary>
+        /// <param name="strs">Set of strings.</param>
+        /// <returns>Longest common prefix of input strings.</returns>
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            string result = "";
+            if (strs.Length == 0) return "";
+            if (strs.Length == 1) return strs[0];
+
+            int smallestLength = strs.Min(x => x.Length);
+            for (int i = 0; i < smallestLength; i++)
+            {
+                var current = strs[0].Substring(0, i + 1);
+                if (strs.Where(x => x.Substring(0, i + 1) == current).Count() == strs.Count()) result = current;
+                else { return result; }
+            }
             return result;
         }
 

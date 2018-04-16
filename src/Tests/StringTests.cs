@@ -124,7 +124,26 @@ namespace LeetCode.Easy.Tests
             Assert.Equal(expectedResult, actualResult);
         }
 
-        #region Test Data
+        [Theory]
+        [MemberData(nameof(CommonPrefixData))]
+        public void CommonPrefix(string[] input, string expected)
+        {
+            var actual = LongestCommonPrefix(input);
+            Assert.Equal(expected, actual);
+        }
+
+        #region Test Data        
+        public static readonly List<object[]> CommonPrefixData
+            = new List<object[]>
+            {
+                new object[] { new string[] { "hello", "hel", "hem", "helloo" }, "he" },
+                new object[] { new string[] { }, "" },
+                new object[] { new string[] { "abb" }, "abb" },
+                new object[] { new string[] { "flower", "flow", "flight" }, "fl" },
+                new object[] { new string[] { "abb", "abc" }, "ab" },
+                new object[] { new string[] { "abb", "abb", "abb", "abb", "abbbb" }, "abb" }
+            };
+
         public static readonly List<object[]> MorseCodeData
             = new List<object[]>
             {
