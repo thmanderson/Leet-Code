@@ -354,6 +354,33 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Calculate the number of lines required to write a string (where a line is 100 units long).
+        /// LeetCode Problem 806 - https://leetcode.com/problems/number-of-lines-to-write-string/description/
+        /// </summary>
+        /// <param name="widths">Array of ints, with number of units to write each letter, i.e. widths[0] is the length of 'a'.</param>
+        /// <param name="S">String to be written.</param>
+        /// <returns>Two ints - number of full lines required, and the length of the final, non-full line.</returns>
+        public int[] NumberOfLines(int[] widths, string S)
+        {
+            var result = new int[] { 1, 0 };
+            int currentLine = 0;
+
+            foreach (char c in S)
+            {
+                var nextWidth = widths[char.ToUpper(c) - 65];
+                if (currentLine + nextWidth > 100)
+                {
+                    result[0]++;
+                    currentLine = nextWidth;
+                }
+                else currentLine += nextWidth;
+            }
+
+            result[1] = currentLine;
+            return result;
+        }
+
+        /// <summary>
         /// LeetCode Problem 811 - https://leetcode.com/problems/subdomain-visit-count/description/
         /// </summary>
         public IList<string> SubdomainCount(string[] cpDomains)
