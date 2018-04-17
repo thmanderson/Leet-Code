@@ -180,6 +180,36 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Move all zeroes in an array to the end of the array.
+        /// </summary>
+        /// <param name="nums">Input array.</param>
+        public static void MoveZeroes(int[] nums)
+        {
+            bool firstZeroFound = false;
+            int toReplace = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!firstZeroFound)
+                {
+                    if (nums[i] == 0)
+                    {
+                        toReplace = i;
+                        firstZeroFound = true;
+                    }
+                }
+                else
+                {
+                    if (nums[i] == 0) continue;
+                    int tmp = nums[toReplace];
+                    nums[toReplace] = nums[i];
+                    nums[i] = tmp;
+                    toReplace++;
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>

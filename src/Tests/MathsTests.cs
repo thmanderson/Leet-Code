@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LeetCode.Model;
 using static LeetCode.Maths;
 using Xunit;
@@ -159,7 +160,21 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(MoveZeroesData))]
+        public void MoveZeroes(int[] input, int[] expected)
+        {
+            Maths.MoveZeroes(input);
+            Assert.True(Enumerable.SequenceEqual(input, expected));
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> MoveZeroesData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 0, 1, 0, 3, 12 }, new int[] { 1, 3, 12,0, 0} },
+            };
 
         public static readonly List<object[]> CandyData
             = new List<object[]>
