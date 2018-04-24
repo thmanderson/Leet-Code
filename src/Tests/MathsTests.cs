@@ -168,7 +168,23 @@ namespace LeetCode.Tests
             Assert.True(Enumerable.SequenceEqual(input, expected));
         }
 
+        [Theory]
+        [MemberData(nameof(ShortestToCharData))]
+        public void ShortestToChar(string S, char C, int[] expected)
+        {
+            var actual = Maths.ShortestToChar(S, C);
+            Assert.True(Enumerable.SequenceEqual(actual, expected));
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> ShortestToCharData
+            = new List<object[]>
+            {
+                new object[] { "e", 'e', new int[] { 0 } },
+                new object[] { "loveleetcode", 'e', new int[] { 3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0 } },
+                new object[] { "hellomynameisearl", 'e', new int[] { 1, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0, 1, 1, 0, 1, 2, 3 } },
+            };
 
         public static readonly List<object[]> MoveZeroesData
             = new List<object[]>

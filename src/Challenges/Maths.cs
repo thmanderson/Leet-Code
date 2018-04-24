@@ -512,7 +512,7 @@ namespace LeetCode
             }
             return result;
         }
-        
+
         /// <summary>
         /// Find the maximum increase in height that can be made to a 'city', without altering the skyline.
         /// This means increasing all buildings without making them taller than the tallest in both their row and column.
@@ -545,6 +545,27 @@ namespace LeetCode
                     var difference = Math.Min(sideView[i], topView[j]) - currentHeight;
                     if (difference > 0) result += difference;
                 }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds the distance from each position in a string to the nearest instance of a specific character.
+        /// LeetCode problem 821 - https://leetcode.com/problems/shortest-distance-to-a-character/description/
+        /// </summary>
+        /// <param name="S">Input string</param>
+        /// <param name="C">Character to find distance to</param>
+        /// <returns>Array of distances to char C</returns>
+        public static int[] ShortestToChar(string S, char C)
+        {
+            var result = new int[S.Length];
+
+            for (int i = 0; i < S.Length; i++)
+            {
+                int toNextChar = Math.Abs(((S.IndexOf(C, i) != -1) ? S.IndexOf(C, i) : S.Length + i) - i);
+                int toPrevChar = Math.Abs(((S.LastIndexOf(C, i) != -1) ? S.LastIndexOf(C, i) : S.Length + i) - i);
+                result[i] = Math.Min(toNextChar, toPrevChar);
             }
 
             return result;

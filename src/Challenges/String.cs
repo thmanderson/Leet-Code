@@ -330,6 +330,27 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Return true if string A can be turned into string B just be rotating the string, i.e. pushing the left-most char to the further right position.
+        /// LeetCode problem 796: https://leetcode.com/problems/rotate-string/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <returns></returns>
+        public static bool RotateString(string A, string B)
+        {
+            if (A == B) return true;
+
+            string tmp = A;
+            for (int i = 0; i < B.Length - 1; i++)
+            {
+                tmp = tmp.Substring(1) + tmp[0];
+                if (tmp == B) return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// In morse code some words can look identical. Finds the number of unique morse code representations for a set of words.
         /// LeetCode Problem 804 - https://leetcode.com/problems/unique-morse-code-words/description/
         /// </summary>

@@ -146,6 +146,16 @@ namespace LeetCode.Easy.Tests
             Assert.True(expected == actual, "For input " + input + ", expected result " + expected + " but " + actual + " was returned.");
         }
 
+        [Theory]
+        [InlineData("","", true)]
+        [InlineData("abcde", "deabc", true)]
+        [InlineData("abcdf", "deabc", false)]
+        public void RotateString(string A, string B, bool expected)
+        {
+            var actual = String.RotateString(A, B);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data        
         public static readonly List<object[]> CommonPrefixData
             = new List<object[]>
