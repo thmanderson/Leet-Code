@@ -176,6 +176,16 @@ namespace LeetCode.Tests
             Assert.True(Enumerable.SequenceEqual(actual, expected));
         }
 
+        [Theory]
+        [InlineData(1, 2, 0)]
+        [InlineData(6, 10, 4)]
+        [InlineData(10, 15, 5)]
+        public void PrimeBits(int L, int R, int expected)
+        {
+            var actual = Maths.CountPrimeSetBits(L, R);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
 
         public static readonly List<object[]> ShortestToCharData

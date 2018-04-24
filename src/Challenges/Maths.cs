@@ -514,6 +514,50 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Count of numbers in range L to R (inclusive) that have a prime number of bits set.
+        /// LeetCode problem 762: https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/description/            
+        /// </summary>
+        /// <param name="L"></param>
+        /// <param name="R"></param>
+        /// <returns></returns>
+        public static int CountPrimeSetBits(int L, int R)
+        {
+            var primes = new HashSet<int> { 2, 3, 5, 7, 11, 13, 17, 19 };
+            int result = 0;
+            
+            for (int i = L; i <= R; i++)
+            {
+                var binary = Convert.ToString(i, 2);
+                // Rather than use IsPrime, because we know R.Max is 10^6, maximum number of bits is 21, so we can use a specific subset of primes.
+                var bits = binary.Count(x => x == '1');
+                if (primes.Contains(bits)) result++;
+            }
+            
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates if a given integer is a prime number.
+        /// </summary>
+        /// <param name="input">An integer</param>
+        /// <returns>True if the integer is a prime number</returns>
+        public static bool IsPrime(int input)
+        {
+            if (input == 0 || input == 1) return false;
+            if (input == 2) return true;
+            if (input % 2 == 0) return false;
+
+            var boundary = (int)Math.Floor(Math.Sqrt(input));
+
+            for (int i = 3; i <= boundary; i += 2)
+            {
+                if (input % i == 0) return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Find the maximum increase in height that can be made to a 'city', without altering the skyline.
         /// This means increasing all buildings without making them taller than the tallest in both their row and column.
         /// LeetCode problem 807 - https://leetcode.com/problems/max-increase-to-keep-city-skyline/
