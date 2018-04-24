@@ -330,6 +330,27 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Return true if string A can be turned into string B just be rotating the string, i.e. pushing the left-most char to the further right position.
+        /// LeetCode problem 796: https://leetcode.com/problems/rotate-string/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <returns></returns>
+        public static bool RotateString(string A, string B)
+        {
+            if (A == B) return true;
+
+            string tmp = A;
+            for (int i = 0; i < B.Length - 1; i++)
+            {
+                tmp = tmp.Substring(1) + tmp[0];
+                if (tmp == B) return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// In morse code some words can look identical. Finds the number of unique morse code representations for a set of words.
         /// LeetCode Problem 804 - https://leetcode.com/problems/unique-morse-code-words/description/
         /// </summary>
@@ -351,6 +372,33 @@ namespace LeetCode
             }
 
             return uniqueWords.Count;
+        }
+
+        /// <summary>
+        /// Calculate the number of lines required to write a string (where a line is 100 units long).
+        /// LeetCode Problem 806 - https://leetcode.com/problems/number-of-lines-to-write-string/description/
+        /// </summary>
+        /// <param name="widths">Array of ints, with number of units to write each letter, i.e. widths[0] is the length of 'a'.</param>
+        /// <param name="S">String to be written.</param>
+        /// <returns>Two ints - number of full lines required, and the length of the final, non-full line.</returns>
+        public int[] NumberOfLines(int[] widths, string S)
+        {
+            var result = new int[] { 1, 0 };
+            int currentLine = 0;
+
+            foreach (char c in S)
+            {
+                var nextWidth = widths[char.ToUpper(c) - 65];
+                if (currentLine + nextWidth > 100)
+                {
+                    result[0]++;
+                    currentLine = nextWidth;
+                }
+                else currentLine += nextWidth;
+            }
+
+            result[1] = currentLine;
+            return result;
         }
 
         /// <summary>

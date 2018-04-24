@@ -180,6 +180,36 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Move all zeroes in an array to the end of the array.
+        /// </summary>
+        /// <param name="nums">Input array.</param>
+        public static void MoveZeroes(int[] nums)
+        {
+            bool firstZeroFound = false;
+            int toReplace = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!firstZeroFound)
+                {
+                    if (nums[i] == 0)
+                    {
+                        toReplace = i;
+                        firstZeroFound = true;
+                    }
+                }
+                else
+                {
+                    if (nums[i] == 0) continue;
+                    int tmp = nums[toReplace];
+                    nums[toReplace] = nums[i];
+                    nums[i] = tmp;
+                    toReplace++;
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
@@ -482,7 +512,51 @@ namespace LeetCode
             }
             return result;
         }
-        
+
+        /// <summary>
+        /// Count of numbers in range L to R (inclusive) that have a prime number of bits set.
+        /// LeetCode problem 762: https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/description/            
+        /// </summary>
+        /// <param name="L"></param>
+        /// <param name="R"></param>
+        /// <returns></returns>
+        public static int CountPrimeSetBits(int L, int R)
+        {
+            var primes = new HashSet<int> { 2, 3, 5, 7, 11, 13, 17, 19 };
+            int result = 0;
+            
+            for (int i = L; i <= R; i++)
+            {
+                var binary = Convert.ToString(i, 2);
+                // Rather than use IsPrime, because we know R.Max is 10^6, maximum number of bits is 21, so we can use a specific subset of primes.
+                var bits = binary.Count(x => x == '1');
+                if (primes.Contains(bits)) result++;
+            }
+            
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates if a given integer is a prime number.
+        /// </summary>
+        /// <param name="input">An integer</param>
+        /// <returns>True if the integer is a prime number</returns>
+        public static bool IsPrime(int input)
+        {
+            if (input == 0 || input == 1) return false;
+            if (input == 2) return true;
+            if (input % 2 == 0) return false;
+
+            var boundary = (int)Math.Floor(Math.Sqrt(input));
+
+            for (int i = 3; i <= boundary; i += 2)
+            {
+                if (input % i == 0) return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Find the maximum increase in height that can be made to a 'city', without altering the skyline.
         /// This means increasing all buildings without making them taller than the tallest in both their row and column.
@@ -515,6 +589,27 @@ namespace LeetCode
                     var difference = Math.Min(sideView[i], topView[j]) - currentHeight;
                     if (difference > 0) result += difference;
                 }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds the distance from each position in a string to the nearest instance of a specific character.
+        /// LeetCode problem 821 - https://leetcode.com/problems/shortest-distance-to-a-character/description/
+        /// </summary>
+        /// <param name="S">Input string</param>
+        /// <param name="C">Character to find distance to</param>
+        /// <returns>Array of distances to char C</returns>
+        public static int[] ShortestToChar(string S, char C)
+        {
+            var result = new int[S.Length];
+
+            for (int i = 0; i < S.Length; i++)
+            {
+                int toNextChar = Math.Abs(((S.IndexOf(C, i) != -1) ? S.IndexOf(C, i) : S.Length + i) - i);
+                int toPrevChar = Math.Abs(((S.LastIndexOf(C, i) != -1) ? S.LastIndexOf(C, i) : S.Length + i) - i);
+                result[i] = Math.Min(toNextChar, toPrevChar);
             }
 
             return result;

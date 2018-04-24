@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LeetCode.Model;
 using static LeetCode.Maths;
 using Xunit;
@@ -159,7 +160,47 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(MoveZeroesData))]
+        public void MoveZeroes(int[] input, int[] expected)
+        {
+            Maths.MoveZeroes(input);
+            Assert.True(Enumerable.SequenceEqual(input, expected));
+        }
+
+        [Theory]
+        [MemberData(nameof(ShortestToCharData))]
+        public void ShortestToChar(string S, char C, int[] expected)
+        {
+            var actual = Maths.ShortestToChar(S, C);
+            Assert.True(Enumerable.SequenceEqual(actual, expected));
+        }
+
+        [Theory]
+        [InlineData(1, 2, 0)]
+        [InlineData(6, 10, 4)]
+        [InlineData(10, 15, 5)]
+        public void PrimeBits(int L, int R, int expected)
+        {
+            var actual = Maths.CountPrimeSetBits(L, R);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> ShortestToCharData
+            = new List<object[]>
+            {
+                new object[] { "e", 'e', new int[] { 0 } },
+                new object[] { "loveleetcode", 'e', new int[] { 3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0 } },
+                new object[] { "hellomynameisearl", 'e', new int[] { 1, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0, 1, 1, 0, 1, 2, 3 } },
+            };
+
+        public static readonly List<object[]> MoveZeroesData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 0, 1, 0, 3, 12 }, new int[] { 1, 3, 12,0, 0} },
+            };
 
         public static readonly List<object[]> CandyData
             = new List<object[]>

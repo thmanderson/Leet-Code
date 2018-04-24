@@ -25,6 +25,21 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Invert the input binary tree, i.e. left node becomes right, and all subsequent nodes also inverted.
+        /// LeetCode problem 226 - Invert Binary Tree: https://leetcode.com/problems/invert-binary-tree/description/
+        /// </summary>
+        /// <param name="input">Binary tree to be inverted.</param>
+        /// <returns>Inverted tree.</returns>
+        public static Model.TreeNode InvertTree(Model.TreeNode root)
+        {
+            if (root == null) return null;
+            var result = new Model.TreeNode(root.val);
+            if (root.right != null) result.left = InvertTree(root.right);
+            if (root.left != null) result.right = InvertTree(root.left);
+            return result;
+        }
+
+        /// <summary>
         /// Turn a binary tree into a string.
         /// LeetCode problem 606 - Construct string from binary tree: https://leetcode.com/problems/construct-string-from-binary-tree/#/description
         /// </summary>
