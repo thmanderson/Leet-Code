@@ -210,6 +210,27 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Returns the maximum sum of a subarray of a given array of integers.
+        /// LeetCode problem 53: https://leetcode.com/problems/maximum-subarray/description/
+        /// </summary>
+        /// <param name="nums">Array of integers.</param>
+        /// <returns>The maximum sum of a sub-array within the input array.</returns>
+        public static int MaxSubArray(int[] nums)
+        {
+            int runningTotal = 0, maximumTotal = Int32.MinValue;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > maximumTotal) maximumTotal = nums[i];
+                runningTotal += nums[i];
+                if (runningTotal > maximumTotal) maximumTotal = runningTotal;
+                if (runningTotal < 0) runningTotal = 0;
+            }
+
+            return maximumTotal;
+        }
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>

@@ -186,7 +186,24 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(MaximumSubArrayData))]
+        public void MaxSubArray(int[] nums, int expected)
+        {
+            var actual = Maths.MaxSubArray(nums);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> MaximumSubArrayData
+            = new List<object[]>
+            {
+                new object[] { new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 }, 6 },
+                new object[] { new int[] { -2 }, -2 },
+                new object[] { new int[] { }, Int32.MinValue },
+                new object[] { new int[] { -1, -2, -3, -4, -5, -6 }, -1 },
+            };
 
         public static readonly List<object[]> ShortestToCharData
             = new List<object[]>
