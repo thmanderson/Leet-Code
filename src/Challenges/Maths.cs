@@ -297,6 +297,23 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// LeetCode problem 442: https://leetcode.com/problems/find-all-duplicates-in-an-array/description/
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static IList<int> FindDuplicates(int[] nums)
+        {
+            var result = new List<int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[Math.Abs(nums[i]) - 1] < 0) result.Add(Math.Abs(nums[i]));
+                nums[Math.Abs(nums[i]) - 1] = -nums[Math.Abs(nums[i]) - 1];
+            }
+            return result;
+        }
+
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
@@ -697,6 +714,23 @@ namespace LeetCode
                 int toNextChar = Math.Abs(((S.IndexOf(C, i) != -1) ? S.IndexOf(C, i) : S.Length + i) - i);
                 int toPrevChar = Math.Abs(((S.LastIndexOf(C, i) != -1) ? S.LastIndexOf(C, i) : S.Length + i) - i);
                 result[i] = Math.Min(toNextChar, toPrevChar);
+            }
+
+            return result;
+        }
+        
+        public static int MaxProfitAssignment(int[] difficulty, int[] profit, int[] worker)
+        {
+            // Attempt 1: Too slow for LeetCode
+            int result = 0;
+
+            var jobs = new List<Tuple<int, int>>();
+            for (int i = 0; i < difficulty.Length; i++) jobs.Add(new Tuple<int, int>(difficulty[i], profit[i]));
+            jobs = jobs.OrderByDescending(x => x.Item2).ToList();
+            
+            foreach (var w in worker)
+            {
+                result += jobs.FirstOrDefault(x => x.Item1 <= w).Item2;
             }
 
             return result;

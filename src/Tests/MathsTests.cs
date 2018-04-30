@@ -209,7 +209,32 @@ namespace LeetCode.Tests
             }
         }
 
+        [Theory]
+        [MemberData(nameof(WorkerProfitData))]
+        public void ProfitableWorkers(int[] difficulty, int[] profit, int[] worker, int expected)
+        {
+            var actual = Maths.MaxProfitAssignment(difficulty, profit, worker);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> WorkerProfitData
+            = new List<object[]>
+            {
+                new object[] {
+                    new int[] { 2, 4, 6, 8, 10 },
+                    new int[] { 10, 20, 30, 40, 50 },
+                    new int[] { 4, 5, 6, 7 },
+                    100
+                },
+                new object[] {
+                    new int[] { 85, 47, 57 },
+                    new int[] { 24, 66, 99 },
+                    new int[] { 40, 25, 25 },
+                    0
+                },
+            };
 
         public static readonly List<object[]> QueueData
             = new List<object[]>
