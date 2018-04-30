@@ -304,7 +304,7 @@ namespace LeetCode
         public static IList<int> FindDuplicates(int[] nums)
         {
             var result = new List<int>();
-            for (int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++) // Mark the number with index nums[i] as negative, anything already marked negative is at a duplicate index.
             {
                 if (nums[Math.Abs(nums[i]) - 1] < 0) result.Add(Math.Abs(nums[i]));
                 nums[Math.Abs(nums[i]) - 1] = -nums[Math.Abs(nums[i]) - 1];
