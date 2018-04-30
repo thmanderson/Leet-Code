@@ -194,7 +194,39 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(QueueData))]
+        public void ReconstructQueue(int[,] people, int[,] expected)
+        {
+            var actual = Maths.ReconstructQueue(people);
+
+            for (int i = 0; i < people.Length / people.Rank; i++)
+            {
+                for (int j = 0; j < people.Rank; j++)
+                {
+                    Assert.Equal(expected[i, j], actual[i, j]);
+                }
+            }
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> QueueData
+            = new List<object[]>
+            {
+                new object[] {
+                    new int[,] { { 7, 0 }, { 4, 4 }, { 7, 1 }, { 5, 0 }, { 6, 1 }, { 5, 2 } },
+                    new int[,] { { 5, 0 }, { 7, 0 }, { 5, 2 }, { 6, 1 }, { 4, 4 }, { 7, 1 } }
+                },
+                new object[] {
+                    new int[,] { { 7, 0 }, { 4, 4 }, { 7, 1 }, { 5, 0 }, { 6, 1 }, { 5, 2 }, { 5, 1 } },
+                    new int[,] { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 7, 0 }, { 4, 4 }, { 6, 1 }, { 7, 1 } }
+                },
+                new object[] {
+                    new int[,] { { 1, 5 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 1 }, { 5, 0 } },
+                    new int[,] { { 1, 0 }, { 2, 0 }, { 3, 0 }, { 5, 0 }, { 4, 1 }, { 1, 5 } }
+                },
+            };
 
         public static readonly List<object[]> MaximumSubArrayData
             = new List<object[]>
