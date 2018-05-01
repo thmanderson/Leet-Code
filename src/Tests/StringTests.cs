@@ -165,7 +165,60 @@ namespace LeetCode.Tests
             Assert.True(Enumerable.SequenceEqual(expected, actual));
         }
 
+        [Theory]
+        [MemberData(nameof(BattleshipData))]
+        public void CountBattleships(char[,] board, int expected)
+        {
+            var actual = String.CountBattleships(board);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data        
+
+        public static readonly List<object[]> BattleshipData
+            = new List<object[]>
+            {
+                new object[] 
+                {
+                    new char[,] { 
+                        { 'X', '.', '.', 'X'},
+                        { '.', '.', '.', 'X'},
+                        { '.', '.', '.', 'X'},
+                    }, 2
+                },
+                new object[]
+                {
+                    new char[,] {
+                        { 'X', '.', '.', 'X'},
+                        { 'X', '.', '.', 'X'},
+                        { 'X', '.', '.', 'X'},
+                    }, 2
+                },
+                new object[]
+                {
+                    new char[,] {
+                        { 'X', '.', '.', 'X'},
+                        { '.', '.', '.', 'X'},
+                        { 'X', 'X', '.', 'X'},
+                    }, 3
+                },
+                new object[]
+                {
+                    new char[,] {
+                        { 'X', '.', '.', 'X'},
+                        { '.', '.', '.', 'X'},
+                        { 'X', 'X', 'X', '.'},
+                    }, 3
+                },
+                new object[]
+                {
+                    new char[,] {
+                        { '.', '.', '.', '.'},
+                        { '.', '.', '.', '.'},
+                        { '.', '.', '.', '.'},
+                    }, 0
+                },
+            };
 
         public static readonly List<object[]> PartitionData
             = new List<object[]>
