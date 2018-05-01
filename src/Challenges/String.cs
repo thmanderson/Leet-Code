@@ -202,6 +202,16 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Count the number of battleships on a board. No two ships are directly adjaecant.
+        /// </summary>
+        /// <param name="board">Board - 'X' denotes part of a battleship '.' is an empty space.</param>
+        /// <returns>Number of battleships on the board.</returns>
+        public static int CountBattleships(char[,] board)
+        {
+            throw new NotImplementedException(nameof(CountBattleships));
+        }
+
+        /// <summary>
         /// Given a list of words, determine which can be typed using a single row of characters on a standard keyboard.
         /// LeetCode problem 500 - Keyboard Row: https://leetcode.com/problems/keyboard-row/#/description
         /// </summary>
