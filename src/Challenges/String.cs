@@ -308,6 +308,50 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Partition a string into sub-strings, where each letter only occurs in one sub-string. Return lengths of the partitions.
+        /// LeetCode Problem 763: https://leetcode.com/problems/partition-labels/description/
+        /// </summary>
+        /// <param name="S"></param>
+        /// <returns></returns>
+        public static IList<int> PartitionLabels(string S)
+        {
+            var result = new List<int>();
+
+            // Determine first and last occurrance of each char.
+            var indices = new Dictionary<char, Tuple<int, int>>();
+
+            for (int i = 0; i < S.Length; i++)
+            {
+                char c = S[i];
+                if (indices.ContainsKey(c)) indices[c] = new Tuple<int, int>(indices[c].Item1, i);
+                else indices[c] = new Tuple<int, int>(i, i);
+            }
+
+            // Determine overlap between the partitions for each char. E.g. if a = 0 -> 4, and b = > 1 -> 5, they must both go in region 0 -> 5, so add 5 to the list.
+            var tmpResult = new List<char>();
+            int currentMin = 0, currentMax = 0;
+            foreach (var charIndex in indices)
+            {
+                if (charIndex.Value.Item1 <= currentMax) // Has to go into the current partition
+                {
+                    currentMin = Math.Min(currentMin, charIndex.Value.Item1);
+                    currentMax = Math.Max(currentMax, charIndex.Value.Item2);
+                    tmpResult.Add(charIndex.Key);
+                }
+                else // Doesn't fit in - so we add the length of the previous partition to the result, and start a new one.
+                {
+                    result.Add(currentMax + 1 - currentMin);
+                    tmpResult = new List<char>();
+                    currentMin = charIndex.Value.Item1;
+                    currentMax = charIndex.Value.Item2;
+                }
+            }
+            result.Add(currentMax + 1 - currentMin); // Make sure we catch the final partition
+
+            return result;
+        }
+
+        /// <summary>
         /// LeetCode Problem 771 - Jewels and Stones: https://leetcode.com/problems/jewels-and-stones/description/
         /// Given a list of stones, and a list of which stones are jewels, count how many jewels you have (case sensitive).
         /// </summary>
