@@ -208,7 +208,23 @@ namespace LeetCode
         /// <returns>Number of battleships on the board.</returns>
         public static int CountBattleships(char[,] board)
         {
-            throw new NotImplementedException(nameof(CountBattleships));
+            int result = 0;
+
+            for (int i = 0; i < board.GetLength(0); i++)
+            {
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
+                    if (board[i,j] == 'X')
+                    {
+                        int counts = 1;
+                        if (j > 0) if (board[i, j - 1] == 'X') counts = 0;
+                        if (i > 0) if (board[i - 1, j] == 'X') counts = 0;
+                        result += counts;
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

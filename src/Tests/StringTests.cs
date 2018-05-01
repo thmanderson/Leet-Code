@@ -186,6 +186,38 @@ namespace LeetCode.Tests
                         { '.', '.', '.', 'X'},
                     }, 2
                 },
+                new object[]
+                {
+                    new char[,] {
+                        { 'X', '.', '.', 'X'},
+                        { 'X', '.', '.', 'X'},
+                        { 'X', '.', '.', 'X'},
+                    }, 2
+                },
+                new object[]
+                {
+                    new char[,] {
+                        { 'X', '.', '.', 'X'},
+                        { '.', '.', '.', 'X'},
+                        { 'X', 'X', '.', 'X'},
+                    }, 3
+                },
+                new object[]
+                {
+                    new char[,] {
+                        { 'X', '.', '.', 'X'},
+                        { '.', '.', '.', 'X'},
+                        { 'X', 'X', 'X', '.'},
+                    }, 3
+                },
+                new object[]
+                {
+                    new char[,] {
+                        { '.', '.', '.', '.'},
+                        { '.', '.', '.', '.'},
+                        { '.', '.', '.', '.'},
+                    }, 0
+                },
             };
 
         public static readonly List<object[]> PartitionData
