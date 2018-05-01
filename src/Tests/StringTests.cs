@@ -172,8 +172,22 @@ namespace LeetCode.Tests
             var actual = String.CountBattleships(board);
             Assert.Equal(expected, actual);
         }
+        
+        [Theory]
+        [MemberData(nameof(LetterCombinationData))]
+        public void LetterCombinations(string number, List<string> expected)
+        {
+            var actual = String.LetterCombinations(number);
+            Assert.True(Enumerable.SequenceEqual(expected, actual));
+        }
 
         #region Test Data        
+
+        public static readonly List<object[]> LetterCombinationData
+            = new List<object[]>
+            {
+                new object[] { "23", new List<string> { "ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf" } },
+            };
 
         public static readonly List<object[]> BattleshipData
             = new List<object[]>

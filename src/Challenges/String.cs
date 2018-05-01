@@ -130,6 +130,17 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Given a series of numbers, return all possible combinations of letter that could be created on a phone.
+        /// LeetCode problem 17: https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+        /// </summary>
+        /// <param name="digits">Phone Number</param>
+        /// <returns>All possible string combinations</returns>
+        public static IList<string> LetterCombinations(string digits)
+        {
+            throw new NotImplementedException(nameof(LetterCombinations));
+        }
+
+        /// <summary>
         /// Checks if a string has valid parantheses use.
         /// LeetCode problem 20 - Valid Parantheses: https://leetcode.com/problems/valid-parentheses/description/
         /// </summary>
