@@ -210,6 +210,110 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Returns the maximum sum of a subarray of a given array of integers.
+        /// LeetCode problem 53: https://leetcode.com/problems/maximum-subarray/description/
+        /// </summary>
+        /// <param name="nums">Array of integers.</param>
+        /// <returns>The maximum sum of a sub-array within the input array.</returns>
+        public static int MaxSubArray(int[] nums)
+        {
+            int runningTotal = 0, maximumTotal = Int32.MinValue;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > maximumTotal) maximumTotal = nums[i];
+                runningTotal += nums[i];
+                if (runningTotal > maximumTotal) maximumTotal = runningTotal;
+                if (runningTotal < 0) runningTotal = 0;
+            }
+
+            return maximumTotal;
+        }
+
+        /// <summary>
+        /// Given an array describing a queue of people [h,k] (not in the correct order), where h is the height of the person, and
+        /// k is the number of people in front of them who are either taller, or of the same height, return the array in the correct order.
+        /// LeetCode problem 406: https://leetcode.com/problems/queue-reconstruction-by-height/description/
+        /// </summary>
+        /// <param name="people">Multidimensional unordered array of people [h,k].</param>
+        /// <returns>Re-ordered array, in the actual order of the queue, determined using h and k.</returns>
+        public static int[,] ReconstructQueue(int[,] people)
+        {
+            // Convert to Jagged Array so I can use LINQ.
+            var jaggedPeople = new int[people.Length / people.Rank][];
+            var jaggedReconstructed = new int[people.Length / people.Rank][];
+            
+            for (int i = 0; i < people.Length / people.Rank; i++)
+            {
+                jaggedPeople[i] = new int[people.Rank];
+                for (int j = 0; j < people.Rank; j++)
+                {
+                    jaggedPeople[i][j] = people[i, j];
+                }
+            }
+
+            // Get an ordered list of all the people (by height).
+            var orderedPeople = jaggedPeople.OrderBy(x => x[0]).ThenBy(x => x[1]);
+
+            // For an ordered list of people, we know that any empty space, or space occupied by someone of the same height, there will be someone who counts towards their number K.
+            // e.g. for someone [5,2], iterate through the new list, and empty space, or space occupied by someone of height 5 will count towards k (2), as they must be the same height
+            // or taller if they haven't been added to the queue yet. Count the number of these spaces found, and when it equals k, put this person here in the list.
+            // If this space isn't empty, it must be by someone shorter, so won't affect K - so just add to the next empty space.
+            // This means we count how many spaces are occupied by people of the same height
+
+            // For the next shortest person in the list
+            foreach (var person in orderedPeople)
+            {
+                // Go through the reconstructed queue
+                for (int i = 0, empty = 0; i < jaggedReconstructed.Length; i++)
+                {
+                    // If it's null, it's a possible space.
+                    if (jaggedReconstructed[i] == null)
+                    {
+                        // If the number of spaces that were either empty, or occupied by someone of the same height, this is our spot
+                        if (empty >= person[1])
+                        {
+                            jaggedReconstructed[i] = person;
+                            break;
+                        }
+                        // If not, we keep going until the next empty spot
+                        empty++;
+                    }
+                    // If a spot is occupied by someone of the same height
+                    else if (jaggedReconstructed[i][0] == person[0]) empty++;
+                }
+            }
+            
+            // Convert back to multi-dimensional
+            var reconstructed = new int[people.Length / people.Rank, 2];
+            for (int i = 0; i < reconstructed.Length / reconstructed.Rank; i++)
+            {
+                for (int j = 0; j < reconstructed.Rank; j++)
+                {
+                    reconstructed[i, j] = jaggedReconstructed[i][j];
+                }
+            }
+            return reconstructed;
+        }
+
+        /// <summary>
+        /// LeetCode problem 442: https://leetcode.com/problems/find-all-duplicates-in-an-array/description/
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static IList<int> FindDuplicates(int[] nums)
+        {
+            var result = new List<int>();
+            for (int i = 0; i < nums.Length; i++) // Mark the number with index nums[i] as negative, anything already marked negative is at a duplicate index.
+            {
+                if (nums[Math.Abs(nums[i]) - 1] < 0) result.Add(Math.Abs(nums[i]));
+                nums[Math.Abs(nums[i]) - 1] = -nums[Math.Abs(nums[i]) - 1];
+            }
+            return result;
+        }
+
+
+        /// <summary>
         /// Returns the hamming distance (https://en.wikipedia.org/wiki/Hamming_distance) between 2 integers.
         /// LeetCode problem 461 - Hamming Distance: https://leetcode.com/problems/hamming-distance/#/description
         /// </summary>
@@ -610,6 +714,23 @@ namespace LeetCode
                 int toNextChar = Math.Abs(((S.IndexOf(C, i) != -1) ? S.IndexOf(C, i) : S.Length + i) - i);
                 int toPrevChar = Math.Abs(((S.LastIndexOf(C, i) != -1) ? S.LastIndexOf(C, i) : S.Length + i) - i);
                 result[i] = Math.Min(toNextChar, toPrevChar);
+            }
+
+            return result;
+        }
+        
+        public static int MaxProfitAssignment(int[] difficulty, int[] profit, int[] worker)
+        {
+            // Attempt 1: Too slow for LeetCode
+            int result = 0;
+
+            var jobs = new List<Tuple<int, int>>();
+            for (int i = 0; i < difficulty.Length; i++) jobs.Add(new Tuple<int, int>(difficulty[i], profit[i]));
+            jobs = jobs.OrderByDescending(x => x.Item2).ToList();
+            
+            foreach (var w in worker)
+            {
+                result += jobs.FirstOrDefault(x => x.Item1 <= w) != null ? jobs.FirstOrDefault(x => x.Item1 <= w).Item2 : 0;
             }
 
             return result;

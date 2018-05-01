@@ -186,7 +186,81 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(MaximumSubArrayData))]
+        public void MaxSubArray(int[] nums, int expected)
+        {
+            var actual = Maths.MaxSubArray(nums);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [MemberData(nameof(QueueData))]
+        public void ReconstructQueue(int[,] people, int[,] expected)
+        {
+            var actual = Maths.ReconstructQueue(people);
+
+            for (int i = 0; i < people.Length / people.Rank; i++)
+            {
+                for (int j = 0; j < people.Rank; j++)
+                {
+                    Assert.Equal(expected[i, j], actual[i, j]);
+                }
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(WorkerProfitData))]
+        public void ProfitableWorkers(int[] difficulty, int[] profit, int[] worker, int expected)
+        {
+            var actual = Maths.MaxProfitAssignment(difficulty, profit, worker);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> WorkerProfitData
+            = new List<object[]>
+            {
+                new object[] {
+                    new int[] { 2, 4, 6, 8, 10 },
+                    new int[] { 10, 20, 30, 40, 50 },
+                    new int[] { 4, 5, 6, 7 },
+                    100
+                },
+                new object[] {
+                    new int[] { 85, 47, 57 },
+                    new int[] { 24, 66, 99 },
+                    new int[] { 40, 25, 25 },
+                    0
+                },
+            };
+
+        public static readonly List<object[]> QueueData
+            = new List<object[]>
+            {
+                new object[] {
+                    new int[,] { { 7, 0 }, { 4, 4 }, { 7, 1 }, { 5, 0 }, { 6, 1 }, { 5, 2 } },
+                    new int[,] { { 5, 0 }, { 7, 0 }, { 5, 2 }, { 6, 1 }, { 4, 4 }, { 7, 1 } }
+                },
+                new object[] {
+                    new int[,] { { 7, 0 }, { 4, 4 }, { 7, 1 }, { 5, 0 }, { 6, 1 }, { 5, 2 }, { 5, 1 } },
+                    new int[,] { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 7, 0 }, { 4, 4 }, { 6, 1 }, { 7, 1 } }
+                },
+                new object[] {
+                    new int[,] { { 1, 5 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 1 }, { 5, 0 } },
+                    new int[,] { { 1, 0 }, { 2, 0 }, { 3, 0 }, { 5, 0 }, { 4, 1 }, { 1, 5 } }
+                },
+            };
+
+        public static readonly List<object[]> MaximumSubArrayData
+            = new List<object[]>
+            {
+                new object[] { new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 }, 6 },
+                new object[] { new int[] { -2 }, -2 },
+                new object[] { new int[] { }, Int32.MinValue },
+                new object[] { new int[] { -1, -2, -3, -4, -5, -6 }, -1 },
+            };
 
         public static readonly List<object[]> ShortestToCharData
             = new List<object[]>

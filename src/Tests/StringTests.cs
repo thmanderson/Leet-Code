@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using static LeetCode.String;
 
-namespace LeetCode.Easy.Tests
+namespace LeetCode.Tests
 {
     public class StringTests
     {
@@ -156,7 +157,24 @@ namespace LeetCode.Easy.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(PartitionData))]
+        public void StringPartitions(string S, List<int> expected)
+        {
+            var actual = String.PartitionLabels(S);
+            Assert.True(Enumerable.SequenceEqual(expected, actual));
+        }
+
         #region Test Data        
+
+        public static readonly List<object[]> PartitionData
+            = new List<object[]>
+            {
+                new object[] { "ababcbacadefegdehijhklij", new List<int> { 9, 7, 8 } },
+                new object[] { "ababcbacadefegdehijhklia", new List<int> { 24 } },
+                new object[] { "a", new List<int> { 1 } },
+            };
+
         public static readonly List<object[]> CommonPrefixData
             = new List<object[]>
             {
