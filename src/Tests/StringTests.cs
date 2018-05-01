@@ -186,7 +186,9 @@ namespace LeetCode.Tests
         public static readonly List<object[]> LetterCombinationData
             = new List<object[]>
             {
-                new object[] { "23", new List<string> { "ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf" } },
+                new object[] { "23", new List<string> { "ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf" } }, // Leetcode default testcase
+                new object[] { "", new List<string>() }, // Empty
+                new object[] { "01", new List<string>() }, // Invalid number
             };
 
         public static readonly List<object[]> BattleshipData

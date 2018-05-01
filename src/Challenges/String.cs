@@ -137,7 +137,26 @@ namespace LeetCode
         /// <returns>All possible string combinations</returns>
         public static IList<string> LetterCombinations(string digits)
         {
-            throw new NotImplementedException(nameof(LetterCombinations));
+            if (digits == "") return new List<string>();
+
+            var values = new Dictionary<char, string>() { { '2', "abc" }, { '3', "def" }, { '4', "ghi" }, { '5', "jkl" }, { '6', "mno" }, { '7', "pqrs" }, { '8', "tuv" }, { '9', "wxyz" } };
+            if (!values.ContainsKey(digits[0])) return new List<string>();
+
+            var results = new List<string>();
+
+            if (digits.Length == 1) foreach (char c in values[digits[0]]) results.Add(c.ToString());
+            else
+            {
+                var nextResults = LetterCombinations(digits.Substring(1));
+                foreach (char c in values[digits[0]])
+                {
+                    foreach (string s in nextResults)
+                    {
+                        results.Add(c + s);
+                    }
+                }
+            }
+            return results;
         }
 
         /// <summary>
