@@ -730,7 +730,7 @@ namespace LeetCode
             
             foreach (var w in worker)
             {
-                result += jobs.FirstOrDefault(x => x.Item1 <= w).Item2;
+                result += jobs.FirstOrDefault(x => x.Item1 <= w) != null ? jobs.FirstOrDefault(x => x.Item1 <= w).Item2 : 0;
             }
 
             return result;
