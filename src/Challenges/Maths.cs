@@ -573,6 +573,45 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// Determines if a number of flowers can be added to a flowerbed. A flower cannot be planted if there are any adjacent flowers.
+        /// LeetCode problem 605: https://leetcode.com/problems/can-place-flowers/
+        /// </summary>
+        /// <param name="flowerbed">Binary array representing a flower bed, 1 = plant already there, 0 = empty space in the bed.</param>
+        /// <param name="n">Number of flowers to determine if they can be planted.</param>
+        /// <returns>True if the bed can accomodate n flowers, false if not.</returns>
+        public static bool CanPlaceFlowers(int[] flowerbed, int n)
+        {
+            if (flowerbed.Length == 1)
+            {
+                if (flowerbed[0] == 0 && n <= 1) return true;
+                if (flowerbed[0] == 1 && n == 0) return true;
+                return false;
+            }
+
+            int spaces = 0;
+
+            if (flowerbed[0] == 0 && flowerbed[1] == 0)
+            {
+                spaces++;
+                flowerbed[0] = 1;
+            }
+
+            for (int i = 1; i < flowerbed.Length - 1; i++)
+            {
+                if (flowerbed[i - 1] == 0 && flowerbed[i] == 0 && flowerbed[i+1] == 0)
+                {
+                    spaces++;
+                    flowerbed[i] = 1;
+                }
+            }
+
+            if (flowerbed[flowerbed.Length - 1] == 0 && flowerbed[flowerbed.Length - 2] == 0) spaces++;
+
+            if (n <= spaces) return true;
+            else return false;
+        }
+
+        /// <summary>
         /// Find out of a given set of moves result in starting and finishing in the same place.
         /// LeetCode problem 657 - Judge Route Circuit: https://leetcode.com/problems/judge-route-circle/
         /// </summary>

@@ -217,7 +217,25 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(FlowerBedData))]
+        public void FlowerBeds(int[] flowerbed, int n, bool expected)
+        {
+            var actual = CanPlaceFlowers(flowerbed, n);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> FlowerBedData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 1, 0, 0, 0, 1 }, 1, true },
+                new object[] { new int[] { 1, 0, 0, 0, 1 }, 2, false },
+                new object[] { new int[] { 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0 }, 3, true },
+                new object[] { new int[] { 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0 }, 7, false },
+                new object[] { new int[] { 1, 0, 0, 0, 1, 0, 0 }, 2, true },
+            };
 
         public static readonly List<object[]> WorkerProfitData
             = new List<object[]>
