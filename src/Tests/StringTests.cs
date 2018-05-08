@@ -181,7 +181,30 @@ namespace LeetCode.Tests
             Assert.True(Enumerable.SequenceEqual(expected, actual));
         }
 
+        [Theory]
+        [MemberData(nameof(CharacterGroupData))]
+        public void CharacterGroups(string S, List<List<int>> expected)
+        {
+            var actual = String.LargeGroupPositions(S);
+
+            Assert.Equal(expected.Count, actual.Count);
+
+            for (int i = 0; i < actual.Count; i++)
+            {
+                Assert.True(Enumerable.SequenceEqual(expected[i], actual[i]));
+            }
+        }
+
         #region Test Data        
+
+        public static readonly List<object[]> CharacterGroupData
+            = new List<object[]>
+            {
+                new object[] { "abbxxxxzzy", new List<List<int>> { new List<int> { 3, 6 } } },
+                new object[] { "abc", new List<List<int>>() },
+                new object[] { "abcdddeeeeaabbbcd", new List<List<int>> { new List<int> { 3, 5 }, new List<int> { 6, 9 }, new List<int> { 12, 14 } } },
+                new object[] { "aaa", new List<List<int>> { new List<int> { 0, 2 } } },
+            };
 
         public static readonly List<object[]> LetterCombinationData
             = new List<object[]>
