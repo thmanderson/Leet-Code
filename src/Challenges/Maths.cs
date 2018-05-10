@@ -774,5 +774,30 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 829: https://leetcode.com/problems/consecutive-numbers-sum/description/
+        /// </summary>
+        /// <param name="N"></param>
+        /// <returns></returns>
+        public static int ConsecutiveNumbersSum(int N)
+        {
+            int result = 1;
+
+            int limit = N + 1 / 2;
+
+            for (int i = 1; i < limit; i++)
+            {
+                int sum = 0;
+                for (int j = i; j < limit; j++)
+                {
+                    sum += j;
+                    if (sum == N) result++;
+                    if (sum >= N) break;
+                }
+            }
+
+            return result;
+        }
     }
 }

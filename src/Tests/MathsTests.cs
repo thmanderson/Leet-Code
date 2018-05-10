@@ -225,6 +225,16 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData(5, 2)]
+        [InlineData(9, 3)]
+        [InlineData(15, 4)]
+        public void ConsecutiveNumbersSum(int N, int expected)
+        {
+            var actual = Maths.ConsecutiveNumbersSum(N);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
 
         public static readonly List<object[]> FlowerBedData
