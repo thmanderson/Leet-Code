@@ -195,6 +195,17 @@ namespace LeetCode.Tests
             }
         }
 
+        [Theory]
+        [InlineData("LeetCode@LeetCode.com", "l*****e@leetcode.com")]
+        [InlineData("AB@qq.com", "a*****b@qq.com")]
+        [InlineData("1(234)567-890", "***-***-7890")]
+        [InlineData("86-(10)12345678", "+**-***-***-5678")]
+        public void MaskPII(string S, string expected)
+        {
+            var actual = String.MaskPII(S);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data        
 
         public static readonly List<object[]> CharacterGroupData

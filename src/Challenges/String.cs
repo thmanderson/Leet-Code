@@ -560,5 +560,34 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 831: https://leetcode.com/problems/masking-personal-information/description/
+        /// </summary>
+        /// <param name="S"></param>
+        /// <returns></returns>
+        public static string MaskPII(string S)
+        {
+            var result = "";
+            
+            if (S.Contains('@'))
+            {
+                var atIndex = S.IndexOf('@');
+                result += S[0] + "*****" + S[atIndex - 1] + S.Substring(atIndex);
+                return result.ToLower();
+            }
+            else
+            {
+                var tmp = "";
+                foreach (char c in S) if (char.IsDigit(c)) tmp += c;
+                if (tmp.Length > 10) {
+                    result += '+';
+                    for (int i = 0; i < tmp.Length - 10; i++) result += '*';
+                    result += '-';
+                }
+                result += "***-***-" + tmp.Substring(tmp.Length - 4);
+                return result;
+            }
+        }
     }
 }
