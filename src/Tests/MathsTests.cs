@@ -225,7 +225,64 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData(5, 2)]
+        [InlineData(9, 3)]
+        [InlineData(15, 4)]
+        public void ConsecutiveNumbersSum(int N, int expected)
+        {
+            var actual = Maths.ConsecutiveNumbersSum(N);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [MemberData(nameof(FlipImageData))]
+        public void FlipAndInvertImage(int[][] A, int[][] expected)
+        {
+            var actual = Maths.FlipAndInvertImage(A);
+
+            Assert.Equal(expected.Length, actual.Length);
+            for (int i = 0; i < expected.Length; i++) Assert.True(Enumerable.SequenceEqual(expected[i], actual[i]));
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> FlipImageData
+            = new List<object[]>
+            {
+                new object[] 
+                {
+                    new int[][]
+                    {
+                        new int[]{ 1,1,0 },
+                        new int[]{ 1,0,1 },
+                        new int[]{ 0,0,0 }
+                    },
+                    new int[][]
+                    {
+                        new int[]{ 1,0,0 },
+                        new int[]{ 0,1,0 },
+                        new int[]{ 1,1,1 },
+                    }
+                },
+                new object[]
+                {
+                    new int[][]
+                    {
+                        new int[]{ 1,1,0,0 },
+                        new int[]{ 1,0,0,1 },
+                        new int[]{ 0,1,1,1 },
+                        new int[]{ 1,0,1,0 }
+                    },
+                    new int[][]
+                    {
+                        new int[]{ 1,1,0,0 },
+                        new int[]{ 0,1,1,0 },
+                        new int[]{ 0,0,0,1 },
+                        new int[]{ 1,0,1,0 }
+                    },
+                }
+            };
 
         public static readonly List<object[]> FlowerBedData
             = new List<object[]>

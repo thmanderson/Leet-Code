@@ -774,5 +774,52 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 829: https://leetcode.com/problems/consecutive-numbers-sum/description/
+        /// </summary>
+        /// <param name="N"></param>
+        /// <returns></returns>
+        public static int ConsecutiveNumbersSum(int N)
+        {
+            int result = 1;
+
+            int limit = N + 1 / 2;
+
+            for (int i = 1; i < limit; i++)
+            {
+                int sum = 0;
+                for (int j = i; j < limit; j++)
+                {
+                    sum += j;
+                    if (sum == N) result++;
+                    if (sum >= N) break;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// LeetCode problem 832: https://leetcode.com/problems/flipping-an-image/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static int[][] FlipAndInvertImage(int[][] A)
+        {
+            var result = new int[A.Length][];
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                result[i] = new int[A[i].Length];
+                for (int j = 0; j < A[i].Length; j++)
+                {
+                    var opposite = A[i][A[j].Length - (j + 1)];
+                    result[i][j] = opposite == 1 ? 0 : 1;
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -530,5 +530,64 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// Find starting and ending indices for each large group (3+) of characters in a string.
+        /// LeetCode problem 830: https://leetcode.com/problems/positions-of-large-groups/description/
+        /// </summary>
+        /// <param name="S">Lowercase string of characters.</param>
+        /// <returns>List of starting and ending indices for all large groups found.</returns>
+        public static IList<IList<int>> LargeGroupPositions(string S)
+        {
+            var result = new List<IList<int>>();
+            if (S == "") return result;
+
+            char prev = S[0];
+            int start = 0, end = 0;
+
+            for (int i = 1; i < S.Length; i++)
+            {
+                if (S[i] == prev) end++;
+                else
+                {
+                    if (end - start >= 2) result.Add(new List<int>() { start, end });
+                    start = end = i;
+                }
+                prev = S[i];
+            }
+
+            if (end - start >= 2) result.Add(new List<int>() { start, end });
+
+            return result;
+        }
+
+        /// <summary>
+        /// LeetCode problem 831: https://leetcode.com/problems/masking-personal-information/description/
+        /// </summary>
+        /// <param name="S"></param>
+        /// <returns></returns>
+        public static string MaskPII(string S)
+        {
+            var result = "";
+            
+            if (S.Contains('@'))
+            {
+                var atIndex = S.IndexOf('@');
+                result += S[0] + "*****" + S[atIndex - 1] + S.Substring(atIndex);
+                return result.ToLower();
+            }
+            else
+            {
+                var tmp = "";
+                foreach (char c in S) if (char.IsDigit(c)) tmp += c;
+                if (tmp.Length > 10) {
+                    result += '+';
+                    for (int i = 0; i < tmp.Length - 10; i++) result += '*';
+                    result += '-';
+                }
+                result += "***-***-" + tmp.Substring(tmp.Length - 4);
+                return result;
+            }
+        }
     }
 }
