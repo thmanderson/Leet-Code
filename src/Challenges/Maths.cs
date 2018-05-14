@@ -799,5 +799,27 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 832: https://leetcode.com/problems/flipping-an-image/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static int[][] FlipAndInvertImage(int[][] A)
+        {
+            var result = new int[A.Length][];
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                result[i] = new int[A[i].Length];
+                for (int j = 0; j < A[i].Length; j++)
+                {
+                    var opposite = A[i][A[j].Length - (j + 1)];
+                    result[i][j] = opposite == 1 ? 0 : 1;
+                }
+            }
+
+            return result;
+        }
     }
 }
