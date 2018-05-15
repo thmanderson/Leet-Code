@@ -9,17 +9,17 @@ namespace LeetCode.Tests
     {
         [Theory]
         [MemberData(nameof(DepthTreeData))]
-        public void MaxTreeDepth_ValidInputs(Model.TreeNode x, int expectedResult)
+        public void MaxTreeDepth_ValidInputs(TreeNode x, int expectedResult)
         {
-            int actualResult = TreeNode.MaxDepth(x);
+            int actualResult = TreeNodes.MaxDepth(x);
             Assert.True(expectedResult.Equals(actualResult));
         }
 
         [Theory]
         [MemberData(nameof(MergeTreeData))]
-        public void MergeBinaryTrees_ValidInputs(Model.TreeNode x, Model.TreeNode y, Model.TreeNode expectedResult)
+        public void MergeBinaryTrees_ValidInputs(TreeNode x, TreeNode y, TreeNode expectedResult)
         {
-            var actualResult = TreeNode.MergeTrees(x, y);
+            var actualResult = TreeNodes.MergeTrees(x, y);
             Assert.True(expectedResult.Equals(actualResult));
         }
 
@@ -28,8 +28,8 @@ namespace LeetCode.Tests
         public static readonly List<object[]> DepthTreeData
             = new List<object[]>
             {
-                new object[] { new Model.TreeNode(1), 1 },
-                new object[] { new Model.TreeNode(1, new Model.TreeNode(2), new Model.TreeNode(3)), 2 },
+                new object[] { new TreeNode(1), 1 },
+                new object[] { new TreeNode(1, new TreeNode(2), new TreeNode(3)), 2 },
                 new object[] { null, 0 }
             };
 
@@ -38,7 +38,7 @@ namespace LeetCode.Tests
             {
                 new object[]
                 {
-                    new Model.TreeNode(1), new Model.TreeNode(7), new Model.TreeNode(8)
+                    new TreeNode(1), new TreeNode(7), new TreeNode(8)
                 }
             };
 
