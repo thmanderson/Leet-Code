@@ -5,7 +5,7 @@ using LeetCode.Model;
 
 namespace LeetCode
 {
-    public static class TreeNode
+    public static class TreeNodes
     {
         /// <summary>
         /// Find the maximum depth of a tree of <see cref="TreeNode"/>s
@@ -13,7 +13,7 @@ namespace LeetCode
         /// </summary>
         /// <param name="root">Root TreeNode</param>
         /// <returns>Maximum depth of the Tree</returns>
-        public static int MaxDepth(Model.TreeNode root)
+        public static int MaxDepth(TreeNode root)
         {
             if (root == null) return 0; // If null tree, 0 depth.
             if (root.left==null && root.right==null) return 1; // If both connected nodes are null, depth of 1.
@@ -30,10 +30,10 @@ namespace LeetCode
         /// </summary>
         /// <param name="input">Binary tree to be inverted.</param>
         /// <returns>Inverted tree.</returns>
-        public static Model.TreeNode InvertTree(Model.TreeNode root)
+        public static TreeNode InvertTree(TreeNode root)
         {
             if (root == null) return null;
-            var result = new Model.TreeNode(root.val);
+            var result = new TreeNode(root.val);
             if (root.right != null) result.left = InvertTree(root.right);
             if (root.left != null) result.right = InvertTree(root.left);
             return result;
@@ -45,7 +45,7 @@ namespace LeetCode
         /// </summary>
         /// <param name="t">Binary tree.</param>
         /// <returns>String representation of the tree.</returns>
-        public static string Tree2str(Model.TreeNode t)
+        public static string Tree2str(TreeNode t)
         {
             if (t == null) return "";
 
@@ -73,19 +73,42 @@ namespace LeetCode
         /// <param name="t1">First binary tree</param>
         /// <param name="t2">Second binary tree</param>
         /// <returns>Merged result of 2 input trees</returns>
-        public static Model.TreeNode MergeTrees(Model.TreeNode t1, Model.TreeNode t2)
+        public static TreeNode MergeTrees(TreeNode t1, TreeNode t2)
         {
             // If both are null, end of the tree for this node.
             if (t1 == null && t2 == null) return null;
 
             // If not, create new node, combining the 2 input values (either could be null).
-            Model.TreeNode Final = new Model.TreeNode((t1 != null ? t1.val : 0) + (t2 != null ? t2.val : 0));
+            TreeNode Final = new TreeNode((t1 != null ? t1.val : 0) + (t2 != null ? t2.val : 0));
 
             // Create the 2 subsequent nodes from the new tree Final with recursion. Will end when both null.
             Final.left = MergeTrees(t1 != null ? t1.left : null, t2 != null ? t2.left : null);
             Final.right = MergeTrees(t1 != null ? t1.right : null, t2 != null ? t2.right : null);
 
             return Final;
+        }
+
+        public static TreeNode TrimBST(TreeNode root, int L, int R)
+        {
+            if (root == null) return null;
+
+            if (root.val >= L && root.val <= R)
+            {
+                var result = new TreeNode(root.val)
+                {
+                    left = TrimBST(root.left, L, R),
+                    right = TrimBST(root.right, L, R)
+                };
+                return result;
+            }
+            else
+            {
+                var left = TrimBST(root.left, L, R);
+                var right = TrimBST(root.right, L, R);
+
+                if (left != null) return left;
+                else return right;
+            }
         }
     }
 
