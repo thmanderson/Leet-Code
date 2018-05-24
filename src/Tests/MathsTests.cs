@@ -259,7 +259,13 @@ namespace LeetCode.Tests
             = new List<object[]>
             {
                 new object[] { new int[] { 0, 0, 2, 2 }, new int[] { 1, 1, 3, 3 }, true },
+                new object[] { new int[] { 1, 1, 3, 3 }, new int[] { 0, 0, 2, 2 }, true },
                 new object[] { new int[] { 0, 0, 1, 1 }, new int[] { 1, 0, 2, 1 }, false },
+                new object[] { new int[] { 0, 0, 100, 100 }, new int[] { 100, 90, 200, 190 }, false },
+                new object[] { new int[] { 2, 5, 7, 10 }, new int[] { 4, 3, 9, 8 }, true },
+                new object[] { new int[] { 4, 3, 9, 8 }, new int[] { 2, 5, 7, 10 }, true },
+                new object[] { new int[] { 4, 4, 14, 7 }, new int[] { 4, 3, 8, 8 }, true },
+                new object[] { new int[] { -4, -9, -2, 3 }, new int[] { 1, -5, 9, -1 }, false },
             };
 
         public static readonly List<object[]> FlipImageData
