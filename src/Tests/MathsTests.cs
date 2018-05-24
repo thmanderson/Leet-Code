@@ -245,7 +245,22 @@ namespace LeetCode.Tests
             for (int i = 0; i < expected.Length; i++) Assert.True(Enumerable.SequenceEqual(expected[i], actual[i]));
         }
 
+        [Theory]
+        [MemberData(nameof(RectangleOverlapData))]
+        public void RectangleOverlap(int[] rec1, int[] rec2, bool expected)
+        {
+            var actual = Maths.IsRectangleOverlap(rec1, rec2);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> RectangleOverlapData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 0, 0, 2, 2 }, new int[] { 1, 1, 3, 3 }, true },
+                new object[] { new int[] { 0, 0, 1, 1 }, new int[] { 1, 0, 2, 1 }, false },
+            };
 
         public static readonly List<object[]> FlipImageData
             = new List<object[]>

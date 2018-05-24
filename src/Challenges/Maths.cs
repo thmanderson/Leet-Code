@@ -821,5 +821,16 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 836: https://leetcode.com/problems/rectangle-overlap/description/
+        /// </summary>
+        /// <param name="rec1"></param>
+        /// <param name="rec2"></param>
+        /// <returns></returns>
+        public static bool IsRectangleOverlap(int[] rec1, int[] rec2)
+        {
+            throw new NotImplementedException(nameof(IsRectangleOverlap));
+        }
     }
 }
