@@ -266,6 +266,11 @@ namespace LeetCode.Tests
         public static readonly List<object[]> VisitRoomsData
             = new List<object[]>
             {
+                new object[]
+                {
+                    new List<IList<int>> { new List<int> { } },
+                    true
+                },
                 new object[] 
                 {
                     new List<IList<int>> { new List<int> { 1 }, new List<int> { 2 }, new List<int> { 3 }, new List<int> { }, },
