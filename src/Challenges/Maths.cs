@@ -837,5 +837,32 @@ namespace LeetCode
 
             return true;
         }
+
+        /// <summary>
+        /// LeetCode problem 841: https://leetcode.com/problems/keys-and-rooms/description/
+        /// </summary>
+        /// <param name="rooms"></param>
+        /// <returns></returns>
+        public static bool CanVisitAllRooms(IList<IList<int>> rooms)
+        {
+            if (rooms.Count == 1) return true;
+            if (rooms[0].Count == 0) return false;
+
+            var Keys = new HashSet<int>() { 0 };
+            var RoomsToVisit = new Queue<int>();
+            RoomsToVisit.Enqueue(0);
+
+            while (RoomsToVisit.Count > 0)
+            {
+                var current = RoomsToVisit.Dequeue();
+                foreach (var key in rooms[current])
+                {
+                    if (Keys.Add(key)) RoomsToVisit.Enqueue(key);
+                }
+                if (Keys.Count == rooms.Count) return true;
+            }
+
+            return false;
+        }
     }
 }

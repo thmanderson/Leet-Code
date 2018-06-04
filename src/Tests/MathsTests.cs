@@ -253,7 +253,35 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(VisitRoomsData))]
+        public void VisitRooms(IList<IList<int>> rooms, bool expected)
+        {
+            var actual = Maths.CanVisitAllRooms(rooms);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> VisitRoomsData
+            = new List<object[]>
+            {
+                new object[]
+                {
+                    new List<IList<int>> { new List<int> { } },
+                    true
+                },
+                new object[] 
+                {
+                    new List<IList<int>> { new List<int> { 1 }, new List<int> { 2 }, new List<int> { 3 }, new List<int> { }, },
+                    true
+                },
+                new object[]
+                {
+                    new List<IList<int>> { new List<int> { 1, 3 }, new List<int> { 3, 0, 1 }, new List<int> { 2 }, new List<int> { 0 }, },
+                    false
+                },
+            };
 
         public static readonly List<object[]> RectangleOverlapData
             = new List<object[]>
