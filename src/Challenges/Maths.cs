@@ -837,5 +837,15 @@ namespace LeetCode
 
             return true;
         }
+
+        /// <summary>
+        /// LeetCode problem 841: https://leetcode.com/problems/keys-and-rooms/description/
+        /// </summary>
+        /// <param name="rooms"></param>
+        /// <returns></returns>
+        public static bool CanVisitAllRooms(IList<IList<int>> rooms)
+        {
+            throw new NotImplementedException(nameof(CanVisitAllRooms));
+        }
     }
 }
