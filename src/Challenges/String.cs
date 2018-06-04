@@ -589,5 +589,29 @@ namespace LeetCode
                 return result;
             }
         }
+
+        /// <summary>
+        /// LeetCode problem 844: https://leetcode.com/problems/backspace-string-compare/description/
+        /// </summary>
+        /// <param name="S"></param>
+        /// <param name="T"></param>
+        /// <returns></returns>
+        public static bool BackspaceCompare(string S, string T)
+        {
+            return BackspaceString(S) == BackspaceString(T);
+        }
+
+        private static string BackspaceString(string S)
+        {
+            string result = "";
+
+            foreach (char c in S)
+            {
+                if (c == '#' && result != "") result = result.Substring(0, result.Length - 1);
+                else if (c != '#') result += c;
+            }
+
+            return result;
+        }
     }
 }

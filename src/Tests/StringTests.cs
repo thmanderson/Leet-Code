@@ -206,6 +206,21 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData("a#b#c", "d#e#c", true)]
+        [InlineData("ab#c", "ad#c", true)]
+        [InlineData("a#c", "b", false)]
+        [InlineData("a#c", "ac", false)]
+        [InlineData("a##c", "#a#c", true)]
+        [InlineData("", "a#", true)]
+        [InlineData("", "a#a", false)]
+        [InlineData("y#fo##f", "y#f#o##f", true)]
+        public void BackspaceComparison(string S, string T, bool expected)
+        {
+            var actual = String.BackspaceCompare(S, T);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data        
 
         public static readonly List<object[]> CharacterGroupData
