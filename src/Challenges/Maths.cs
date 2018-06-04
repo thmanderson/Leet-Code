@@ -845,8 +845,6 @@ namespace LeetCode
         /// <returns></returns>
         public static bool CanVisitAllRooms(IList<IList<int>> rooms)
         {
-            // throw new NotImplementedException(nameof(CanVisitAllRooms));
-
             if (rooms.Count == 1) return true;
             if (rooms[0].Count == 0) return false;
 
