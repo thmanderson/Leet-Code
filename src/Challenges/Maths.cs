@@ -210,6 +210,28 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// LeetCode problem 27: https://leetcode.com/problems/remove-element/description/
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static int RemoveElement(int[] nums, int val)
+        {
+            int ToReplace = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != val)
+                {
+                    if (i != ToReplace) nums[ToReplace] = nums[i];
+                    ToReplace++;
+                }
+            }
+
+            return ToReplace;
+        }
+
+        /// <summary>
         /// Returns the maximum sum of a subarray of a given array of integers.
         /// LeetCode problem 53: https://leetcode.com/problems/maximum-subarray/description/
         /// </summary>
