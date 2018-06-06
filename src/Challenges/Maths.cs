@@ -151,6 +151,24 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// LeetCode problem 24: https://leetcode.com/problems/swap-nodes-in-pairs/description/
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public static ListNode SwapPairs(ListNode head)
+        {
+            if (head == null) return null;
+            if (head.next == null) return head;
+
+            ListNode seq = head.next.next == null ? null : SwapPairs(head.next.next);
+
+            var result = head.next;
+            head.next = seq;
+            result.next = head;
+            return result;
+        }
+
+        /// <summary>
         /// Given an array of sorted integers, modify the existing array in place, and return the new length so there are no duplicates.
         /// LeetCode problem 26 - Remove Duplicates from Sorted Array: https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
         /// </summary>

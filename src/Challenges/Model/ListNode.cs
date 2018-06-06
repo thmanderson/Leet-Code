@@ -29,6 +29,23 @@ namespace LeetCode.Model
         /// <param name="z">Value for third node.</param>
         public ListNode(int x, int y, int z) { val = x; next = new ListNode(y,z); }
 
+        public static ListNode ConvertToListNode(int[] nums)
+        {
+            if (nums.Length == 0) return null;
+            if (nums.Length == 1) return new ListNode(nums[0]);
+
+            var result = new ListNode(nums[nums.Length - 1]);
+
+            for (int i = nums.Length - 2; i >= 0; i--)
+            {
+                var tmp = result;
+                result = new ListNode(nums[i]);
+                result.next = tmp;
+            }
+
+            return result;
+        }
+
         // Equality methods
         /// <summary> Equality method for ListNode. </summary>
         /// <param name="l">ListNode to be compared to.</param>

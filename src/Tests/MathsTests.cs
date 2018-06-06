@@ -275,7 +275,28 @@ namespace LeetCode.Tests
             Assert.True(Enumerable.SequenceEqual(expected, actual.Take(actualLength)));
         }
 
+        [Theory]
+        [MemberData(nameof(SwapNodeData))]
+        public void SwapElements(int[] inputNums, int[] expectedNums)
+        {
+            // Arrange
+            ListNode input = ListNode.ConvertToListNode(inputNums);
+            ListNode expected = ListNode.ConvertToListNode(expectedNums);
+
+            // Act
+            var actual = Maths.SwapPairs(input);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> SwapNodeData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 1, 2, 3, 4 }, new int[] { 2, 1, 4, 3 } },
+            };
 
         public static readonly List<object[]> RemoveElementData
             = new List<object[]>
