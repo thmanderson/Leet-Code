@@ -261,7 +261,27 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(RemoveElementData))]
+        public void RemoveElement(int[] nums, int val, int[] expected, int expectedLength)
+        {
+            // Arrange & Act
+            var actual = new int[nums.Length];
+            nums.CopyTo(actual, 0);
+            int actualLength = Maths.RemoveElement(actual, val);
+
+            // Assert
+            Assert.Equal(expectedLength, actualLength);
+            Assert.True(Enumerable.SequenceEqual(expected, actual.Take(actualLength)));
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> RemoveElementData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 0,1,2,2,3,0,4,2 }, 2, new int[] { 0,1,3,0,4 }, 5 },
+            };
 
         public static readonly List<object[]> VisitRoomsData
             = new List<object[]>
