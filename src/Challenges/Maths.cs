@@ -85,6 +85,28 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// LeetCode problem 11: https://leetcode.com/problems/container-with-most-water/description/
+        /// </summary>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public static int MaxArea(int[] height)
+        {
+            int area = 0;
+            for (int l = 0, r = height.Length - 1; l < r;)
+            {
+                var left = height[l];
+                var right = height[r];
+
+                area = Math.Max(Math.Min(right, left) * (r - l), area);
+
+                if (left < right) l++;
+                else r--;
+            }
+
+            return area;
+        }
+
+        /// <summary>
         /// Converts a roman numeral string into an integer.
         /// LeetCode problem 13 - https://leetcode.com/problems/roman-to-integer/description/
         /// </summary>
