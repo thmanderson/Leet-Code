@@ -430,6 +430,27 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// LeetCode problem 791
+        /// </summary>
+        /// <param name="S"></param>
+        /// <param name="T"></param>
+        /// <returns></returns>
+        public string CustomSortString(string S, string T)
+        {
+            string result = "";
+            string remaining = T;
+
+            foreach (char c in S)
+            {
+                int count = remaining.Count(x => x == c);
+                for (int i = 0; i < count; i++) result += c;
+                remaining = string.Join(null, remaining.Where(x => x != c));
+            }
+
+            return result + remaining;
+        }
+
+        /// <summary>
         /// Return true if string A can be turned into string B just be rotating the string, i.e. pushing the left-most char to the further right position.
         /// LeetCode problem 796: https://leetcode.com/problems/rotate-string/description/
         /// </summary>
