@@ -904,5 +904,68 @@ namespace LeetCode
 
             return false;
         }
+
+        /// <summary>
+        /// LeetCode problem 845: https://leetcode.com/problems/longest-mountain-in-array/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static int LongestMountain(int[] A)
+        {
+            if (A.Length == 0) return 0;
+
+            bool ascendingMountain = false;
+            bool descendingMountain = false;
+            int ascentLength = 0;
+            int descentLength = 0;
+            int result = 0;
+            int prev = A[0];
+
+            for (int i = 1; i < A.Length; i++)
+            {
+                // If we're not on a mountain yet, try to find one
+                if (!ascendingMountain && !descendingMountain)
+                {
+                    // Start of a new potential mountain
+                    if (A[i] > prev)
+                    {
+                        ascendingMountain = true;
+                        descendingMountain = false; // redundant but leaving for now
+                        ascentLength = 1;
+                    }
+                }
+                else if (ascendingMountain)
+                {
+                    if (A[i] > prev) ascentLength++;
+                    else if (A[i] == prev) ascendingMountain = false;
+                    else
+                    {
+                        descendingMountain = true;
+                        ascendingMountain = false;
+                        descentLength = 1;
+                    }
+                }
+                else if (descendingMountain)
+                {
+                    if (A[i] < prev) descentLength++;
+                    else // end of mountain
+                    {
+                        result = Math.Max(ascentLength + descentLength + 1, result);
+                        descendingMountain = false;
+                        if (A[i] > prev)
+                        {
+                            ascendingMountain = true;
+                            ascentLength = 1;
+                        }
+                    }
+                }
+
+                prev = A[i];
+            }
+
+            if (descendingMountain) result = Math.Max(ascentLength + descentLength + 1, result);
+
+            return result;
+        }
     }
 }
