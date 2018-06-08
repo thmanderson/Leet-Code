@@ -298,7 +298,26 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(MaxAreaData))]
+        public void MaxArea(int[] height, int expected)
+        {
+            var actual = Maths.MaxArea(height);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> MaxAreaData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 1, 1 }, 1 },
+                new object[] { new int[] { 2, 1 }, 1 },
+                new object[] { new int[] { 1, 1, 1, 10, 10, 1, 1 }, 10 },
+                new object[] { new int[] { 1, 1, 1, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, 15 },
+                new object[] { new int[] { 1, 1, 1, 10, 10, 1, 1, 1, 1, 1, 5, 1, 1, 1, 5, 1 }, 55 },
+                new object[] { new int[] { 1, 1, 6, 7, 1, 8, 3, 1, 1, 1, 1, 8, 12, 36, 1, 12, 4, 1, 1, 1, 9 }, 120 },
+            };
 
         public static readonly List<object[]> MountainData
             = new List<object[]>
