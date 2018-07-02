@@ -989,5 +989,37 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 860: https://leetcode.com/problems/lemonade-change/description/
+        /// </summary>
+        /// <param name="bills"></param>
+        /// <returns></returns>
+        public static bool LemonadeChange(int[] bills)
+        {
+            var money = new Dictionary<int, int> { { 5, 0 }, { 10, 0 }, { 20, 0 } };
+
+            foreach (int customer in bills)
+            { 
+                money[customer]++;
+                if (customer == 10)
+                {
+                    if (money[5] > 0) money[5]--;
+                    else return false;
+                }
+                else if (customer == 20)
+                {
+                    if (money[5] > 0 && money[10] > 0)
+                    {
+                        money[5]--;
+                        money[10]--;
+                    }
+                    else if (money[5] > 2) money[5] -= 3;
+                    else return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

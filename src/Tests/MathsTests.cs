@@ -306,7 +306,26 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(LemonadeData))]
+        public void LemonadeChange(int[] bills, bool expected)
+        {
+            var actual = Maths.LemonadeChange(bills);
+            Assert.Equal(expected, actual);
+        }
+
+
         #region Test Data
+
+        public static readonly List<object[]> LemonadeData
+            = new List<object[]>
+            {
+                new object[] { new int[] { }, true },
+                new object[] { new int[] { 5, 5, 5, 10, 20 }, true },
+                new object[] { new int[] { 5, 5, 10 }, true },
+                new object[] { new int[] { 10, 10 }, false },
+                new object[] { new int[] { 5, 5, 10, 10, 20 }, false },
+            };
 
         public static readonly List<object[]> MaxAreaData
             = new List<object[]>
