@@ -221,6 +221,24 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData("ab", "ba",true)]
+        [InlineData("aa", "aa", true)]
+        [InlineData("ab", "ab", false)]
+        [InlineData("aaaaaaabc", "aaaaaaacb", true)]
+        [InlineData("", "aa", false)]
+        [InlineData("", "", false)]
+        [InlineData("a", "a", false)]
+        [InlineData("a", "b", false)]
+        [InlineData("abcdef", "bcdefa", false)]
+        [InlineData("aaabbbcccddd", "aaabbbcccddd", true)]
+        [InlineData("aaabbbccceee", "aaabbbcccddd", false)]
+        public void BuddyStrings(string A, string B, bool expected)
+        {
+            var actual = String.BuddyStrings(A, B);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data        
 
         public static readonly List<object[]> CharacterGroupData
