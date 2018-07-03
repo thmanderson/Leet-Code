@@ -1021,5 +1021,17 @@ namespace LeetCode
 
             return true;
         }
+
+        /// <summary>
+        /// LeetCode problem 268: Missing number. Given an array of ints containing numbers 0 to n, but missing one, return the missing number.
+        /// </summary>
+        /// <param name="nums">Array of ints from 0 to n, missing any integer between 0 and n.</param>
+        /// <returns>Missing integer.</returns>
+        public static int MissingNumber(int[] nums)
+        {
+            int expectedSum = (nums.Length * (nums.Length + 1)) / 2;
+            foreach (int n in nums) expectedSum -= n;
+            return expectedSum;
+        }
     }
 }
