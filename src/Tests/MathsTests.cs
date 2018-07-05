@@ -314,8 +314,45 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(PermuteData))]
+        public void Permute(int[] nums, IList<IList<int>> expected)
+        {
+            var actual = Maths.Permute(nums);
+
+            Assert.Equal(expected.Count(), actual.Count());
+
+            for (int i = 0; i < expected.Count; i++)
+            {
+                Assert.True(Enumerable.SequenceEqual(expected[i], actual[i]));
+            }
+        }
 
         #region Test Data
+
+        public static readonly List<object[]> PermuteData
+            = new List<object[]>
+            {
+                new object[] {
+                    new int[] { 1, 2, 3 },
+                    new List<IList<int>>
+                    {
+                        new List<int>{ 1, 2, 3 },
+                        new List<int>{ 1, 3, 2 },
+                        new List<int>{ 2, 1, 3 },
+                        new List<int>{ 2, 3, 1 },
+                        new List<int>{ 3, 1, 2 },
+                        new List<int>{ 3, 2, 1 },
+                    }
+                },
+                new object[] {
+                    new int[] { 1 },
+                    new List<IList<int>>
+                    {
+                        new List<int>{ 1 },
+                    }
+                },
+            };
 
         public static readonly List<object[]> LemonadeData
             = new List<object[]>
