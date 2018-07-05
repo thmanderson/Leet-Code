@@ -1046,12 +1046,12 @@ namespace LeetCode
             var result = new List<IList<int>>();
 
             foreach (int n in nums)
-                result.AddRange(Permute2(new List<int> { n }, nums.Where(x => x != n).ToList()));
+                result.AddRange(RecursivePermute(new List<int> { n }, nums.Where(x => x != n).ToList()));
 
             return result;
         }
 
-        private static IList<IList<int>> Permute2(List<int> permuation, List<int> remaining)
+        private static IList<IList<int>> RecursivePermute(List<int> permuation, List<int> remaining)
         {
             if (remaining.Count == 0) throw new ArgumentException(nameof(remaining));
 
@@ -1069,10 +1069,23 @@ namespace LeetCode
             {
                 var tmp = new List<int>(permuation);
                 tmp.Add(n);
-                result.AddRange(Permute2(tmp, remaining.Where(x => x != n).ToList()));
+                result.AddRange(RecursivePermute(tmp, remaining.Where(x => x != n).ToList()));
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// LeetCode problem 540: https://leetcode.com/problems/single-element-in-a-sorted-array/description/
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int SingleNonDuplicate(int[] nums)
+        {
+            if (nums.Length == 1) return nums[0];
+            for (int i = 1; i < nums.Length; i += 2)
+                if (nums[i - 1] != nums[i]) return nums[i - 1];
+            return nums.Last();
         }
     }
 }
