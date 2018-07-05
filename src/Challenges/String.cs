@@ -634,5 +634,51 @@ namespace LeetCode
 
             return result;
         }
+
+        public static bool BuddyStrings(string A, string B)
+        {
+            if (A.Length != B.Length) return false;
+
+            // If the strings are the same, can only be true if we switch 2 of the same char
+            if (A == B)
+            {
+                foreach (char c in A) if (A.Count(x => x == c) > 1) return true;
+                return false;
+            }
+
+            var MismatchedLetters = new List<Tuple<char, char>>();
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] != B[i]) MismatchedLetters.Add(new Tuple<char, char>(A[i], B[i]));
+            }
+
+            if (MismatchedLetters.Count != 2) return false;
+
+            if (MismatchedLetters[0].Item1 == MismatchedLetters[1].Item2
+                && MismatchedLetters[0].Item2 == MismatchedLetters[1].Item1) return true;
+
+            return false;
+        }
+
+        public static string ShortestCompletingWord(string licensePlate, string[] words)
+        {
+            var letters = licensePlate.ToLower().Where(c => char.IsLetter(c)).ToList();
+            var result = "";
+
+            foreach(var word in words)
+            {
+                var valid = true;
+                foreach (char c in letters)
+                    if (letters.Count(x => x == c) > word.Count(y => y == c))
+                    {
+                        valid = false;
+                        break;
+                    }
+                if (valid && (word.Length < result.Length || result == "")) result = word;
+            }
+
+            return result;
+        }
     }
 }

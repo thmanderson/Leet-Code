@@ -221,7 +221,42 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData("ab", "ba",true)]
+        [InlineData("aa", "aa", true)]
+        [InlineData("ab", "ab", false)]
+        [InlineData("aaaaaaabc", "aaaaaaacb", true)]
+        [InlineData("", "aa", false)]
+        [InlineData("", "", false)]
+        [InlineData("a", "a", false)]
+        [InlineData("a", "b", false)]
+        [InlineData("abcdef", "bcdefa", false)]
+        [InlineData("aaabbbcccddd", "aaabbbcccddd", true)]
+        [InlineData("aaabbbccceee", "aaabbbcccddd", false)]
+        public void BuddyStrings(string A, string B, bool expected)
+        {
+            var actual = String.BuddyStrings(A, B);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [MemberData(nameof(ShortestCompletingWordData))]
+        public void ShortestCompletingWord(string licensePlate, string[] words, string expected)
+        {
+            var actual = String.ShortestCompletingWord(licensePlate, words);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data        
+
+        public static readonly List<object[]> ShortestCompletingWordData
+            = new List<object[]>
+            {
+                new object[] { "", new string[] {}, ""},
+                new object[] { "1s3 PSt", new string[] { "step", "steps", "stripe", "stepple" }, "steps"},
+                new object[] { "1s3 456", new string[] { "looks", "pest", "stew", "show" }, "pest"},
+                new object[] { "GrC8950", new string[] { "measure","other","every","base","according","level","meeting","none","marriage","rest" }, "according"},
+            };
 
         public static readonly List<object[]> CharacterGroupData
             = new List<object[]>

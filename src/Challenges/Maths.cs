@@ -989,5 +989,90 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 860: https://leetcode.com/problems/lemonade-change/description/
+        /// </summary>
+        /// <param name="bills"></param>
+        /// <returns></returns>
+        public static bool LemonadeChange(int[] bills)
+        {
+            var money = new Dictionary<int, int> { { 5, 0 }, { 10, 0 }, { 20, 0 } };
+
+            foreach (int customer in bills)
+            { 
+                money[customer]++;
+                if (customer == 10)
+                {
+                    if (money[5] > 0) money[5]--;
+                    else return false;
+                }
+                else if (customer == 20)
+                {
+                    if (money[5] > 0 && money[10] > 0)
+                    {
+                        money[5]--;
+                        money[10]--;
+                    }
+                    else if (money[5] > 2) money[5] -= 3;
+                    else return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// LeetCode problem 268: Missing number. Given an array of ints containing numbers 0 to n, but missing one, return the missing number.
+        /// </summary>
+        /// <param name="nums">Array of ints from 0 to n, missing any integer between 0 and n.</param>
+        /// <returns>Missing integer.</returns>
+        public static int MissingNumber(int[] nums)
+        {
+            int expectedSum = (nums.Length * (nums.Length + 1)) / 2;
+            foreach (int n in nums) expectedSum -= n;
+            return expectedSum;
+        }
+
+        /// <summary>
+        /// LeetCode problem 46: https://leetcode.com/problems/permutations/description/
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static IList<IList<int>> Permute(int[] nums)
+        {
+            if (nums.Length == 1) return new List<IList<int>> { new List<int> { nums[0] } };
+
+            var result = new List<IList<int>>();
+
+            foreach (int n in nums)
+                result.AddRange(Permute2(new List<int> { n }, nums.Where(x => x != n).ToList()));
+
+            return result;
+        }
+
+        private static IList<IList<int>> Permute2(List<int> permuation, List<int> remaining)
+        {
+            if (remaining.Count == 0) throw new ArgumentException(nameof(remaining));
+
+            var result = new List<IList<int>>();
+            if (remaining.Count == 1)
+            {
+                var tmp = new List<int>(permuation);
+                tmp.Add(remaining[0]);
+
+                result.Add(tmp);
+                return result;
+            }
+
+            foreach (int n in remaining)
+            {
+                var tmp = new List<int>(permuation);
+                tmp.Add(n);
+                result.AddRange(Permute2(tmp, remaining.Where(x => x != n).ToList()));
+            }
+
+            return result;
+        }
     }
 }
