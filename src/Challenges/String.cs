@@ -660,5 +660,25 @@ namespace LeetCode
 
             return false;
         }
+
+        public static string ShortestCompletingWord(string licensePlate, string[] words)
+        {
+            var letters = licensePlate.ToLower().Where(c => char.IsLetter(c)).ToList();
+            var result = "";
+
+            foreach(var word in words)
+            {
+                var valid = true;
+                foreach (char c in letters)
+                    if (letters.Count(x => x == c) > word.Count(y => y == c))
+                    {
+                        valid = false;
+                        break;
+                    }
+                if (valid && (word.Length < result.Length || result == "")) result = word;
+            }
+
+            return result;
+        }
     }
 }
