@@ -1112,5 +1112,36 @@ namespace LeetCode
                 + (B[0] * (C[1] - A[1])) 
                 + (C[0] * (A[1] - B[1])));
         }
+
+        /// <summary>
+        /// LeetCode problem 817: https://leetcode.com/problems/linked-list-components/description/
+        /// </summary>
+        /// <param name="head">Start of a linked list of integers.</param>
+        /// <param name="G">Subset of values from the linked list <paramref name="head"/>.</param>
+        /// <returns>The number of connected 'components' - i.e. consecutive integers from the subset G.</returns>
+        public static int NumComponents(ListNode head, int[] G)
+        {
+            // Solution seems to give correct answers but exceeds LeetCode time limit.
+            int result = 0;
+            var node = head;
+            bool section = false;
+
+            while(node != null)
+            {
+                if (!section)
+                {
+                    if (G.Contains(node.val)) // Starting a new component
+                    {
+                        result++;
+                        section = true;
+                    }
+                }
+                else if (!G.Contains(node.val)) // End of a component
+                    section = false;
+                node = node.next;
+            }
+
+            return result;
+        }
     }
 }
