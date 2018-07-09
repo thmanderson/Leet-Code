@@ -1126,17 +1126,19 @@ namespace LeetCode
             var node = head;
             bool section = false;
 
+            var set = new HashSet<int>(G);
+
             while(node != null)
             {
                 if (!section)
                 {
-                    if (G.Contains(node.val)) // Starting a new component
+                    if (set.Contains(node.val)) // Starting a new component
                     {
                         result++;
                         section = true;
                     }
                 }
-                else if (!G.Contains(node.val)) // End of a component
+                else if (!set.Contains(node.val)) // End of a component
                     section = false;
                 node = node.next;
             }
