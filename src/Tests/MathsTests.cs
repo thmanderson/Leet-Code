@@ -336,7 +336,26 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(NumComponentsData))]
+        public void NumComponents(int[] nums, int[] numsSubset, int expected)
+        {
+            ListNode input = ListNode.ConvertToListNode(nums);
+            var actual = Maths.NumComponents(input, numsSubset);
+
+            Assert.Equal(expected, actual);
+        }
+
+
         #region Test Data
+
+        public static readonly List<object[]> NumComponentsData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 0, 1, 2, 3 }, new int[] { 0, 1, 3}, 2 },
+                new object[] { new int[] { 0, 1, 2, 3, 4 }, new int[] { 0, 3, 1, 4 }, 2 },
+                new object[] { new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, new int[] { 0, 2, 4, 6, 8, 10 }, 6 },
+            };
 
         public static readonly List<object[]> SingleNonDuplicateData
             = new List<object[]>

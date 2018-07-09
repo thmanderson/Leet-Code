@@ -1087,5 +1087,63 @@ namespace LeetCode
                 if (nums[i - 1] != nums[i]) return nums[i - 1];
             return nums.Last();
         }
+
+        /// <summary>
+        /// LeetCode problem 812: https://leetcode.com/problems/largest-triangle-area/description/
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static double LargestTriangleArea(int[][] points)
+        {
+            double result = 0;
+
+            for (int i = 0; i < points.Length - 2; i++)
+                for (int j = i; j < points.Length - 1; j++)
+                    for (int k = j; k < points.Length; k++)
+                        result = Math.Max(result, CalculateAreaOfTriangle(points[i], points[j], points[k]));
+
+            return result;
+        }
+
+        private static double CalculateAreaOfTriangle(int[] A, int[] B, int[] C)
+        {
+            return 0.5 * Math.Abs( 
+                (A[0] * (B[1] - C[1])) 
+                + (B[0] * (C[1] - A[1])) 
+                + (C[0] * (A[1] - B[1])));
+        }
+
+        /// <summary>
+        /// LeetCode problem 817: https://leetcode.com/problems/linked-list-components/description/
+        /// </summary>
+        /// <param name="head">Start of a linked list of integers.</param>
+        /// <param name="G">Subset of values from the linked list <paramref name="head"/>.</param>
+        /// <returns>The number of connected 'components' - i.e. consecutive integers from the subset G.</returns>
+        public static int NumComponents(ListNode head, int[] G)
+        {
+            // Solution seems to give correct answers but exceeds LeetCode time limit.
+            int result = 0;
+            var node = head;
+            bool section = false;
+
+            var set = new HashSet<int>(G);
+
+            while(node != null)
+            {
+                if (!section)
+                {
+                    if (set.Contains(node.val)) // Starting a new component
+                    {
+                        result++;
+                        section = true;
+                    }
+                }
+                else if (!set.Contains(node.val)) // End of a component
+                    section = false;
+                node = node.next;
+            }
+
+            return result;
+        }
     }
 }
