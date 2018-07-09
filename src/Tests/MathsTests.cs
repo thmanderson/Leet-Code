@@ -328,7 +328,25 @@ namespace LeetCode.Tests
             }
         }
 
+        [Theory]
+        [MemberData(nameof(SingleNonDuplicateData))]
+        public void SingleNonDuplicate(int[] nums, int expected)
+        {
+            var actual = Maths.SingleNonDuplicate(nums);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> SingleNonDuplicateData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 1, 1, 2, 3, 3, 4, 4, 8, 8 }, 2 },
+                new object[] { new int[] { 3, 3, 7, 7, 10, 11, 11 }, 10 },
+                new object[] { new int[] { 1, 1, 2 }, 2 },
+                new object[] { new int[] { 1, 1, 2, 2, 3 }, 3 },
+                new object[] { new int[] { 1, 2, 2, 3, 3 }, 1 },
+            };
 
         public static readonly List<object[]> PermuteData
             = new List<object[]>
