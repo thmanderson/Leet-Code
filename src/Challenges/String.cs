@@ -680,5 +680,25 @@ namespace LeetCode
 
             return result;
         }
+
+        public static IList<string> AmbiguousCoordinates(string S)
+        {
+            throw new NotImplementedException(nameof(AmbiguousCoordinates));
+
+            var result = new List<string>();
+
+            var tidy = S.Trim('(', ')');
+
+            if (tidy.Length == 2)
+                return new List<string> { WrapNumbers(Convert.ToString(S[0]), Convert.ToString(S[1])) };
+
+            // Want to find as many combinations of strings where commas can go first. So go through whole tidy string, if comma in this place
+            // makes sense, then add to the list of pairs of string.
+            // Once we have a list of valid string pairs, for each of these, go through and check where we can put decimals. Add each possible to the result, after wrapping.
+
+            return result;
+        }
+
+        private static string WrapNumbers(string A, string B) => "(" + A + ", " + B + ")";
     }
 }
