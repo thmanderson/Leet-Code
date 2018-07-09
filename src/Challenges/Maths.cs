@@ -1087,5 +1087,30 @@ namespace LeetCode
                 if (nums[i - 1] != nums[i]) return nums[i - 1];
             return nums.Last();
         }
+
+        /// <summary>
+        /// LeetCode problem 812: https://leetcode.com/problems/largest-triangle-area/description/
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static double LargestTriangleArea(int[][] points)
+        {
+            double result = 0;
+
+            for (int i = 0; i < points.Length - 2; i++)
+                for (int j = i; j < points.Length - 1; j++)
+                    for (int k = j; k < points.Length; k++)
+                        result = Math.Max(result, CalculateAreaOfTriangle(points[i], points[j], points[k]));
+
+            return result;
+        }
+
+        private static double CalculateAreaOfTriangle(int[] A, int[] B, int[] C)
+        {
+            return 0.5 * Math.Abs( 
+                (A[0] * (B[1] - C[1])) 
+                + (B[0] * (C[1] - A[1])) 
+                + (C[0] * (A[1] - B[1])));
+        }
     }
 }
