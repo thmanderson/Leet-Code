@@ -681,20 +681,56 @@ namespace LeetCode
             return result;
         }
 
+        /// <summary>
+        /// LeetCode 816: https://leetcode.com/problems/ambiguous-coordinates/description/
+        /// </summary>
+        /// <param name="S"></param>
+        /// <returns></returns>
         public static IList<string> AmbiguousCoordinates(string S)
         {
-            throw new NotImplementedException(nameof(AmbiguousCoordinates));
-
             var result = new List<string>();
+            var coordPairs = new Dictionary<string, string>();
 
             var tidy = S.Trim('(', ')');
 
             if (tidy.Length == 2)
-                return new List<string> { WrapNumbers(Convert.ToString(S[0]), Convert.ToString(S[1])) };
+                return new List<string> { WrapNumbers(Convert.ToString(tidy[0]), Convert.ToString(tidy[1])) };
 
-            // Want to find as many combinations of strings where commas can go first. So go through whole tidy string, if comma in this place
-            // makes sense, then add to the list of pairs of string.
-            // Once we have a list of valid string pairs, for each of these, go through and check where we can put decimals. Add each possible to the result, after wrapping.
+            for (int i = 1; i < tidy.Length; i++)
+            {
+                string A = tidy.Substring(0, i);
+                string B = tidy.Substring(i);
+                if ((!(A[0] == '0' && A[A.Length - 1] == '0') || A == "0")
+                    && (!(B[0] == '0' && B[B.Length - 1] == '0') || B == "0"))
+                    coordPairs.Add(A, B);
+            }
+
+            foreach (var x in coordPairs)
+            {
+                var AVariations = GetCoordinatePossibilites(x.Key);
+                var BVariations = GetCoordinatePossibilites(x.Value);
+                
+                foreach (var a in AVariations)
+                    foreach (var b in BVariations)
+                        result.Add(WrapNumbers(a, b));
+            }
+
+            return result;
+        }
+        private static List<string> GetCoordinatePossibilites(string input)
+        {
+            var result = new List<string>();
+            result.Add(input);
+
+            // If the last char is a zero, no valid place to put a decimal point.
+            if (input[input.Length - 1] == '0') return result;
+
+            // If starts with a zero, only valid place to put a decimal point is after the first one.
+            else if (input[0] == '0') return new List<string> { "0." + input.Substring(1) };
+            // If we don't start or end with a zero, all other combinations are valid.
+            else
+                for (int i = 1; i < input.Length; i++)
+                    result.Add(input.Substring(0, i) + '.' + input.Substring(i));
 
             return result;
         }
