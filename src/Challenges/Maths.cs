@@ -1145,5 +1145,21 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 852: https://leetcode.com/problems/peak-index-in-a-mountain-array/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static int PeakIndexInMountainArray(int[] A)
+        {
+            int prev = A[0];
+            for (int i = 1; i < A.Length; i++)
+            {
+                if (A[i] < prev) return i - 1;
+                prev = A[i];
+            }
+            return prev;
+        }
     }
 }
