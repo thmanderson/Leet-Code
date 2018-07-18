@@ -247,7 +247,41 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(AmbiguousCoordinatesData))]
+        public void AmbiguousCoordinates(string input, List<string> expected)
+        {
+            var actual = String.AmbiguousCoordinates(input);
+            foreach (var variant in expected)
+                Assert.True(actual.Contains(variant));
+        }
+
         #region Test Data        
+
+        public static readonly List<object[]> AmbiguousCoordinatesData
+            = new List<object[]>
+            {
+                new object[] 
+                {
+                    "(123)",
+                    new List<string> { "(1, 2.3)", "(1, 23)", "(1.2, 3)", "(12, 3)" }
+                },
+                new object[] 
+                {
+                    "(0123)",
+                    new List<string> { "(0, 1.23)", "(0, 12.3)", "(0, 123)", "(0.1, 2.3)", "(0.1, 23)", "(0.12, 3)" }
+                },
+                new object[]
+                {
+                    "(00011)",
+                    new List<string> { "(0, 0.011)","(0.001, 1)" }
+                },
+                new object[]
+                {
+                    "(00)",
+                    new List<string> { "(0, 0)" }
+                },
+            };
 
         public static readonly List<object[]> ShortestCompletingWordData
             = new List<object[]>

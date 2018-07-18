@@ -1195,5 +1195,23 @@ namespace LeetCode
 
             return false;
         }
+      
+        /// LeetCode problem 868: https://leetcode.com/problems/transpose-matrix/description/
+        /// </summary>
+        /// <param name="A">Matrix of integers.</param>
+        /// <returns>Transposed matrix of A.</returns>
+        public static int[][] Transpose(int[][] A)
+        {
+            var result = new int[A[0].Length][];
+
+            for (int i = 0; i < A[0].Length; i++)
+            {
+                result[i] = new int[A.Length];
+                for (int j = 0; j < A.Length; j++)
+                    result[i][j] = A[j][i];
+            }
+
+            return result;
+        }
     }
 }

@@ -355,8 +355,52 @@ namespace LeetCode.Tests
             Assert.Equal(actual, expected);
         }
 
+        [MemberData(nameof(TransposeData))]
+        public void Transpose(int[][] input, int[][] expected)
+        {
+            var actual = Maths.Transpose(input);
+
+            Assert.Equal(expected.Length, actual.Length);
+            for (int i = 0; i < expected.Length; i++)
+                Assert.True(Enumerable.SequenceEqual(expected[i], actual[i]));
+        }
 
         #region Test Data
+
+        public static readonly List<object[]> TransposeData
+            = new List<object[]>
+            {
+                new object[]
+                {
+                    new int[][]
+                    {
+                        new int[]{ 1,2,3 },
+                        new int[]{ 4,5,6 },
+                        new int[]{ 7,8,9 }
+                    },
+                    new int[][]
+                    {
+                        new int[]{ 1,4,7 },
+                        new int[]{ 2,5,8 },
+                        new int[]{ 3,6,9 },
+                    }
+                },
+                new object[]
+                {
+                    new int[][]
+                    {
+                        new int[]{ 1,2 },
+                        new int[]{ 3,4 },
+                        new int[]{ 5,6 },
+                        new int[]{ 7,8 },
+                    },
+                    new int[][]
+                    {
+                        new int[]{ 1,3,5,7 },
+                        new int[]{ 2,4,6,8 },
+                    },
+                },
+            };
 
         public static readonly List<object[]> NumComponentsData
             = new List<object[]>
