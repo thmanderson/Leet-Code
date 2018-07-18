@@ -1213,5 +1213,28 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 870: https://leetcode.com/problems/advantage-shuffle/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <returns></returns>
+        public static int[] AdvantageCount(int[] A, int[] B)
+        {
+            var result = new int[A.Length];
+            var inputList = new List<int>(A);
+
+            // For each value in B, either take the smallest value that is greater than B[i], or take the smallest value available
+            for (int i = 0; i < A.Length; i++)
+            {
+                var possibles = inputList.Where(x => x > B[i]);
+                var tmp = possibles.Count() == 0 ? inputList.Min() : inputList.Where(x => x > B[i]).Min();
+                inputList.Remove(tmp);
+                result[i] = tmp;
+            }
+
+            return result;
+        }
     }
 }

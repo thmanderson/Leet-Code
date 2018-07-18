@@ -355,6 +355,7 @@ namespace LeetCode.Tests
             Assert.Equal(actual, expected);
         }
 
+        [Theory]
         [MemberData(nameof(TransposeData))]
         public void Transpose(int[][] input, int[][] expected)
         {
@@ -365,7 +366,30 @@ namespace LeetCode.Tests
                 Assert.True(Enumerable.SequenceEqual(expected[i], actual[i]));
         }
 
+        [Theory]
+        [MemberData(nameof(AdvantageCountData))]
+        public void AdvantageCount(int[] A, int[] B, int expectedAdvantage)
+        {
+            var actual = Maths.AdvantageCount(A, B);
+            Assert.Equal(actual.Length, B.Length);
+
+            var actualAdvantage = 0;
+
+            for (int i = 0; i < actual.Length; i++)
+                if (actual[i] > B[i]) actualAdvantage++;
+
+            Assert.Equal(expectedAdvantage, actualAdvantage);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> AdvantageCountData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 2, 7, 11, 15 }, new int[] { 1, 10, 4, 11 }, 4 },
+                new object[] { new int[] { 0, 0, 0, 0 }, new int[] { 1, 1, 1, 1 }, 0 },
+                new object[] { new int[] { 100, 99, 5, 63 }, new int[] { 1, 1, 1, 1 }, 4 },
+            };
 
         public static readonly List<object[]> TransposeData
             = new List<object[]>
