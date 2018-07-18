@@ -1216,20 +1216,22 @@ namespace LeetCode
 
         /// <summary>
         /// LeetCode problem 870: https://leetcode.com/problems/advantage-shuffle/description/
+        /// Shuffle an array of integers so that the advantage over a second array is maximised.
+        /// Advantage is the number of elements where A[i] > B[i].
         /// </summary>
-        /// <param name="A"></param>
-        /// <param name="B"></param>
-        /// <returns></returns>
+        /// <param name="A">Array of integers, assumed A.Length == <paramref name="B"/>.Length</param>
+        /// <param name="B">Array of integers, assumed B.Length == <paramref name="A"/>.Length</param>
+        /// <returns>Re-ordered <paramref name="A"/> to maximise "advantage" over <paramref name="B"/></returns>
         public static int[] AdvantageCount(int[] A, int[] B)
         {
             var result = new int[A.Length];
             var inputList = new List<int>(A);
+            inputList.Sort();
 
             // For each value in B, either take the smallest value that is greater than B[i], or take the smallest value available
             for (int i = 0; i < A.Length; i++)
             {
-                var possibles = inputList.Where(x => x > B[i]);
-                var tmp = possibles.Count() == 0 ? inputList.Min() : inputList.Where(x => x > B[i]).Min();
+                var tmp = inputList.Last() <= B[i] ? inputList.First() : inputList.FirstOrDefault(x => x > B[i]);
                 inputList.Remove(tmp);
                 result[i] = tmp;
             }
