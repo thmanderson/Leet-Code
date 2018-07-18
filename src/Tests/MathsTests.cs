@@ -381,7 +381,32 @@ namespace LeetCode.Tests
             Assert.Equal(expectedAdvantage, actualAdvantage);
         }
 
+        [Theory]
+        [MemberData(nameof(MinRefuelStopsData))]
+        public void MinRefuelStops(int target, int startFuel, int[][] stations, int expected)
+        {
+            var actual = Maths.MinRefuelStops(target, startFuel, stations);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
+
+        public static readonly List<object[]> MinRefuelStopsData
+            = new List<object[]>
+            {
+                new object[] { 1, 1,  new int[][] { }, 0 },
+                new object[] { 100, 1,  new int[][] { new int[] { 10, 100 } }, -1 },
+                new object[] { 100, 1,  new int[][] { }, -1 },
+                new object[] { 100, 50,  new int[][] { new int[] { 25, 30} }, -1 },
+                new object[] { 100, 10,  new int[][] { new int[] { 10, 60 }, new int[] { 20, 30 }, new int[] { 30, 30 }, new int[] { 60, 40 } }, 2 },
+                new object[] { 900, 300,  new int[][] { new int[] { 10, 100 }, new int[] { 20, 200 }, new int[] { 30, 300 }, new int[] { 100, 301 } }, 2 },
+                new object[] {
+                    1000,
+                    83,
+                    new int[][] { new int[] { 25, 27 }, new int[] { 36, 187 }, new int[] { 140, 186 }, new int[] { 378, 6 }, new int[] { 492, 202 }, new int[] { 517, 89 }, new int[] { 579, 234 }, new int[] { 673, 86 }, new int[] { 808, 53 }, new int[] { 954, 49 } },
+                    -1
+                },
+            };
 
         public static readonly List<object[]> AdvantageCountData
             = new List<object[]>
