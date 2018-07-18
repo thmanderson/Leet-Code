@@ -347,6 +347,14 @@ namespace LeetCode.Tests
         }
 
         [Theory]
+        [InlineData(1, true)]
+        [InlineData(679213508, true)]
+        public void ReorderedPowerOf2(int input, bool expected)
+        {
+            var actual = Maths.ReorderedPowerOf2(input);
+            Assert.Equal(actual, expected);
+        }
+
         [MemberData(nameof(TransposeData))]
         public void Transpose(int[][] input, int[][] expected)
         {

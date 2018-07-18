@@ -1147,6 +1147,55 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// LeetCode problem 852: https://leetcode.com/problems/peak-index-in-a-mountain-array/description/
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static int PeakIndexInMountainArray(int[] A)
+        {
+            int prev = A[0];
+            for (int i = 1; i < A.Length; i++)
+            {
+                if (A[i] < prev) return i - 1;
+                prev = A[i];
+            }
+            return prev;
+        }
+
+        /// <summary>
+        ///  LeetCode problem 869: https://leetcode.com/problems/reordered-power-of-2/description/
+        /// </summary>
+        /// <param name="N"></param>
+        /// <returns></returns>
+        public static bool ReorderedPowerOf2(int N)
+        {
+            int index = 0;
+            long power = 0;
+            var powers = new HashSet<string>();
+            var inputString = Convert.ToString(N);
+
+            // Find all possible powers of 2 (N <= 10^9)
+            while (power < (long)N * 10)
+            {
+                power = (long)Math.Pow(2, index);
+                powers.Add(Convert.ToString(power));
+                index++;
+            }
+
+            // For N - find possible matches in the list of powers
+            var possibleMatches = powers.Where(x => x.Length == inputString.Length);
+            foreach(var possible in possibleMatches)
+            {
+                var isMatch = true;
+                foreach(char c in possible)
+                    if (possible.Count(x => x == c) != inputString.Count(x => x == c))
+                        isMatch = false;
+                if (isMatch) return true;
+            }
+
+            return false;
+        }
+      
         /// LeetCode problem 868: https://leetcode.com/problems/transpose-matrix/description/
         /// </summary>
         /// <param name="A">Matrix of integers.</param>
