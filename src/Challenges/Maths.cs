@@ -1238,5 +1238,36 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 322: https://leetcode.com/problems/coin-change/description/
+        /// </summary>
+        /// <param name="coins"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static int CoinChange(int[] coins, int amount)
+        {
+            // Initial setup & catching for easily divisible
+            if (amount == 0) return 0;
+            if (coins.Count() == 0) return -1;
+            if (coins.Min() > amount) return -1;
+            int result = amount + 1;
+
+            // If any of the coins are easily divisible, that's our first best guess
+            foreach(var coin in coins) if (amount % coin == 0) result = Math.Min(amount / coin, result);
+
+            // Then, take the biggest coin, take as much out of the amount as possible, then recursively try to find the rest using a subset of the coins.
+            int biggest = coins.Max();
+            int biggestCount = amount / biggest;
+
+            for (int i = biggestCount; i >= 0; i--)
+            {
+                int remainder = amount - (i * biggest); // How much extra we need to get from remaining coins
+                int fromRest = CoinChange(coins.Where(x => x != biggest).ToArray(), remainder); // How many coins it takes to make the rest
+                if (fromRest != -1) return Math.Min(result, fromRest + i); // If we get a good result back, see if that's the best we can do
+            }
+
+            return result > amount ? -1 : result; // If the result is still greater than the original amount, we found nothing, so return -1
+        }
     }
 }
