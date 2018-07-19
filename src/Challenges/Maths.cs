@@ -1269,5 +1269,30 @@ namespace LeetCode
 
             return result > amount ? -1 : result; // If the result is still greater than the original amount, we found nothing, so return -1
         }
+
+        public static bool IsHappy(int n)
+        {
+            if (n == 1) return true;
+
+            var numbersSeen = new HashSet<int>();
+            int next = n;
+
+            while (!numbersSeen.Contains(next))
+            {
+                numbersSeen.Add(next);
+                next = SumOfDigitsSquared(next);
+                if (next == 1) return true;
+            }
+
+            return false;
+        }
+
+        private static int SumOfDigitsSquared(int input)
+        {
+            var result = 0;
+            var inputString = Convert.ToString(input);
+            foreach (char c in inputString) result += (int)Math.Pow(Char.GetNumericValue(c), 2);
+            return result;
+        }
     }
 }
