@@ -1294,5 +1294,49 @@ namespace LeetCode
             foreach (char c in inputString) result += (int)Math.Pow(Char.GetNumericValue(c), 2);
             return result;
         }
+
+        /// <summary>
+        /// LeetCode problem 871: https://leetcode.com/problems/minimum-number-of-refueling-stops/description/
+        /// </summary>
+        /// <param name="target">Distance of target destination from starting point.</param>
+        /// <param name="startFuel">Amount of fuel at the start.</param>
+        /// <param name="stations">Stations that can be refuelled at, [distance from start][fuel available]</param>
+        /// <returns>Minimum number of stops to reach the target, -1 if it cannot be reached.</returns>
+        public static int MinRefuelStops(int target, int startFuel, int[][] stations)
+        {
+            // Method: Always take the station with the most fuel we can reach, and update totals.
+            // Then re-evaluate with all remaining stations, including those earlier in the journey.
+
+            // Check to see if we can already get there / rule it out easily.
+            if (target <= startFuel) return 0;
+            if (stations.Count() == 0) return -1;
+            if (stations[0][0] > startFuel) return -1;
+
+            int count = 0, currentPostion = 0, currentFuel = startFuel;
+
+            // Store as list so that we can remove visited stations.
+            var stationsList = new List<int[]>(stations);
+
+            // Figure out which stops we can get to without refuelling.
+            var possible = stationsList.Where(x => x[0] <= currentPostion + currentFuel);
+
+            while(possible.Count() > 0)
+            {
+                // Take the best, which is just whichever we can reach that has the most fuel.
+                var best = possible.OrderByDescending(x => x[1]).First();
+
+                // Update position and fuel based on using the best option, and remove from the list.
+                currentFuel += best[1] - (best[0] - currentPostion);
+                currentPostion = best[0];
+                count++;
+                stationsList.Remove(best);
+
+                // Update possible stations with remaining list.
+                if (currentPostion + currentFuel >= target) return count;
+                possible = stationsList.Where(x => x[0] <= currentPostion + currentFuel);
+            }
+
+            return -1; // Wasn't able to reach the target.
+        }
     }
 }

@@ -399,6 +399,14 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(MinRefuelStopsData))]
+        public void MinRefuelStops(int target, int startFuel, int[][] stations, int expected)
+        {
+            var actual = Maths.MinRefuelStops(target, startFuel, stations);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
 
         public static readonly List<object[]> CoinChangeData
@@ -413,6 +421,23 @@ namespace LeetCode.Tests
                 new object[] { new int[] { }, 23, -1  },
                 // new object[] { new int[] { 186, 419, 83, 408 }, 6249, 20  },
                 new object[] { new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }, 16033, 617  },
+            };
+
+        public static readonly List<object[]> MinRefuelStopsData
+            = new List<object[]>
+            {
+                new object[] { 1, 1,  new int[][] { }, 0 },
+                new object[] { 100, 1,  new int[][] { new int[] { 10, 100 } }, -1 },
+                new object[] { 100, 1,  new int[][] { }, -1 },
+                new object[] { 100, 50,  new int[][] { new int[] { 25, 30} }, -1 },
+                new object[] { 100, 10,  new int[][] { new int[] { 10, 60 }, new int[] { 20, 30 }, new int[] { 30, 30 }, new int[] { 60, 40 } }, 2 },
+                new object[] { 900, 300,  new int[][] { new int[] { 10, 100 }, new int[] { 20, 200 }, new int[] { 30, 300 }, new int[] { 100, 301 } }, 2 },
+                new object[] {
+                    1000,
+                    83,
+                    new int[][] { new int[] { 25, 27 }, new int[] { 36, 187 }, new int[] { 140, 186 }, new int[] { 378, 6 }, new int[] { 492, 202 }, new int[] { 517, 89 }, new int[] { 579, 234 }, new int[] { 673, 86 }, new int[] { 808, 53 }, new int[] { 954, 49 } },
+                    -1
+                },
             };
 
         public static readonly List<object[]> AdvantageCountData
