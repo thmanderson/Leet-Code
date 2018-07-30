@@ -1240,6 +1240,62 @@ namespace LeetCode
         }
 
         /// <summary>
+        /// LeetCode problem 322: https://leetcode.com/problems/coin-change/description/
+        /// </summary>
+        /// <param name="coins"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static int CoinChange(int[] coins, int amount)
+        {
+            // Initial setup & catching for easily divisible
+            if (amount == 0) return 0;
+            if (coins.Count() == 0) return -1;
+            if (coins.Min() > amount) return -1;
+            int result = amount + 1;
+
+            // If any of the coins are easily divisible, that's our first best guess
+            foreach(var coin in coins) if (amount % coin == 0) result = Math.Min(amount / coin, result);
+
+            // Then, take the biggest coin, take as much out of the amount as possible, then recursively try to find the rest using a subset of the coins.
+            int biggest = coins.Max();
+            int biggestCount = amount / biggest;
+
+            for (int i = biggestCount; i >= 0; i--)
+            {
+                int remainder = amount - (i * biggest); // How much extra we need to get from remaining coins
+                int fromRest = CoinChange(coins.Where(x => x != biggest).ToArray(), remainder); // How many coins it takes to make the rest
+                if (fromRest != -1) return Math.Min(result, fromRest + i); // If we get a good result back, see if that's the best we can do
+            }
+
+            return result > amount ? -1 : result; // If the result is still greater than the original amount, we found nothing, so return -1
+        }
+
+        public static bool IsHappy(int n)
+        {
+            if (n == 1) return true;
+
+            var numbersSeen = new HashSet<int>();
+            int next = n;
+
+            while (!numbersSeen.Contains(next))
+            {
+                numbersSeen.Add(next);
+                next = SumOfDigitsSquared(next);
+                if (next == 1) return true;
+            }
+
+            return false;
+        }
+
+        private static int SumOfDigitsSquared(int input)
+        {
+            var result = 0;
+            var inputString = Convert.ToString(input);
+            foreach (char c in inputString) result += (int)Math.Pow(Char.GetNumericValue(c), 2);
+            return result;
+        }
+
+        /// <summary>
         /// LeetCode problem 871: https://leetcode.com/problems/minimum-number-of-refueling-stops/description/
         /// </summary>
         /// <param name="target">Distance of target destination from starting point.</param>

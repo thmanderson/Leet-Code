@@ -382,6 +382,24 @@ namespace LeetCode.Tests
         }
 
         [Theory]
+        [MemberData(nameof(CoinChangeData))]
+        public void CoinChange(int[] coins, int amount, int expected)
+        {
+            var actual = Maths.CoinChange(coins, amount);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(19, true)]
+        [InlineData(1, true)]
+        [InlineData(0, false)]
+        public void IsHappy(int input, bool expected)
+        {
+            var actual = Maths.IsHappy(input);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [MemberData(nameof(MinRefuelStopsData))]
         public void MinRefuelStops(int target, int startFuel, int[][] stations, int expected)
         {
@@ -390,6 +408,20 @@ namespace LeetCode.Tests
         }
 
         #region Test Data
+
+        public static readonly List<object[]> CoinChangeData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 1 }, 0, 0  },
+                new object[] { new int[] { 1, 2, 5 }, 11, 3  },
+                new object[] { new int[] { 2 }, 3, -1  },
+                new object[] { new int[] { 1 }, 100, 100  },
+                new object[] { new int[] { 100 }, 1, -1  },
+                new object[] { new int[] { 1, 2, 3, 4, 5 }, 23, 5  },
+                new object[] { new int[] { }, 23, -1  },
+                // new object[] { new int[] { 186, 419, 83, 408 }, 6249, 20  },
+                new object[] { new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }, 16033, 617  },
+            };
 
         public static readonly List<object[]> MinRefuelStopsData
             = new List<object[]>
