@@ -407,6 +407,14 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [MemberData(nameof(FairCandySwapData))]
+        public void FairCandySwap(int[] A, int[] B, int[] expected)
+        {
+            var actual = Maths.FairCandySwap(A, B);
+            Assert.True(Enumerable.SequenceEqual(expected, actual));
+        }
+
         #region Test Data
 
         public static readonly List<object[]> CoinChangeData
@@ -421,6 +429,15 @@ namespace LeetCode.Tests
                 new object[] { new int[] { }, 23, -1  },
                 // new object[] { new int[] { 186, 419, 83, 408 }, 6249, 20  },
                 new object[] { new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }, 16033, 617  },
+            };
+
+        public static readonly List<object[]> FairCandySwapData
+            = new List<object[]>
+            {
+                new object[] { new int[] { 1, 1 }, new int[] { 2, 2 }, new int[] { 1, 2 } },
+                new object[] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 1, 2 } },
+                new object[] { new int[] { 2 }, new int[] { 1, 3 }, new int[] { 2, 3 } },
+                new object[] { new int[] { 1, 2, 5 }, new int[] { 2, 4 }, new int[] { 5, 4 } },
             };
 
         public static readonly List<object[]> MinRefuelStopsData

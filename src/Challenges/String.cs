@@ -244,7 +244,7 @@ namespace LeetCode
             {
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
-                    if (board[i,j] == 'X')
+                    if (board[i, j] == 'X')
                     {
                         int counts = 1;
                         if (j > 0) if (board[i, j - 1] == 'X') counts = 0;
@@ -590,7 +590,7 @@ namespace LeetCode
         public static string MaskPII(string S)
         {
             var result = "";
-            
+
             if (S.Contains('@'))
             {
                 var atIndex = S.IndexOf('@');
@@ -601,7 +601,8 @@ namespace LeetCode
             {
                 var tmp = "";
                 foreach (char c in S) if (char.IsDigit(c)) tmp += c;
-                if (tmp.Length > 10) {
+                if (tmp.Length > 10)
+                {
                     result += '+';
                     for (int i = 0; i < tmp.Length - 10; i++) result += '*';
                     result += '-';
@@ -666,7 +667,7 @@ namespace LeetCode
             var letters = licensePlate.ToLower().Where(c => char.IsLetter(c)).ToList();
             var result = "";
 
-            foreach(var word in words)
+            foreach (var word in words)
             {
                 var valid = true;
                 foreach (char c in letters)
@@ -709,7 +710,7 @@ namespace LeetCode
             {
                 var AVariations = GetCoordinatePossibilites(x.Key);
                 var BVariations = GetCoordinatePossibilites(x.Value);
-                
+
                 foreach (var a in AVariations)
                     foreach (var b in BVariations)
                         result.Add(WrapNumbers(a, b));
@@ -736,5 +737,23 @@ namespace LeetCode
         }
 
         private static string WrapNumbers(string A, string B) => "(" + A + ", " + B + ")";
+
+        /// <summary>
+        /// Finds words that occur only once in one sentence, and not at all in the other.
+        /// </summary>
+        /// <param name="A">First sentence, words separated by spaces, all lowercase.</param>
+        /// <param name="B">Second sentence, words separated by spaces, all lowercase.</param>
+        /// <returns>All uncommon words.</returns>
+        public string[] UncommonFromSentences(string A, string B)
+        {
+            var listA = A.Split(' ').ToList();
+            var listB = B.Split(' ').ToList();
+            var all = listA.Concat(listB);
+
+            return all.Where( x => 
+                (listA.Count(y => y == x) == 1 && !listB.Contains(x)) || 
+                (listB.Count(y => y == x) == 1 && !listA.Contains(x)) )
+                .ToArray();
+        }
     }
 }
