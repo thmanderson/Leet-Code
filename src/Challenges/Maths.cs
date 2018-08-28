@@ -1282,5 +1282,14 @@ namespace LeetCode
 
             return -1; // Wasn't able to reach the target.
         }
+
+        public static int[] FairCandySwap(int[] A, int[] B)
+        {
+            var BSet = new HashSet<int>(B);
+            var diff = (B.Sum() - A.Sum()) / 2;
+            for (int i = 0; i < A.Length; i++) if (BSet.Contains(A[i] + diff)) return new int[] { A[i], A[i] + diff };
+            return null;
+        }
+
     }
 }
