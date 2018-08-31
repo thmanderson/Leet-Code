@@ -744,7 +744,7 @@ namespace LeetCode
         /// <param name="A">First sentence, words separated by spaces, all lowercase.</param>
         /// <param name="B">Second sentence, words separated by spaces, all lowercase.</param>
         /// <returns>All uncommon words.</returns>
-        public string[] UncommonFromSentences(string A, string B)
+        public static string[] UncommonFromSentences(string A, string B)
         {
             var listA = A.Split(' ').ToList();
             var listB = B.Split(' ').ToList();
@@ -754,6 +754,20 @@ namespace LeetCode
                 (listA.Count(y => y == x) == 1 && !listB.Contains(x)) || 
                 (listB.Count(y => y == x) == 1 && !listA.Contains(x)) )
                 .ToArray();
+        }
+
+        public static bool CanConstruct(string ransomNote, string magazine)
+        {
+            var results = new Dictionary<char, int>();
+            foreach (char c in ransomNote)
+            {
+                if (results.ContainsKey(c)) results[c]--;
+                else results.Add(c, -1);
+            }
+            foreach (char c in magazine) if (results.ContainsKey(c)) results[c]++;
+
+            foreach (var result in results) if (result.Value < 0) return false;
+            return true;
         }
     }
 }
