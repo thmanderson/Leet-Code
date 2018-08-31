@@ -256,6 +256,16 @@ namespace LeetCode.Tests
                 Assert.True(actual.Contains(variant));
         }
 
+        [Theory]
+        [InlineData("a", "b", false)]
+        [InlineData("aa", "ab", false)]
+        [InlineData("aa", "aab", true)]
+        public void CanConstruct(string ransomNote, string magazine, bool expected)
+        {
+            var actual = String.CanConstruct(ransomNote, magazine);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data        
 
         public static readonly List<object[]> AmbiguousCoordinatesData
