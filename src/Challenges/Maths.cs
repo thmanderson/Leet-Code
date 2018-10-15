@@ -1347,5 +1347,22 @@ namespace LeetCode
             return null;
         }
 
+        // LeetCode problem 922: https://leetcode.com/problems/sort-array-by-parity-ii/description/
+        public static int[] SortArrayByParityII(int[] A) {
+            var result = new int[A.Length];
+            int even = 0, odd = 1;
+            foreach(int number in A){
+                if (number % 2 == 0){
+                    result[even] = number;
+                    even += 2;
+                }
+                else {
+                    result[odd] = number;
+                    odd += 2;
+                }
+            }
+            return result;
+        }
+
     }
 }
