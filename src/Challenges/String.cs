@@ -769,5 +769,33 @@ namespace LeetCode
             foreach (var result in results) if (result.Value < 0) return false;
             return true;
         }
+        
+        public static IList<string> FindAndReplacePattern(string[] words, string pattern) {
+            var result = new List<string>();
+
+            foreach (var word in words){
+                var mappings = new Dictionary<char,char>();
+                bool valid = true;
+
+                for (int i = 0; i < word.Length; i++){
+                    if (mappings.ContainsKey(word[i])){
+                        if (mappings[word[i]] != pattern[i]) {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    else if (mappings.ContainsValue(pattern[i])){
+                        valid = false;
+                        break;
+                    }
+                    else {
+                        mappings.Add(word[i], pattern[i]);
+                    }
+                }
+                if (valid) result.Add(word);
+            }
+
+            return result;
+        }
     }
 }
