@@ -266,7 +266,20 @@ namespace LeetCode.Tests
             Assert.Equal(expected, actual);
         }
 
-        #region Test Data        
+        [Theory]
+        [MemberData(nameof(FindAndReplacePatternData))]
+        public void FindAndReplacePattern(string[] words, string pattern, IList<string> expected){
+            var actual = String.FindAndReplacePattern(words, pattern);
+            Assert.True(Enumerable.SequenceEqual(expected,actual));
+        }
+
+        #region Test Data
+
+        public static readonly List<object[]> FindAndReplacePatternData
+            = new List<object[]>
+            {
+                new object[] { new string[] {"abc", "deq", "mee", "aqq", "dkd", "ccc"}, "abb", new List<string> {"mee", "aqq"} }
+            };
 
         public static readonly List<object[]> AmbiguousCoordinatesData
             = new List<object[]>
