@@ -273,6 +273,18 @@ namespace LeetCode.Tests
             Assert.True(Enumerable.SequenceEqual(expected,actual));
         }
 
+        [Theory]
+        [InlineData("", 0)]
+        [InlineData("())", 1)]
+        [InlineData("(((", 3)]
+        [InlineData("()", 0)]
+        [InlineData("()))((", 4)]
+        [InlineData("()(((())()()((()(", 5)]
+        public void MinAddToMakeValid(string S, int expected){
+            var actual = String.MinAddToMakeValid(S);
+            Assert.Equal(expected, actual);
+        }
+
         #region Test Data
 
         public static readonly List<object[]> FindAndReplacePatternData
