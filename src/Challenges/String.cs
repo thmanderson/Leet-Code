@@ -797,5 +797,20 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// LeetCode Problem 921: https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/
+        /// </summary>
+        public static int MinAddToMakeValid(string S) {
+            int total = 0, unclosedOpen = 0;
+            foreach(char c in S){
+                if (c == '(') unclosedOpen++;
+                else {
+                    if (unclosedOpen > 0) unclosedOpen--;
+                    else  total++;
+                }
+            }
+            return total + unclosedOpen;
+        }
     }
 }
