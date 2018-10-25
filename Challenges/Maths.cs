@@ -1363,6 +1363,5 @@ namespace LeetCode
             }
             return result;
         }
-
     }
 }
